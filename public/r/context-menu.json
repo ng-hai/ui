@@ -4,7 +4,7 @@
   "title": "Context Menu",
   "description": "Unstyled context menu component with submenu, trigger, portal, positioner, popup, items, groups, radio, checkbox, built on Base UI",
   "dependencies": [
-    "@base-ui/react@^1.4.0"
+    "@base-ui/react@^1.5.0"
   ],
   "registryDependencies": [
     "@bare-ui/create-style-context",

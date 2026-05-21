@@ -4,7 +4,7 @@
   "title": "Scroll Area",
   "description": "Unstyled scroll area component with viewport, scrollbar, thumb, corner, built on Base UI",
   "dependencies": [
-    "@base-ui/react@^1.4.0"
+    "@base-ui/react@^1.5.0"
   ],
   "registryDependencies": [
     "@bare-ui/create-style-context",
