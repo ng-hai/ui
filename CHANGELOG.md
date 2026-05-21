@@ -6,6 +6,12 @@ Consumers pin to a release by swapping `main` for a tag (e.g. `v0.1.0`) in the r
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-05-21
+
+### Changed
+
+- All components: bump pinned `@base-ui/react` range from `^1.4.0` to `^1.5.0` in `public/r/*.json`. No bare-ui API changes; consumers reinstalling get Base UI 1.5.x, which is API-compatible apart from Base UI's own OTP Field rename (`sanitizeValue` → `normalizeValue`) — only consumers who set that prop directly need to update.
+
 ## [0.1.0] - 2026-04-19
 
 Initial tagged release.
@@ -17,5 +23,6 @@ Initial tagged release.
 - Shared libs: `tv-config`, `split-variant-props`, `create-style-context`.
 - Claude Code skill at `skills/bare-ui/SKILL.md`.
 
-[Unreleased]: https://github.com/ng-hai/bare-ui/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/ng-hai/bare-ui/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/ng-hai/bare-ui/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/ng-hai/bare-ui/releases/tag/v0.1.0
