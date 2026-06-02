@@ -6,6 +6,12 @@ Consumers pin to a release by swapping `main` for a tag (e.g. `v0.1.0`) in the r
 
 ## [Unreleased]
 
+## [0.1.2] - 2026-06-03
+
+### Changed
+
+- `tv-config`: bump `tailwind-variants` to `^3.2.0` and pin `tailwind-merge` to `^3.0.0` in `public/r/tv-config.json` (previously `^0.3.1` and unpinned). Tracks the Tailwind Variants 3 line; `tv.config.ts` is unchanged, so consumers reinstalling just pick up the newer transitive deps. No bare-ui API changes.
+
 ## [0.1.1] - 2026-05-21
 
 ### Changed
@@ -23,6 +29,7 @@ Initial tagged release.
 - Shared libs: `tv-config`, `split-variant-props`, `create-style-context`.
 - Claude Code skill at `skills/bare-ui/SKILL.md`.
 
-[Unreleased]: https://github.com/ng-hai/bare-ui/compare/v0.1.1...HEAD
+[Unreleased]: https://github.com/ng-hai/bare-ui/compare/v0.1.2...HEAD
+[0.1.2]: https://github.com/ng-hai/bare-ui/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/ng-hai/bare-ui/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/ng-hai/bare-ui/releases/tag/v0.1.0
