@@ -84,8 +84,8 @@ Every component — including single-part ones like `button` and `input` — fol
 1. Create files under `registry/bare/ui/<name>/` following the structure of a sibling (use `dialog/` or `select/` for multi-part — one file per part, `button/` for single-part). Every component ships both `index.ts` and `index.parts.ts`.
 2. Add an entry to **`registry.json`**:
    - `type: "registry:ui"` for components, `registry:lib` for shared utils.
-   - `registryDependencies` uses the `@bare-ui/<dep>` namespace form (e.g. `@bare-ui/tv-config`, `@bare-ui/split-variant-props`, and — for multi-part — `@bare-ui/create-style-context`). Never hardcode raw GitHub URLs.
-   - `dependencies: ["@base-ui/react"]`.
+   - `registryDependencies` uses the `@bare-ui/<dep>` namespace form (e.g. `@bare-ui/tv-config`, `@bare-ui/split-variant-props`, and — for multi-part — `@bare-ui/create-style-context`). Never hardcode raw GitHub URLs — shadcn resolves the namespace against the registry the item was fetched from.
+   - `dependencies: ["@base-ui/react@^1.5.0"]` — write the npm range inline. Convention: **floor at the minor you build against**, mirroring `package.json` as a caret (e.g. `@base-ui/react@^1.5.0`, `tailwind-variants@^3.2.0`) — the lowest version actually validated, no looser. A transitive peer is the exception: floor it at what its requirer needs, not the version that happened to resolve (e.g. `tailwind-merge@^3.0.0`, the range `tailwind-variants` itself requires, even though the repo has 3.6 installed). No build step derives these from `package.json`, so what you type here ships verbatim.
    - `categories: [...]` for discoverability (`form`, `overlay`, `display`, `navigation`, `disclosure`, etc.).
    - List every file in the component folder under `files` (including `index.parts.ts`), each with `type: "registry:ui"` (so shadcn places them in `components/ui/` in consumer projects).
 3. Run `pnpm registry:build` and commit both `registry.json` **and** the regenerated `public/r/*.json`.

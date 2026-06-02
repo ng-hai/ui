@@ -4,8 +4,8 @@
   "title": "TV Config",
   "description": "Shared Tailwind Variants configuration with twMerge and extensible classGroups",
   "dependencies": [
-    "tailwind-variants@^0.3.1",
-    "tailwind-merge"
+    "tailwind-variants@^3.2.0",
+    "tailwind-merge@^3.0.0"
   ],
   "files": [
     {
