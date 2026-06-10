@@ -18,7 +18,7 @@ function App() {
           </h1>
           <p className="text-sm text-emerald-600">
             Components from <code>@registry-b</code>, styled on top of{" "}
-            <code>@bare-ui</code>
+            <code>ng-hai/bare-ui</code>
           </p>
         </div>
 

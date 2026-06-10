@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "registry:build": "shadcn build",
+    "registry:validate": "shadcn registry validate",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest"
@@ -22,7 +22,7 @@
     "@types/react": "19.2.16",
     "@types/react-dom": "19.2.3",
     "jsdom": "29.1.1",
-    "shadcn": "4.10.0",
+    "shadcn": "4.11.0",
     "typescript": "6.0.3",
     "vitest": "4.1.8"
   }

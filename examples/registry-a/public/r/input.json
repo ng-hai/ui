@@ -4,7 +4,7 @@
   "title": "Input",
   "description": "Blue rounded input styles for bare-ui",
   "registryDependencies": [
-    "@bare-ui/input",
+    "ng-hai/bare-ui/input",
     "@registry-a/theme"
   ],
   "files": [

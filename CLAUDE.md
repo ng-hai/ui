@@ -8,9 +8,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 The repo ships a single registry:
 
-- **`registry.json`** (root) — the "bare" components under `registry/bare/**`. Styles are intentionally empty slots; consumers fill them in themselves. Referenced via the `@bare-ui` namespace.
+- **`registry.json`** (root) — the "bare" components under `registry/bare/**`. Styles are intentionally empty slots; consumers fill them in themselves.
 
-Built registry JSON lives under `public/r/*.json`, consumed over `https://raw.githubusercontent.com/ng-hai/bare-ui/main/public/r/<name>.json`.
+This is a [GitHub registry](https://ui.shadcn.com/docs/registry/github): the `shadcn` CLI reads `registry.json` and the referenced source files directly from this repo. Consumers install with `shadcn add ng-hai/bare-ui/<name>` — no `components.json` registry config, no namespace, and no pre-built JSON to host or commit.
 
 ## Presets and theme files
 
@@ -30,32 +30,28 @@ Default Tailwind `@theme` CSS files are shipped as `registry:file` items with an
 }
 ```
 
-Theme CSS files live under `registry/bare/theme/`. Consumers install via `shadcn add @bare-ui/theme` and then `@import` the file in their `globals.css`. They can replace it with their own `@theme` — the separation between tokens (CSS) and styles (`styles.ts`) is intentional.
+Theme CSS files live under `registry/bare/theme/`. Consumers install via `shadcn add ng-hai/bare-ui/theme` and then `@import` the file in their `globals.css`. They can replace it with their own `@theme` — the separation between tokens (CSS) and styles (`styles.ts`) is intentional.
 
 ## Commands
 
 ```bash
-pnpm registry:build    # shadcn build → public/r/*.json
+pnpm registry:validate # shadcn registry validate → parse registry.json, check referenced files exist
 pnpm typecheck         # tsc --noEmit (uses the local tsc, not PATH)
+pnpm test              # vitest run
 ```
 
-There is no lint script and no dev server. Run `pnpm registry:build` any time `registry.json` or any file it references changes, and commit the regenerated `public/r/*.json`. Always run `pnpm typecheck`, not `pnpm tsc …` — the latter falls back to whatever `tsc` is on `PATH` (often an older global install) and will report phantom errors.
+There is no build step, no lint script, and no dev server. Run `pnpm registry:validate` any time `registry.json` or any file it references changes — it parses the registry and verifies every `files[].path` resolves. Always run `pnpm typecheck`, not `pnpm tsc …` — the latter falls back to whatever `tsc` is on `PATH` (often an older global install) and will report phantom errors.
 
 ## Release process
 
-There is no npm release — consumers fetch `public/r/*.json` directly from `raw.githubusercontent.com/ng-hai/bare-ui/main/...`, so **anything merged to `main` is live**. To ship a change:
+There is no build artifact and no npm release. The `shadcn` CLI resolves components straight from `registry.json` and the source files on this repo's default branch, so **anything merged to `main` is live**. To ship a change:
 
 1. Edit the component source and/or `registry.json`.
-2. `pnpm registry:build` to regenerate `public/r/*.json`.
+2. `pnpm registry:validate` to confirm the registry parses and every referenced file exists.
 3. `pnpm typecheck` to typecheck.
-4. Commit both the source changes **and** the regenerated `public/r/*.json` in the same commit (the built JSON is the published artifact).
-5. Push to `main`. The new version is immediately available via `pnpm dlx shadcn@latest add @bare-ui/<name>`.
+4. Commit the source changes and push to `main`. The change is immediately available via `pnpm dlx shadcn@latest add ng-hai/bare-ui/<name>`.
 
-Because `main` is the release channel, never push a commit where `public/r/*.json` is out of sync with source — consumers will install broken components. If you forget to rebuild, the fix is another commit, not a force-push.
-
-### Tagging
-
-Consumers who want reproducibility pin to a tag (`v<major>.<minor>.<patch>`) in the registry URL. After merging to `main`, classify the change and cut a tag per the runbook in **`CONTRIBUTING.md`** — it's written as an executable procedure (classification rules, version-bump table, copy-pasteable commands, AI guardrails). Follow it verbatim; don't skip the pre-flight or post-flight checks.
+There are no version tags to cut and no `public/r` artifact to keep in sync. Consumers who want a reproducible install pin to a commit SHA at install time (`shadcn add ng-hai/bare-ui/<name>#<sha>`); the repo itself only maintains `main`.
 
 ## Component architecture
 
@@ -84,12 +80,12 @@ Every component — including single-part ones like `button` and `input` — fol
 1. Create files under `registry/bare/ui/<name>/` following the structure of a sibling (use `dialog/` or `select/` for multi-part — one file per part, `button/` for single-part). Every component ships both `index.ts` and `index.parts.ts`.
 2. Add an entry to **`registry.json`**:
    - `type: "registry:ui"` for components, `registry:lib` for shared utils.
-   - `registryDependencies` uses the `@bare-ui/<dep>` namespace form (e.g. `@bare-ui/tv-config`, `@bare-ui/split-variant-props`, and — for multi-part — `@bare-ui/create-style-context`). Never hardcode raw GitHub URLs — shadcn resolves the namespace against the registry the item was fetched from.
+   - `registryDependencies` uses the full GitHub item address `ng-hai/bare-ui/<dep>` (e.g. `ng-hai/bare-ui/tv-config`, `ng-hai/bare-ui/split-variant-props`, and — for multi-part — `ng-hai/bare-ui/create-style-context`). That is how same-repo dependencies are referenced in a GitHub registry; don't use the old `@bare-ui/<dep>` namespace form or raw GitHub URLs.
    - `dependencies: ["@base-ui/react@^1.5.0"]` — write the npm range inline. Convention: **floor at the minor you build against**, mirroring `package.json` as a caret (e.g. `@base-ui/react@^1.5.0`, `tailwind-variants@^3.2.0`) — the lowest version actually validated, no looser. A transitive peer is the exception: floor it at what its requirer needs, not the version that happened to resolve (e.g. `tailwind-merge@^3.0.0`, the range `tailwind-variants` itself requires, even though the repo has 3.6 installed). No build step derives these from `package.json`, so what you type here ships verbatim.
    - `categories: [...]` for discoverability (`form`, `overlay`, `display`, `navigation`, `disclosure`, etc.).
    - List every file in the component folder under `files` (including `index.parts.ts`), each with `type: "registry:ui"` (so shadcn places them in `components/ui/` in consumer projects).
-3. Run `pnpm registry:build` and commit both `registry.json` **and** the regenerated `public/r/*.json`.
+3. Run `pnpm registry:validate` and `pnpm typecheck`, then commit `registry.json` together with the new source files.
 
 ## Path aliases
 
-`tsconfig.json` maps `@/*` to the repo root. Component source uses `@/registry/bare/lib/...` — these imports get rewritten by `shadcn build` based on the consumer's aliases, so don't flatten them to relative paths.
+`tsconfig.json` maps `@/*` to the repo root. Component source uses `@/registry/bare/lib/...` — the `shadcn` CLI rewrites these imports to the consumer's aliases when it installs, so don't flatten them to relative paths.

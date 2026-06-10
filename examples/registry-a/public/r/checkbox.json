@@ -4,7 +4,7 @@
   "title": "Checkbox",
   "description": "Blue rounded checkbox styles for bare-ui",
   "registryDependencies": [
-    "@bare-ui/checkbox",
+    "ng-hai/bare-ui/checkbox",
     "@registry-a/theme"
   ],
   "files": [

@@ -4,7 +4,7 @@
   "title": "Input",
   "description": "Green angular input styles for bare-ui",
   "registryDependencies": [
-    "@bare-ui/input",
+    "ng-hai/bare-ui/input",
     "@registry-b/theme"
   ],
   "files": [

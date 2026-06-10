@@ -17,7 +17,7 @@
       "type": "registry:ui",
       "title": "Button",
       "description": "Green angular button styles for bare-ui",
-      "registryDependencies": ["@bare-ui/button", "@registry-b/theme"],
+      "registryDependencies": ["ng-hai/bare-ui/button", "@registry-b/theme"],
       "files": [
         { "path": "registry/b/ui/button/styles.ts", "type": "registry:ui" }
       ]
@@ -27,7 +27,7 @@
       "type": "registry:ui",
       "title": "Input",
       "description": "Green angular input styles for bare-ui",
-      "registryDependencies": ["@bare-ui/input", "@registry-b/theme"],
+      "registryDependencies": ["ng-hai/bare-ui/input", "@registry-b/theme"],
       "files": [
         { "path": "registry/b/ui/input/styles.ts", "type": "registry:ui" }
       ]
@@ -37,7 +37,7 @@
       "type": "registry:ui",
       "title": "Checkbox",
       "description": "Green angular checkbox styles for bare-ui",
-      "registryDependencies": ["@bare-ui/checkbox", "@registry-b/theme"],
+      "registryDependencies": ["ng-hai/bare-ui/checkbox", "@registry-b/theme"],
       "files": [
         { "path": "registry/b/ui/checkbox/styles.ts", "type": "registry:ui" }
       ]
@@ -47,7 +47,7 @@
       "type": "registry:ui",
       "title": "Switch",
       "description": "Green angular switch styles for bare-ui",
-      "registryDependencies": ["@bare-ui/switch", "@registry-b/theme"],
+      "registryDependencies": ["ng-hai/bare-ui/switch", "@registry-b/theme"],
       "files": [
         { "path": "registry/b/ui/switch/styles.ts", "type": "registry:ui" }
       ]
@@ -57,7 +57,7 @@
       "type": "registry:ui",
       "title": "Separator",
       "description": "Green angular separator styles for bare-ui",
-      "registryDependencies": ["@bare-ui/separator", "@registry-b/theme"],
+      "registryDependencies": ["ng-hai/bare-ui/separator", "@registry-b/theme"],
       "files": [
         { "path": "registry/b/ui/separator/styles.ts", "type": "registry:ui" }
       ]
