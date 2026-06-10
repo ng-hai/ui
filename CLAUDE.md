@@ -81,7 +81,7 @@ Every component — including single-part ones like `button` and `input` — fol
 2. Add an entry to **`registry.json`**:
    - `type: "registry:ui"` for components, `registry:lib` for shared utils.
    - `registryDependencies` uses the full GitHub item address `ng-hai/bare-ui/<dep>` (e.g. `ng-hai/bare-ui/tv-config`, `ng-hai/bare-ui/split-variant-props`, and — for multi-part — `ng-hai/bare-ui/create-style-context`). That is how same-repo dependencies are referenced in a GitHub registry; don't use the old `@bare-ui/<dep>` namespace form or raw GitHub URLs.
-   - `dependencies: ["@base-ui/react"]`.
+   - `dependencies: ["@base-ui/react@^1.5.0"]` — write the npm range inline. Convention: **floor at the minor you build against**, mirroring `package.json` as a caret (e.g. `@base-ui/react@^1.5.0`, `tailwind-variants@^3.2.0`) — the lowest version actually validated, no looser. A transitive peer is the exception: floor it at what its requirer needs, not the version that happened to resolve (e.g. `tailwind-merge@^3.0.0`, the range `tailwind-variants` itself requires, even though the repo has 3.6 installed). No build step derives these from `package.json`, so what you type here ships verbatim.
    - `categories: [...]` for discoverability (`form`, `overlay`, `display`, `navigation`, `disclosure`, etc.).
    - List every file in the component folder under `files` (including `index.parts.ts`), each with `type: "registry:ui"` (so shadcn places them in `components/ui/` in consumer projects).
 3. Run `pnpm registry:validate` and `pnpm typecheck`, then commit `registry.json` together with the new source files.
