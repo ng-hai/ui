@@ -4,121 +4,30 @@ A [shadcn](https://ui.shadcn.com) registry of **unstyled** React components buil
 
 Every component ships with an empty Tailwind Variants slot config — the behavior, ARIA, and composition are baked in; the look is yours.
 
-## Set up the registry
-
-Add `@bare-ui` to your project's `components.json`:
-
-```json
-{
-  "registries": {
-    "@bare-ui": "https://raw.githubusercontent.com/ng-hai/bare-ui/main/public/r/{name}.json"
-  }
-}
-```
-
-This tracks `main` — every merge is immediately installable. For a reproducible pin, use a release tag instead (see below).
-
-## Pin to a release (optional)
-
-Releases are tagged `v<major>.<minor>.<patch>` (see [`CHANGELOG.md`](./CHANGELOG.md) for the list). Swap `main` in the registry URL for a tag to lock every install to that version:
-
-```json
-{
-  "registries": {
-    "@bare-ui": "https://raw.githubusercontent.com/ng-hai/bare-ui/v0.1.0/public/r/{name}.json"
-  }
-}
-```
-
-Commit `components.json` so the whole team installs the same version. To upgrade, bump the tag string and re-run `shadcn add` for the components you want to refresh.
-
-### Mix pinned and bleeding-edge channels
-
-Register both under different namespaces:
-
-```json
-{
-  "registries": {
-    "@bare-ui": "https://raw.githubusercontent.com/ng-hai/bare-ui/v0.1.0/public/r/{name}.json",
-    "@bare-ui-next": "https://raw.githubusercontent.com/ng-hai/bare-ui/main/public/r/{name}.json"
-  }
-}
-```
-
-Then `shadcn add @bare-ui-next/dialog` pulls `dialog` from `main` while the rest of the project stays on `v0.1.0`.
-
-### One-off install via raw URL
-
-Skip `components.json` entirely and point at a tagged JSON directly — useful for scripts or when you want one component from a different version than the rest:
-
-```bash
-pnpm dlx shadcn@latest add https://raw.githubusercontent.com/ng-hai/bare-ui/v0.1.0/public/r/button.json
-```
-
-**Heads up:** `shadcn` resolves `registryDependencies` from the same registry URL it was invoked with, so transitive deps (`tv-config`, `create-style-context`, etc.) are always version-consistent with the component you installed. Tags are immutable; `main` is not — if you mix pinned and floating channels, the floating one can drift between installs.
-
-## Set up the Claude Code skill (optional)
-
-bare-ui ships a [Claude Code skill](https://docs.claude.com/en/docs/claude-code/skills) — `skills/bare-ui/SKILL.md` — that teaches Claude the conventions of this registry: the root/parts layering, `createPropSplitter`, `StyleContext`, the `styles` prop escape hatch, private-registry auth, and common pitfalls. With it installed, Claude Code can add, extend, and style bare-ui components idiomatically without you pasting context every time.
-
-### Install
-
-> You only need `.claude/skills/bare-ui/SKILL.md` in your project — don't recreate the `skills/` directory you see in this repo. That's bare-ui's internal layout, kept so the file is browsable on GitHub; the consumer-side path is dictated by Claude Code, not by us.
-
-Drop the skill into your project's [`.claude/skills/`](https://docs.claude.com/en/docs/claude-code/skills) directory — that's the path Claude Code scans for project-scoped skills. It's picked up automatically on the next session.
-
-```bash
-mkdir -p .claude/skills/bare-ui
-curl -fsSL https://raw.githubusercontent.com/ng-hai/bare-ui/main/skills/bare-ui/SKILL.md \
-  -o .claude/skills/bare-ui/SKILL.md
-```
-
-Commit the file so your whole team gets it:
-
-```bash
-git add .claude/skills/bare-ui/SKILL.md
-git commit -m "chore: add bare-ui Claude Code skill"
-```
-
-### Private registry repo
-
-If `ng-hai/bare-ui` is a fork in a private org, `curl` needs an auth token. Use the GitHub CLI:
-
-```bash
-gh api repos/<org>/bare-ui/contents/skills/bare-ui/SKILL.md \
-  -H "Accept: application/vnd.github.raw" \
-  > .claude/skills/bare-ui/SKILL.md
-```
-
-### Stay in sync (optional)
-
-If you want updates to flow automatically, add the upstream as a sparse git subtree instead of a one-time copy:
-
-```bash
-git subtree add --prefix=.claude/skills/bare-ui \
-  https://github.com/ng-hai/bare-ui.git main --squash
-# later, to pull updates:
-git subtree pull --prefix=.claude/skills/bare-ui \
-  https://github.com/ng-hai/bare-ui.git main --squash
-```
-
-Subtree pulls the whole repo under the prefix, so pair it with a sparse-checkout or prefer the `curl` route if you only want the single `SKILL.md`.
-
-### Verify
-
-Open Claude Code in your project and run `/skills` — you should see `bare-ui` in the list with the description `Rules for working with bare-ui unstyled components …`. Next time you ask Claude to add or style a bare-ui component, it will invoke the skill automatically.
-
 ## Install a component
 
+This repo is a [GitHub registry](https://ui.shadcn.com/docs/registry/github). There's no `components.json` setup, no namespace, and no registry URL to configure — install straight from the repo with the `shadcn` CLI:
+
 ```bash
-pnpm dlx shadcn@latest add @bare-ui/button
+pnpm dlx shadcn@latest add ng-hai/bare-ui/button
 ```
 
-This copies the component source into `components/ui/button/` and the shared helpers (`tv.config.ts`, `split-variant-props.ts`, and — for multi-part components — `create-style-context.ts`) into `lib/`. Transitive dependencies (`@bare-ui/tv-config`, `@bare-ui/split-variant-props`, etc.) are resolved automatically.
+The first two path segments (`ng-hai/bare-ui`) are the GitHub owner and repo; the rest (`button`) is the registry item. This copies the component source into `components/ui/button/` and the shared helpers (`tv.config.ts`, `split-variant-props.ts`, and — for multi-part components — `create-style-context.ts`) into `lib/`. Transitive dependencies (`ng-hai/bare-ui/tv-config`, `ng-hai/bare-ui/split-variant-props`, etc.) resolve automatically from the same repo.
 
-Available components: `button`, `input`, `checkbox`, `avatar`, `select`, `dialog`, `popover`, `tabs`, `accordion`, `tooltip`.
+> GitHub registries require a recent `shadcn` CLI (the `owner/repo/item` form landed in the 4.x line). Using `shadcn@latest` as above always works.
 
-> Don't want the namespace config? You can also install via raw URL: `pnpm dlx shadcn@latest add https://raw.githubusercontent.com/ng-hai/bare-ui/main/public/r/button.json`.
+Available components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `button`, `checkbox`, `checkbox-group`, `collapsible`, `combobox`, `context-menu`, `dialog`, `drawer`, `field`, `fieldset`, `form`, `input`, `menu`, `menubar`, `meter`, `navigation-menu`, `number-field`, `otp-field`, `popover`, `preview-card`, `progress`, `radio`, `scroll-area`, `select`, `separator`, `slider`, `switch`, `tabs`, `toast`, `toggle`, `toggle-group`, `toolbar`, `tooltip`. A default `theme` preset and the shared libs (`tv-config`, `split-variant-props`, `create-style-context`) are pulled in automatically as dependencies.
+
+### Pin to a specific version (optional)
+
+A bare `ng-hai/bare-ui/button` tracks the repo's default branch (`main`) — every merge is immediately installable. To lock an install to an exact point in history, append `#<ref>`, where `<ref>` is a branch or commit SHA:
+
+```bash
+pnpm dlx shadcn@latest add ng-hai/bare-ui/button#c0ffee2   # pin to a commit
+pnpm dlx shadcn@latest add ng-hai/bare-ui/button#main      # explicit default branch
+```
+
+Commit SHAs are immutable, so pinning to one gives a fully reproducible install. Transitive dependencies resolve at the same ref, so the whole component tree stays consistent. Commit the resulting source into your repo — that, not a version string, is your record of what you installed.
 
 ## Use it
 
@@ -243,6 +152,57 @@ const danger = tv({
 ```
 
 When `styles` is passed, the root's own variant resolution is skipped — variant props on the element won't be re-evaluated, so bake them into the call above.
+
+## Set up the Claude Code skill (optional)
+
+bare-ui ships a [Claude Code skill](https://docs.claude.com/en/docs/claude-code/skills) — `skills/bare-ui/SKILL.md` — that teaches Claude the conventions of this registry: the root/parts layering, `createPropSplitter`, `StyleContext`, the `styles` prop escape hatch, private-registry auth, and common pitfalls. With it installed, Claude Code can add, extend, and style bare-ui components idiomatically without you pasting context every time.
+
+### Install
+
+> You only need `.claude/skills/bare-ui/SKILL.md` in your project — don't recreate the `skills/` directory you see in this repo. That's bare-ui's internal layout, kept so the file is browsable on GitHub; the consumer-side path is dictated by Claude Code, not by us.
+
+Drop the skill into your project's [`.claude/skills/`](https://docs.claude.com/en/docs/claude-code/skills) directory — that's the path Claude Code scans for project-scoped skills. It's picked up automatically on the next session.
+
+```bash
+mkdir -p .claude/skills/bare-ui
+curl -fsSL https://raw.githubusercontent.com/ng-hai/bare-ui/main/skills/bare-ui/SKILL.md \
+  -o .claude/skills/bare-ui/SKILL.md
+```
+
+Commit the file so your whole team gets it:
+
+```bash
+git add .claude/skills/bare-ui/SKILL.md
+git commit -m "chore: add bare-ui Claude Code skill"
+```
+
+### Private registry repo
+
+If `ng-hai/bare-ui` is a fork in a private org, `curl` needs an auth token. Use the GitHub CLI:
+
+```bash
+gh api repos/<org>/bare-ui/contents/skills/bare-ui/SKILL.md \
+  -H "Accept: application/vnd.github.raw" \
+  > .claude/skills/bare-ui/SKILL.md
+```
+
+### Stay in sync (optional)
+
+If you want updates to flow automatically, add the upstream as a sparse git subtree instead of a one-time copy:
+
+```bash
+git subtree add --prefix=.claude/skills/bare-ui \
+  https://github.com/ng-hai/bare-ui.git main --squash
+# later, to pull updates:
+git subtree pull --prefix=.claude/skills/bare-ui \
+  https://github.com/ng-hai/bare-ui.git main --squash
+```
+
+Subtree pulls the whole repo under the prefix, so pair it with a sparse-checkout or prefer the `curl` route if you only want the single `SKILL.md`.
+
+### Verify
+
+Open Claude Code in your project and run `/skills` — you should see `bare-ui` in the list with the description `Rules for working with bare-ui unstyled components …`. Next time you ask Claude to add or style a bare-ui component, it will invoke the skill automatically.
 
 ## License
 

@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "registry:build": "shadcn build && node scripts/pin-registry-deps.mjs",
+    "registry:validate": "shadcn registry validate",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest"
@@ -22,7 +22,7 @@
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "jsdom": "29.0.2",
-    "shadcn": "4.2.0",
+    "shadcn": "4.11.0",
     "typescript": "5.9.3",
     "vitest": "4.1.4"
   }

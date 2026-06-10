@@ -1,11 +1,11 @@
 ---
 name: bare-ui
-description: Use when installing, styling, or extending bare-ui components. Triggers: `shadcn add @bare-ui/<name>`; `components/ui/<name>/` with `<name>-root.tsx` + per-part files + `styles.ts` (`tv({ slots })`) + `index.parts.ts`; imports from `@/lib/tv.config`, `@/lib/create-style-context`, or `@/lib/split-variant-props`; `data-slot`/`useStyles`/`StyleContext` usage; preset injection via `styles` prop; bare-ui registry auth (`raw.githubusercontent.com` + token).
+description: Use when installing, styling, or extending bare-ui components. Triggers: `shadcn add ng-hai/bare-ui/<name>` (GitHub registry); `components/ui/<name>/` with `<name>-root.tsx` + per-part files + `styles.ts` (`tv({ slots })`) + `index.parts.ts`; imports from `@/lib/tv.config`, `@/lib/create-style-context`, or `@/lib/split-variant-props`; `data-slot`/`useStyles`/`StyleContext` usage; preset injection via `styles` prop.
 ---
 
 # bare-ui
 
-bare-ui is an unstyled component registry built on [@base-ui/react](https://base-ui.com). Components are installed via `shadcn add` and copied into your project under `components/ui/<name>/`. There is no npm package — you own the code. Styles are intentionally empty; you fill them in with Tailwind classes.
+bare-ui is an unstyled component registry built on [@base-ui/react](https://base-ui.com). It is a [shadcn GitHub registry](https://ui.shadcn.com/docs/registry/github): install components with `shadcn add ng-hai/bare-ui/<name>` (no `components.json` setup or namespace needed) and they are copied into your project under `components/ui/<name>/`. There is no npm package — you own the code. Styles are intentionally empty; you fill them in with Tailwind classes.
 
 ## Component anatomy
 
@@ -275,7 +275,7 @@ Ship raw SVG files as `registry:file` items and let consumers process them with 
 }
 ```
 
-Consumers install with `shadcn add @bare-ui/icon-chevron-down`, then process via their bundler. Example consumer setup with SVGR + Vite:
+Consumers install with `shadcn add ng-hai/bare-ui/icon-chevron-down`, then process via their bundler. Example consumer setup with SVGR + Vite:
 
 ```tsx
 // svgr turns the SVG import into a React component
@@ -321,70 +321,44 @@ These are invariants. Never break them when modifying bare-ui components.
 - **Don't modify shared libs.** `lib/tv.config.ts`, `lib/create-style-context.ts`, and `lib/split-variant-props.ts` are shared infrastructure. Don't edit them when working on a specific component.
 - **Use Base UI primitives.** Components wrap `@base-ui/react` primitives for behavior and ARIA. Refer to [base-ui.com](https://base-ui.com) for the primitive API.
 
-## Private registry setup
+## Installing from the registry
 
-When the registry repo is private, `raw.githubusercontent.com` requires authentication. shadcn CLI supports native token-based auth via headers in `components.json`.
+bare-ui is a [shadcn GitHub registry](https://ui.shadcn.com/docs/registry/github). For the public `ng-hai/bare-ui` repo there is **no setup and no auth** — install straight from the repo:
 
-### Consumer configuration
+```bash
+pnpm dlx shadcn@latest add ng-hai/bare-ui/button
+```
+
+The first two path segments (`ng-hai/bare-ui`) are the GitHub owner and repo; the rest (`button`) is the registry item. Transitive deps (`ng-hai/bare-ui/tv-config`, `ng-hai/bare-ui/split-variant-props`, `ng-hai/bare-ui/create-style-context`) resolve automatically from the same repo. The CLI reads `registry.json` and the source files directly — there is no pre-built JSON, no `public/r`, and no `components.json` registry entry to configure.
+
+> Requires a recent `shadcn` CLI; the `owner/repo/item` form landed in the 4.x line. Use `shadcn@latest`.
+
+### Pin to a ref
+
+A bare `ng-hai/bare-ui/button` tracks the repo's default branch (`main`). Append `#<ref>` — a branch or commit SHA — to lock an install:
+
+```bash
+pnpm dlx shadcn@latest add ng-hai/bare-ui/button#c0ffee2   # immutable commit SHA → reproducible
+pnpm dlx shadcn@latest add ng-hai/bare-ui/button#main      # explicit default branch
+```
+
+There are no version tags; reproducibility comes from pinning a commit SHA (or just committing the installed source into your own repo).
+
+### Private forks
+
+GitHub addresses (`owner/repo/item`) work for **public repos only** — *"Private repositories and GitHub Enterprise hosts are not currently supported by GitHub addresses."* If you fork bare-ui into a private repo, the `ng-hai/bare-ui/<name>` form will not resolve.
+
+For a private fork, serve the registry behind an authenticated URL and reference it as a [namespace with authentication](https://ui.shadcn.com/docs/registry/authentication) in `components.json` — shadcn substitutes `${ENV_VAR}` into headers/params:
 
 ```json
 {
   "registries": {
-    "bare-ui": {
-      "url": "https://raw.githubusercontent.com/<org>/bare-ui/main/public/r",
-      "headers": {
-        "Authorization": "token ${REGISTRY_TOKEN}"
-      }
+    "@bare-ui": {
+      "url": "https://your-registry.example.com/r/{name}.json",
+      "headers": { "Authorization": "Bearer ${REGISTRY_TOKEN}" }
     }
   }
 }
 ```
 
-**Use `token` prefix for `raw.githubusercontent.com`.** `Bearer` is only for `api.github.com`.
-
-Set the env var in `.env.local` (gitignored, never commit):
-
-```bash
-REGISTRY_TOKEN=ghp_xxxxxxxxxxxx
-```
-
-### GitHub API endpoint (alternative)
-
-```json
-{
-  "headers": {
-    "Authorization": "Bearer ${REGISTRY_TOKEN}",
-    "Accept": "application/vnd.github.raw+json"
-  }
-}
-```
-
-The `Accept` header is required to get raw content instead of JSON-wrapped response.
-
-### CI/CD authentication
-
-| Method | When to use | Token prefix |
-|---|---|---|
-| `GITHUB_TOKEN` | GitHub Actions, registry in same repo | `token` |
-| Fine-grained PAT | Cross-repo access | `token` |
-| GitHub App installation token | Production orgs, no human account | `Bearer` |
-
-GitHub Actions example (same repo):
-
-```yaml
-- name: Install components
-  run: pnpm dlx shadcn@latest add bare-ui/button
-  env:
-    REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-```
-
-For production orgs, prefer a GitHub App over PATs — not tied to a person, short-lived tokens, fine-grained permissions.
-
-### Common issues
-
-| Symptom | Cause | Fix |
-|---|---|---|
-| 404 from raw.githubusercontent.com | Missing or expired token | Check `REGISTRY_TOKEN` is set and valid |
-| 401 Unauthorized | Wrong prefix (`Bearer` vs `token`) | Use `token` for raw.githubusercontent.com |
-| Works locally, fails in CI | Token not in CI secrets | Add `REGISTRY_TOKEN` to pipeline env vars |
-| Token stops working | PAT expired or person left org | Switch to GitHub App for CI |
+Set `REGISTRY_TOKEN` in `.env.local` (gitignored, never commit). Note this requires you to host the registry items yourself — the public-repo GitHub-address path does not apply to private repos.

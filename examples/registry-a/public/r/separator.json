@@ -4,7 +4,7 @@
   "title": "Separator",
   "description": "Blue separator styles for bare-ui",
   "registryDependencies": [
-    "@bare-ui/separator",
+    "ng-hai/bare-ui/separator",
     "@registry-a/theme"
   ],
   "files": [

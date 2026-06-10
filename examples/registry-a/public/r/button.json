@@ -4,7 +4,7 @@
   "title": "Button",
   "description": "Blue rounded button styles for bare-ui",
   "registryDependencies": [
-    "@bare-ui/button",
+    "ng-hai/bare-ui/button",
     "@registry-a/theme"
   ],
   "files": [

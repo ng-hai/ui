@@ -47,7 +47,7 @@
       "title": "Button",
       "description": "Unstyled button component built on Base UI",
       "categories": ["form"],
-      "registryDependencies": ["@bare-ui/split-variant-props", "@bare-ui/tv-config"],
+      "registryDependencies": ["ng-hai/bare-ui/split-variant-props", "ng-hai/bare-ui/tv-config"],
       "dependencies": ["@base-ui/react"],
       "files": [
         { "path": "registry/bare/ui/button/button-root.tsx", "type": "registry:ui" },
@@ -62,7 +62,7 @@
       "title": "Input",
       "description": "Unstyled input component built on Base UI",
       "categories": ["form"],
-      "registryDependencies": ["@bare-ui/split-variant-props", "@bare-ui/tv-config"],
+      "registryDependencies": ["ng-hai/bare-ui/split-variant-props", "ng-hai/bare-ui/tv-config"],
       "dependencies": ["@base-ui/react"],
       "files": [
         { "path": "registry/bare/ui/input/input-root.tsx", "type": "registry:ui" },
@@ -77,7 +77,7 @@
       "title": "Checkbox",
       "description": "Unstyled checkbox component with indicator, built on Base UI",
       "categories": ["form"],
-      "registryDependencies": ["@bare-ui/create-style-context", "@bare-ui/split-variant-props", "@bare-ui/tv-config"],
+      "registryDependencies": ["ng-hai/bare-ui/create-style-context", "ng-hai/bare-ui/split-variant-props", "ng-hai/bare-ui/tv-config"],
       "dependencies": ["@base-ui/react"],
       "files": [
         { "path": "registry/bare/ui/checkbox/checkbox-root.tsx", "type": "registry:ui" },
@@ -93,7 +93,7 @@
       "title": "Avatar",
       "description": "Unstyled avatar component with image and fallback, built on Base UI",
       "categories": ["display"],
-      "registryDependencies": ["@bare-ui/create-style-context", "@bare-ui/split-variant-props", "@bare-ui/tv-config"],
+      "registryDependencies": ["ng-hai/bare-ui/create-style-context", "ng-hai/bare-ui/split-variant-props", "ng-hai/bare-ui/tv-config"],
       "dependencies": ["@base-ui/react"],
       "files": [
         { "path": "registry/bare/ui/avatar/avatar-root.tsx", "type": "registry:ui" },
@@ -110,7 +110,7 @@
       "title": "Select",
       "description": "Unstyled select component with full dropdown parts, built on Base UI",
       "categories": ["form"],
-      "registryDependencies": ["@bare-ui/create-style-context", "@bare-ui/split-variant-props", "@bare-ui/tv-config"],
+      "registryDependencies": ["ng-hai/bare-ui/create-style-context", "ng-hai/bare-ui/split-variant-props", "ng-hai/bare-ui/tv-config"],
       "dependencies": ["@base-ui/react"],
       "files": [
         { "path": "registry/bare/ui/select/select-root.tsx", "type": "registry:ui" },
@@ -139,7 +139,7 @@
       "title": "Dialog",
       "description": "Unstyled dialog/modal component with backdrop, title, description, built on Base UI",
       "categories": ["overlay"],
-      "registryDependencies": ["@bare-ui/create-style-context", "@bare-ui/split-variant-props", "@bare-ui/tv-config"],
+      "registryDependencies": ["ng-hai/bare-ui/create-style-context", "ng-hai/bare-ui/split-variant-props", "ng-hai/bare-ui/tv-config"],
       "dependencies": ["@base-ui/react"],
       "files": [
         { "path": "registry/bare/ui/dialog/dialog-root.tsx", "type": "registry:ui" },
@@ -162,7 +162,7 @@
       "title": "Popover",
       "description": "Unstyled popover component with positioning and arrow, built on Base UI",
       "categories": ["overlay"],
-      "registryDependencies": ["@bare-ui/create-style-context", "@bare-ui/split-variant-props", "@bare-ui/tv-config"],
+      "registryDependencies": ["ng-hai/bare-ui/create-style-context", "ng-hai/bare-ui/split-variant-props", "ng-hai/bare-ui/tv-config"],
       "dependencies": ["@base-ui/react"],
       "files": [
         { "path": "registry/bare/ui/popover/popover-root.tsx", "type": "registry:ui" },
@@ -186,7 +186,7 @@
       "title": "Tabs",
       "description": "Unstyled tabs component with list, tab, indicator, panel, built on Base UI",
       "categories": ["navigation"],
-      "registryDependencies": ["@bare-ui/create-style-context", "@bare-ui/split-variant-props", "@bare-ui/tv-config"],
+      "registryDependencies": ["ng-hai/bare-ui/create-style-context", "ng-hai/bare-ui/split-variant-props", "ng-hai/bare-ui/tv-config"],
       "dependencies": ["@base-ui/react"],
       "files": [
         { "path": "registry/bare/ui/tabs/tabs-root.tsx", "type": "registry:ui" },
@@ -205,7 +205,7 @@
       "title": "Accordion",
       "description": "Unstyled accordion component with item, header, trigger, panel, built on Base UI",
       "categories": ["disclosure"],
-      "registryDependencies": ["@bare-ui/create-style-context", "@bare-ui/split-variant-props", "@bare-ui/tv-config"],
+      "registryDependencies": ["ng-hai/bare-ui/create-style-context", "ng-hai/bare-ui/split-variant-props", "ng-hai/bare-ui/tv-config"],
       "dependencies": ["@base-ui/react"],
       "files": [
         { "path": "registry/bare/ui/accordion/accordion-root.tsx", "type": "registry:ui" },
@@ -224,7 +224,7 @@
       "title": "Tooltip",
       "description": "Unstyled tooltip component with positioning and arrow, built on Base UI",
       "categories": ["overlay"],
-      "registryDependencies": ["@bare-ui/create-style-context", "@bare-ui/split-variant-props", "@bare-ui/tv-config"],
+      "registryDependencies": ["ng-hai/bare-ui/create-style-context", "ng-hai/bare-ui/split-variant-props", "ng-hai/bare-ui/tv-config"],
       "dependencies": ["@base-ui/react"],
       "files": [
         { "path": "registry/bare/ui/tooltip/tooltip-root.tsx", "type": "registry:ui" },
@@ -244,7 +244,7 @@
       "title": "Separator",
       "description": "Unstyled separator component built on Base UI",
       "categories": ["display"],
-      "registryDependencies": ["@bare-ui/split-variant-props", "@bare-ui/tv-config"],
+      "registryDependencies": ["ng-hai/bare-ui/split-variant-props", "ng-hai/bare-ui/tv-config"],
       "dependencies": ["@base-ui/react"],
       "files": [
         { "path": "registry/bare/ui/separator/separator-root.tsx", "type": "registry:ui" },
@@ -259,7 +259,7 @@
       "title": "Toggle",
       "description": "Unstyled toggle button component built on Base UI",
       "categories": ["form"],
-      "registryDependencies": ["@bare-ui/split-variant-props", "@bare-ui/tv-config"],
+      "registryDependencies": ["ng-hai/bare-ui/split-variant-props", "ng-hai/bare-ui/tv-config"],
       "dependencies": ["@base-ui/react"],
       "files": [
         { "path": "registry/bare/ui/toggle/toggle-root.tsx", "type": "registry:ui" },
@@ -274,7 +274,7 @@
       "title": "Toggle Group",
       "description": "Unstyled toggle group component built on Base UI",
       "categories": ["form"],
-      "registryDependencies": ["@bare-ui/split-variant-props", "@bare-ui/tv-config"],
+      "registryDependencies": ["ng-hai/bare-ui/split-variant-props", "ng-hai/bare-ui/tv-config"],
       "dependencies": ["@base-ui/react"],
       "files": [
         { "path": "registry/bare/ui/toggle-group/toggle-group-root.tsx", "type": "registry:ui" },
@@ -289,7 +289,7 @@
       "title": "Checkbox Group",
       "description": "Unstyled checkbox group component built on Base UI",
       "categories": ["form"],
-      "registryDependencies": ["@bare-ui/split-variant-props", "@bare-ui/tv-config"],
+      "registryDependencies": ["ng-hai/bare-ui/split-variant-props", "ng-hai/bare-ui/tv-config"],
       "dependencies": ["@base-ui/react"],
       "files": [
         { "path": "registry/bare/ui/checkbox-group/checkbox-group-root.tsx", "type": "registry:ui" },
@@ -304,7 +304,7 @@
       "title": "Menubar",
       "description": "Unstyled menubar component built on Base UI",
       "categories": ["navigation"],
-      "registryDependencies": ["@bare-ui/split-variant-props", "@bare-ui/tv-config"],
+      "registryDependencies": ["ng-hai/bare-ui/split-variant-props", "ng-hai/bare-ui/tv-config"],
       "dependencies": ["@base-ui/react"],
       "files": [
         { "path": "registry/bare/ui/menubar/menubar-root.tsx", "type": "registry:ui" },
@@ -331,7 +331,7 @@
       "title": "Collapsible",
       "description": "Unstyled collapsible component with trigger and panel, built on Base UI",
       "categories": ["disclosure"],
-      "registryDependencies": ["@bare-ui/create-style-context", "@bare-ui/split-variant-props", "@bare-ui/tv-config"],
+      "registryDependencies": ["ng-hai/bare-ui/create-style-context", "ng-hai/bare-ui/split-variant-props", "ng-hai/bare-ui/tv-config"],
       "dependencies": ["@base-ui/react"],
       "files": [
         { "path": "registry/bare/ui/collapsible/collapsible-root.tsx", "type": "registry:ui" },
@@ -348,7 +348,7 @@
       "title": "Switch",
       "description": "Unstyled switch component with thumb, built on Base UI",
       "categories": ["form"],
-      "registryDependencies": ["@bare-ui/create-style-context", "@bare-ui/split-variant-props", "@bare-ui/tv-config"],
+      "registryDependencies": ["ng-hai/bare-ui/create-style-context", "ng-hai/bare-ui/split-variant-props", "ng-hai/bare-ui/tv-config"],
       "dependencies": ["@base-ui/react"],
       "files": [
         { "path": "registry/bare/ui/switch/switch-root.tsx", "type": "registry:ui" },
@@ -364,7 +364,7 @@
       "title": "Radio",
       "description": "Unstyled radio group with item and indicator, built on Base UI",
       "categories": ["form"],
-      "registryDependencies": ["@bare-ui/create-style-context", "@bare-ui/split-variant-props", "@bare-ui/tv-config"],
+      "registryDependencies": ["ng-hai/bare-ui/create-style-context", "ng-hai/bare-ui/split-variant-props", "ng-hai/bare-ui/tv-config"],
       "dependencies": ["@base-ui/react"],
       "files": [
         { "path": "registry/bare/ui/radio/radio-root.tsx", "type": "registry:ui" },
@@ -381,7 +381,7 @@
       "title": "Fieldset",
       "description": "Unstyled fieldset component with legend, built on Base UI",
       "categories": ["form"],
-      "registryDependencies": ["@bare-ui/create-style-context", "@bare-ui/split-variant-props", "@bare-ui/tv-config"],
+      "registryDependencies": ["ng-hai/bare-ui/create-style-context", "ng-hai/bare-ui/split-variant-props", "ng-hai/bare-ui/tv-config"],
       "dependencies": ["@base-ui/react"],
       "files": [
         { "path": "registry/bare/ui/fieldset/fieldset-root.tsx", "type": "registry:ui" },
@@ -397,7 +397,7 @@
       "title": "Meter",
       "description": "Unstyled meter component with track, indicator, value, label, built on Base UI",
       "categories": ["display"],
-      "registryDependencies": ["@bare-ui/create-style-context", "@bare-ui/split-variant-props", "@bare-ui/tv-config"],
+      "registryDependencies": ["ng-hai/bare-ui/create-style-context", "ng-hai/bare-ui/split-variant-props", "ng-hai/bare-ui/tv-config"],
       "dependencies": ["@base-ui/react"],
       "files": [
         { "path": "registry/bare/ui/meter/meter-root.tsx", "type": "registry:ui" },
@@ -416,7 +416,7 @@
       "title": "Progress",
       "description": "Unstyled progress component with track, indicator, value, label, built on Base UI",
       "categories": ["display"],
-      "registryDependencies": ["@bare-ui/create-style-context", "@bare-ui/split-variant-props", "@bare-ui/tv-config"],
+      "registryDependencies": ["ng-hai/bare-ui/create-style-context", "ng-hai/bare-ui/split-variant-props", "ng-hai/bare-ui/tv-config"],
       "dependencies": ["@base-ui/react"],
       "files": [
         { "path": "registry/bare/ui/progress/progress-root.tsx", "type": "registry:ui" },
@@ -435,7 +435,7 @@
       "title": "Field",
       "description": "Unstyled field component with label, error, description, control, validity, item, built on Base UI",
       "categories": ["form"],
-      "registryDependencies": ["@bare-ui/create-style-context", "@bare-ui/split-variant-props", "@bare-ui/tv-config"],
+      "registryDependencies": ["ng-hai/bare-ui/create-style-context", "ng-hai/bare-ui/split-variant-props", "ng-hai/bare-ui/tv-config"],
       "dependencies": ["@base-ui/react"],
       "files": [
         { "path": "registry/bare/ui/field/field-root.tsx", "type": "registry:ui" },
@@ -456,7 +456,7 @@
       "title": "Scroll Area",
       "description": "Unstyled scroll area component with viewport, scrollbar, thumb, corner, built on Base UI",
       "categories": ["display"],
-      "registryDependencies": ["@bare-ui/create-style-context", "@bare-ui/split-variant-props", "@bare-ui/tv-config"],
+      "registryDependencies": ["ng-hai/bare-ui/create-style-context", "ng-hai/bare-ui/split-variant-props", "ng-hai/bare-ui/tv-config"],
       "dependencies": ["@base-ui/react"],
       "files": [
         { "path": "registry/bare/ui/scroll-area/scroll-area-root.tsx", "type": "registry:ui" },
@@ -476,7 +476,7 @@
       "title": "Slider",
       "description": "Unstyled slider component with label, value, control, track, thumb, indicator, built on Base UI",
       "categories": ["form"],
-      "registryDependencies": ["@bare-ui/create-style-context", "@bare-ui/split-variant-props", "@bare-ui/tv-config"],
+      "registryDependencies": ["ng-hai/bare-ui/create-style-context", "ng-hai/bare-ui/split-variant-props", "ng-hai/bare-ui/tv-config"],
       "dependencies": ["@base-ui/react"],
       "files": [
         { "path": "registry/bare/ui/slider/slider-root.tsx", "type": "registry:ui" },
@@ -497,7 +497,7 @@
       "title": "Preview Card",
       "description": "Unstyled preview card component with trigger, portal, popup, positioner, arrow, built on Base UI",
       "categories": ["overlay"],
-      "registryDependencies": ["@bare-ui/create-style-context", "@bare-ui/split-variant-props", "@bare-ui/tv-config"],
+      "registryDependencies": ["ng-hai/bare-ui/create-style-context", "ng-hai/bare-ui/split-variant-props", "ng-hai/bare-ui/tv-config"],
       "dependencies": ["@base-ui/react"],
       "files": [
         { "path": "registry/bare/ui/preview-card/preview-card-root.tsx", "type": "registry:ui" },
@@ -519,7 +519,7 @@
       "title": "Number Field",
       "description": "Unstyled number field component with group, increment, decrement, input, scrub area, built on Base UI",
       "categories": ["form"],
-      "registryDependencies": ["@bare-ui/create-style-context", "@bare-ui/split-variant-props", "@bare-ui/tv-config"],
+      "registryDependencies": ["ng-hai/bare-ui/create-style-context", "ng-hai/bare-ui/split-variant-props", "ng-hai/bare-ui/tv-config"],
       "dependencies": ["@base-ui/react"],
       "files": [
         { "path": "registry/bare/ui/number-field/number-field-root.tsx", "type": "registry:ui" },
@@ -540,7 +540,7 @@
       "title": "Toolbar",
       "description": "Unstyled toolbar component with group, button, link, input, separator, built on Base UI",
       "categories": ["navigation"],
-      "registryDependencies": ["@bare-ui/create-style-context", "@bare-ui/split-variant-props", "@bare-ui/tv-config"],
+      "registryDependencies": ["ng-hai/bare-ui/create-style-context", "ng-hai/bare-ui/split-variant-props", "ng-hai/bare-ui/tv-config"],
       "dependencies": ["@base-ui/react"],
       "files": [
         { "path": "registry/bare/ui/toolbar/toolbar-root.tsx", "type": "registry:ui" },
@@ -560,7 +560,7 @@
       "title": "Drawer",
       "description": "Unstyled drawer component with provider, trigger, portal, backdrop, popup, swipe area, content, viewport, indent, built on Base UI",
       "categories": ["overlay"],
-      "registryDependencies": ["@bare-ui/create-style-context", "@bare-ui/split-variant-props", "@bare-ui/tv-config"],
+      "registryDependencies": ["ng-hai/bare-ui/create-style-context", "ng-hai/bare-ui/split-variant-props", "ng-hai/bare-ui/tv-config"],
       "dependencies": ["@base-ui/react"],
       "files": [
         { "path": "registry/bare/ui/drawer/drawer-root.tsx", "type": "registry:ui" },
@@ -588,7 +588,7 @@
       "title": "Toast",
       "description": "Unstyled toast component with provider, portal, viewport, positioner, root, content, title, description, action, close, arrow, built on Base UI",
       "categories": ["overlay"],
-      "registryDependencies": ["@bare-ui/create-style-context", "@bare-ui/split-variant-props", "@bare-ui/tv-config"],
+      "registryDependencies": ["ng-hai/bare-ui/create-style-context", "ng-hai/bare-ui/split-variant-props", "ng-hai/bare-ui/tv-config"],
       "dependencies": ["@base-ui/react"],
       "files": [
         { "path": "registry/bare/ui/toast/toast-root.tsx", "type": "registry:ui" },
@@ -613,7 +613,7 @@
       "title": "Navigation Menu",
       "description": "Unstyled navigation menu component with list, item, trigger, icon, content, link, portal, backdrop, positioner, popup, viewport, arrow, built on Base UI",
       "categories": ["navigation"],
-      "registryDependencies": ["@bare-ui/create-style-context", "@bare-ui/split-variant-props", "@bare-ui/tv-config"],
+      "registryDependencies": ["ng-hai/bare-ui/create-style-context", "ng-hai/bare-ui/split-variant-props", "ng-hai/bare-ui/tv-config"],
       "dependencies": ["@base-ui/react"],
       "files": [
         { "path": "registry/bare/ui/navigation-menu/navigation-menu-root.tsx", "type": "registry:ui" },
@@ -640,7 +640,7 @@
       "title": "Menu",
       "description": "Unstyled menu component with submenu, trigger, portal, positioner, popup, items, groups, radio, checkbox, built on Base UI",
       "categories": ["overlay"],
-      "registryDependencies": ["@bare-ui/create-style-context", "@bare-ui/split-variant-props", "@bare-ui/tv-config"],
+      "registryDependencies": ["ng-hai/bare-ui/create-style-context", "ng-hai/bare-ui/split-variant-props", "ng-hai/bare-ui/tv-config"],
       "dependencies": ["@base-ui/react"],
       "files": [
         { "path": "registry/bare/ui/menu/menu-root.tsx", "type": "registry:ui" },
@@ -673,7 +673,7 @@
       "title": "Combobox",
       "description": "Unstyled combobox component with label, trigger, input, chips, clear, list, items, groups, empty, status, positioning, built on Base UI",
       "categories": ["form"],
-      "registryDependencies": ["@bare-ui/create-style-context", "@bare-ui/split-variant-props", "@bare-ui/tv-config"],
+      "registryDependencies": ["ng-hai/bare-ui/create-style-context", "ng-hai/bare-ui/split-variant-props", "ng-hai/bare-ui/tv-config"],
       "dependencies": ["@base-ui/react"],
       "files": [
         { "path": "registry/bare/ui/combobox/combobox-root.tsx", "type": "registry:ui" },
@@ -712,7 +712,7 @@
       "title": "Alert Dialog",
       "description": "Unstyled alert dialog component with trigger, portal, backdrop, popup, viewport, title, description, close, built on Base UI",
       "categories": ["overlay"],
-      "registryDependencies": ["@bare-ui/create-style-context", "@bare-ui/split-variant-props", "@bare-ui/tv-config"],
+      "registryDependencies": ["ng-hai/bare-ui/create-style-context", "ng-hai/bare-ui/split-variant-props", "ng-hai/bare-ui/tv-config"],
       "dependencies": ["@base-ui/react"],
       "files": [
         { "path": "registry/bare/ui/alert-dialog/alert-dialog-root.tsx", "type": "registry:ui" },
@@ -735,7 +735,7 @@
       "title": "Context Menu",
       "description": "Unstyled context menu component with submenu, trigger, portal, positioner, popup, items, groups, radio, checkbox, built on Base UI",
       "categories": ["overlay"],
-      "registryDependencies": ["@bare-ui/create-style-context", "@bare-ui/split-variant-props", "@bare-ui/tv-config"],
+      "registryDependencies": ["ng-hai/bare-ui/create-style-context", "ng-hai/bare-ui/split-variant-props", "ng-hai/bare-ui/tv-config"],
       "dependencies": ["@base-ui/react"],
       "files": [
         { "path": "registry/bare/ui/context-menu/context-menu-root.tsx", "type": "registry:ui" },
@@ -767,7 +767,7 @@
       "title": "Autocomplete",
       "description": "Unstyled autocomplete component with trigger, input, list, items, groups, empty, status, positioning, built on Base UI",
       "categories": ["form"],
-      "registryDependencies": ["@bare-ui/create-style-context", "@bare-ui/split-variant-props", "@bare-ui/tv-config"],
+      "registryDependencies": ["ng-hai/bare-ui/create-style-context", "ng-hai/bare-ui/split-variant-props", "ng-hai/bare-ui/tv-config"],
       "dependencies": ["@base-ui/react"],
       "files": [
         { "path": "registry/bare/ui/autocomplete/autocomplete-root.tsx", "type": "registry:ui" },
@@ -801,7 +801,7 @@
       "title": "OTP Field",
       "description": "Unstyled OTP field component with root, input, separator for one-time password entry, built on Base UI",
       "categories": ["form"],
-      "registryDependencies": ["@bare-ui/create-style-context", "@bare-ui/split-variant-props", "@bare-ui/tv-config"],
+      "registryDependencies": ["ng-hai/bare-ui/create-style-context", "ng-hai/bare-ui/split-variant-props", "ng-hai/bare-ui/tv-config"],
       "dependencies": ["@base-ui/react"],
       "files": [
         { "path": "registry/bare/ui/otp-field/otp-field-root.tsx", "type": "registry:ui" },

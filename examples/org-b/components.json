@@ -22,7 +22,6 @@
   "menuColor": "default",
   "menuAccent": "subtle",
   "registries": {
-    "@bare-ui": "https://raw.githubusercontent.com/ng-hai/bare-ui/main/public/r/{name}.json",
     "@registry-b": "http://localhost:3101/r/{name}.json"
   }
 }

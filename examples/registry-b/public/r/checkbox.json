@@ -4,7 +4,7 @@
   "title": "Checkbox",
   "description": "Green angular checkbox styles for bare-ui",
   "registryDependencies": [
-    "@bare-ui/checkbox",
+    "ng-hai/bare-ui/checkbox",
     "@registry-b/theme"
   ],
   "files": [

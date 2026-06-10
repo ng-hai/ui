@@ -4,7 +4,7 @@
   "title": "Switch",
   "description": "Blue rounded switch styles for bare-ui",
   "registryDependencies": [
-    "@bare-ui/switch",
+    "ng-hai/bare-ui/switch",
     "@registry-a/theme"
   ],
   "files": [

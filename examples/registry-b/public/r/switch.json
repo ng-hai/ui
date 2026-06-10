@@ -4,7 +4,7 @@
   "title": "Switch",
   "description": "Green angular switch styles for bare-ui",
   "registryDependencies": [
-    "@bare-ui/switch",
+    "ng-hai/bare-ui/switch",
     "@registry-b/theme"
   ],
   "files": [
