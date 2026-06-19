@@ -1,4 +1,4 @@
-import { OTPFieldPreview as OTPFieldPrimitive } from "@base-ui/react/otp-field";
+import { OTPField as OTPFieldPrimitive } from "@base-ui/react/otp-field";
 import { createStyleContext } from "@/registry/bare/lib/create-style-context";
 import { createPropSplitter } from "@/registry/bare/lib/split-variant-props";
 import { otpFieldStyles } from "./styles";
