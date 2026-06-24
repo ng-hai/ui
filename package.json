@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "registry:validate": "shadcn registry validate",
+    "registry:validate": "shadcn build --output node_modules/.cache/bare-ui-registry",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest"
