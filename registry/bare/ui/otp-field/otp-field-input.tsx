@@ -1,4 +1,4 @@
-import { OTPFieldPreview as OTPFieldPrimitive } from "@base-ui/react/otp-field";
+import { OTPField as OTPFieldPrimitive } from "@base-ui/react/otp-field";
 import { useOtpFieldStyles } from "./otp-field-root";
 
 interface OTPFieldInputProps extends OTPFieldPrimitive.Input.Props {
