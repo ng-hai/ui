@@ -3,3 +3,6 @@ dist/
 .DS_Store
 docs/superpowers/
 .claude/worktrees/
+
+# theme-generator output (the tool ships; its output is the consumer's, not ours)
+/themes/

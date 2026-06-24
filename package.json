@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "registry:validate": "shadcn build --output node_modules/.cache/bare-ui-registry",
+    "gen:theme": "tsx registry/bare/theme/gen-theme.ts",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest"
@@ -16,13 +17,17 @@
     "tailwind-variants": "3.2.2"
   },
   "devDependencies": {
+    "@adobe/leonardo-contrast-colors": "1.1.0",
     "@testing-library/jest-dom": "6.9.1",
     "@testing-library/react": "16.3.2",
+    "@types/culori": "4.0.1",
     "@types/node": "25.9.1",
     "@types/react": "19.2.16",
     "@types/react-dom": "19.2.3",
+    "culori": "4.0.2",
     "jsdom": "29.1.1",
     "shadcn": "4.11.0",
+    "tsx": "4.22.4",
     "typescript": "6.0.3",
     "vitest": "4.1.8"
   }
