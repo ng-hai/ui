@@ -1,0 +1,134 @@
+/**
+ * bare-ui default theme — the token contract.
+ *
+ * This is the *tokens* layer (values), kept separate from the *styles* layer
+ * (each component's empty `styles.ts` slots). Components only ever reference
+ * these token names, so the whole app re-themes by swapping the values below.
+ *
+ * Install: `shadcn add ng-hai/bare-ui/theme` (lands at styles/bare-ui-theme.css),
+ * then import it AFTER Tailwind in your global stylesheet:
+ *
+ *   @import "tailwindcss";
+ *   @import "./styles/bare-ui-theme.css";
+ *
+ * Single-brand by design: there is one palette, with a light (`:root`) and a
+ * dark (`.dark`) mode. Mode is toggled by adding/removing `.dark` on <html> —
+ * see the `theme-mode` lib. Replace these values with your own brand; keep the
+ * token *names* (the contract) stable so components never need to change.
+ */
+
+/* Make `dark:` utilities track the `.dark` class instead of the OS media query,
+   so the same class our mode controller toggles also drives Tailwind variants. */
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  color-scheme: light;
+
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0 0);
+
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+
+  /* The one knob you liked: a single base radius that a calc() ramp derives the
+     rest from (see @theme inline). Change this one value to retune every corner.
+     Density works the same way via Tailwind's built-in `--spacing` (default
+     0.25rem) — override it here for a compact/comfortable feel. */
+  --radius: 0.625rem;
+}
+
+.dark {
+  color-scheme: dark;
+
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+
+  --destructive: oklch(0.704 0.191 22.216);
+  --destructive-foreground: oklch(0.985 0 0);
+
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+}
+
+/**
+ * Expose the tokens to Tailwind so utilities like `bg-background`,
+ * `text-muted-foreground`, `rounded-md`, `border-border` exist. `inline` makes
+ * the generated utilities reference the var() directly, so they react to the
+ * `.dark` overrides above at runtime — no rebuild, no duplicate dark utilities.
+ */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* The radius ramp — one seed (--radius) derives the whole family. */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}

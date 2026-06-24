@@ -42,6 +42,37 @@
       ]
     },
     {
+      "name": "theme",
+      "type": "registry:file",
+      "title": "Theme",
+      "description": "Default light/dark token contract — :root + .dark CSS variables, an @theme inline mapping, and a single --radius scale ramp. Import after `@import \"tailwindcss\"`.",
+      "categories": ["theme"],
+      "files": [
+        {
+          "path": "registry/bare/theme/default.css",
+          "type": "registry:file",
+          "target": "styles/bare-ui-theme.css"
+        }
+      ]
+    },
+    {
+      "name": "theme-mode",
+      "type": "registry:lib",
+      "title": "Theme Mode",
+      "description": "Framework-agnostic light/dark/system mode controller — pre-paint init script, setMode, OS-preference sync, post-login account reconcile, plus a React useThemeMode hook.",
+      "categories": ["theme"],
+      "files": [
+        {
+          "path": "registry/bare/lib/theme-mode.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "registry/bare/lib/use-theme-mode.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
       "name": "button",
       "type": "registry:ui",
       "title": "Button",
