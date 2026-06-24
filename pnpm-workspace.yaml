@@ -1,0 +1,6 @@
+# pnpm 11 build-script approval. Both packages work without their install
+# scripts (the full test/typecheck/registry suite passes with them skipped),
+# so neither is built. Flip to `true` only if a script becomes required.
+allowBuilds:
+  esbuild: false
+  msw: false

@@ -2,6 +2,7 @@
   "name": "bare-ui",
   "private": true,
   "type": "module",
+  "packageManager": "pnpm@11.9.0",
   "scripts": {
     "registry:validate": "shadcn build --output node_modules/.cache/bare-ui-registry",
     "gen:theme": "tsx registry/bare/theme/gen-theme.ts",
