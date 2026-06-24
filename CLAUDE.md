@@ -35,12 +35,12 @@ Theme CSS files live under `registry/bare/theme/`. Consumers install via `shadcn
 ## Commands
 
 ```bash
-pnpm registry:validate # shadcn registry validate → parse registry.json, check referenced files exist
+pnpm registry:validate # shadcn build to a throwaway cache dir → parse registry.json, check every referenced file resolves
 pnpm typecheck         # tsc --noEmit (uses the local tsc, not PATH)
 pnpm test              # vitest run
 ```
 
-There is no build step, no lint script, and no dev server. Run `pnpm registry:validate` any time `registry.json` or any file it references changes — it parses the registry and verifies every `files[].path` resolves. Always run `pnpm typecheck`, not `pnpm tsc …` — the latter falls back to whatever `tsc` is on `PATH` (often an older global install) and will report phantom errors.
+There is no build step, no lint script, and no dev server. Run `pnpm registry:validate` any time `registry.json` or any file it references changes — it runs `shadcn build` into a throwaway, git-ignored cache dir (`node_modules/.cache/bare-ui-registry`), which parses the registry and verifies every `files[].path` resolves. The output is never committed (the repo still ships no `public/r` artifact). Always run `pnpm typecheck`, not `pnpm tsc …` — the latter falls back to whatever `tsc` is on `PATH` (often an older global install) and will report phantom errors.
 
 ## Release process
 
