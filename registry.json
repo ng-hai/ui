@@ -73,6 +73,39 @@
       ]
     },
     {
+      "name": "theme-brand",
+      "type": "registry:lib",
+      "title": "Theme Brand",
+      "description": "URL-keyed per-tenant brand theming for static SPAs — reads /t/<slug>, sets <html data-tenant>, with a pre-paint init script, route sync, and a React useThemeBrand hook. Pairs with a generated tenants.css. Independent of theme-mode (light/dark).",
+      "categories": ["theme"],
+      "files": [
+        {
+          "path": "registry/bare/lib/theme-brand.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "registry/bare/lib/use-theme-brand.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "theme-generator",
+      "type": "registry:file",
+      "title": "Theme Generator",
+      "description": "Build-time tool: turn brand seeds into accessible light/dark token sets via Adobe Leonardo (contrast-anchored). Fill in your tenants, run it, and it emits per-tenant default.css drop-ins, Tokens Studio JSON for Figma, and a [data-tenant]-scoped tenants.css for the theme-brand lib. Ships no themes of its own — the config is your fill-in slot.",
+      "categories": ["theme"],
+      "registryDependencies": ["ng-hai/bare-ui/theme", "ng-hai/bare-ui/theme-brand"],
+      "devDependencies": ["@adobe/leonardo-contrast-colors@^1.1.0", "culori@^4.0.0", "tsx@^4.0.0"],
+      "files": [
+        {
+          "path": "registry/bare/theme/gen-theme.ts",
+          "type": "registry:file",
+          "target": "scripts/gen-theme.ts"
+        }
+      ]
+    },
+    {
       "name": "button",
       "type": "registry:ui",
       "title": "Button",
