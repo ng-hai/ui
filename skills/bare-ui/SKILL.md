@@ -94,16 +94,16 @@ export const buttonStyles = tv({
   slots: {
     root: [
       "inline-flex items-center justify-center gap-2 rounded-default font-medium",
-      "transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
+      "transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-8",
       "disabled:pointer-events-none disabled:opacity-50",
     ],
   },
   variants: {
     variant: {
-      solid: { root: "bg-primary text-primary-foreground shadow-sm hover:bg-primary/90" },
-      outline: { root: "border border-border text-primary hover:bg-primary/10" },
-      ghost: { root: "text-primary hover:bg-primary/10" },
-      destructive: { root: "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90" },
+      solid: { root: "bg-accent-9 text-accent-contrast shadow-sm hover:bg-accent-10" },
+      outline: { root: "border border-gray-7 text-gray-12 hover:bg-gray-3" },
+      ghost: { root: "text-gray-12 hover:bg-gray-3" },
+      destructive: { root: "bg-danger-9 text-danger-contrast shadow-sm hover:bg-danger-10" },
     },
     size: {
       sm: { root: "h-8 px-3 text-xs" },
@@ -126,33 +126,34 @@ Add a `variants` block and `defaultVariants` to the `tv()` call. `createPropSpli
 <Button.Root variant="outline" size="lg">Click me</Button.Root>
 ```
 
-### Design tokens via @theme
+### Design tokens — the Radix 12-step contract
 
-Create a CSS file with a Tailwind `@theme` block and `@import` it in your `globals.css`:
+The token contract is **not** the shadcn `--primary`/`--secondary`/`--muted` set. It follows [Radix Colors](https://www.radix-ui.com/colors/docs/palette-composition/understanding-the-scale): three 12-step scales — `gray` (neutral chrome), `accent` (brand), `danger` (destructive) — each shipping a **solid** ramp (`1`–`12`) and an **alpha** ramp (`a1`–`a12`), in light (`:root`) and dark (`.dark`). Each step has a fixed role:
 
-```css
-/* styles/theme.css */
-@theme {
-  --color-primary: oklch(0.55 0.25 262);
-  --color-primary-foreground: oklch(0.97 0.01 255);
-  --color-muted: oklch(0.55 0.02 286);
-  --color-muted-foreground: oklch(0.45 0.02 286);
-  --color-destructive: oklch(0.58 0.22 29);
-  --color-destructive-foreground: oklch(0.97 0.01 29);
-  --color-surface: oklch(1 0 0);
-  --color-surface-foreground: oklch(0.15 0.01 286);
-  --color-overlay: oklch(0 0 0 / 50%);
-  --color-border: oklch(0.9 0.01 262);
-  --color-ring: oklch(0.7 0.16 262);
-  --radius-sm: 0.25rem;
-  --radius-default: 0.5rem;
-  --radius-lg: 0.75rem;
-  --shadow-sm: 0 1px 2px 0 oklch(0 0 0 / 5%);
-  --shadow-lg: 0 10px 15px -3px oklch(0 0 0 / 10%), 0 4px 6px -4px oklch(0 0 0 / 10%);
-}
+| Step | Role | Step | Role |
+|---|---|---|---|
+| 1 | app background | 7 | border / focus ring |
+| 2 | subtle background | 8 | hovered border |
+| 3 | component background | 9 | **solid** (the pure color) |
+| 4 | hovered component | 10 | solid hover |
+| 5 | active / selected | 11 | low-contrast text |
+| 6 | subtle border / separator | 12 | high-contrast text |
+
+Plus specials: `--accent-contrast` / `--danger-contrast` (legible text on step 9), `--{gray,accent,danger}-surface` (translucent panels), `--background` (page), `--overlay` (scrims). All are exposed to Tailwind via `@theme inline`, so utilities like `bg-accent-9`, `text-gray-11`, `border-gray-6`, `bg-accent-a3`, `text-accent-contrast` exist.
+
+Pick by role, not by guessing a shade:
+
+```ts
+solid:   "bg-accent-9 text-accent-contrast hover:bg-accent-10"   // primary button
+soft:    "bg-accent-3 text-accent-11 hover:bg-accent-4"          // tinted button
+outline: "border border-gray-7 text-gray-12 hover:bg-gray-3"
+ghost:   "text-gray-12 hover:bg-gray-3"
+input:   "border border-gray-7 bg-gray-1 placeholder:text-gray-9 focus-visible:outline-accent-8"
+card:    "bg-gray-2 text-gray-12 border border-gray-6"
+muted:   "text-gray-11"
 ```
 
-Then reference tokens in `styles.ts` via Tailwind utility classes: `bg-primary`, `text-surface-foreground`, `rounded-default`, etc.
+The contract ships **neutral** (accent == a dark gray) via the `theme` preset (`shadcn add ng-hai/bare-ui/theme`). To brand it, install `theme-generator`, drop your brand hex into its `THEMES` config, and run it — it regenerates the whole contract (pinning `accent-9` to your brand) with a printed WCAG self-check. Keep the token *names* stable; only the values change.
 
 ### One-off overrides
 
@@ -183,7 +184,7 @@ export const dialogStyles = tv({
     // ... existing slots
     closeButton: [
       "absolute top-4 right-4 inline-flex items-center justify-center",
-      "rounded-sm size-6 text-muted-foreground hover:text-surface-foreground",
+      "rounded-sm size-6 text-gray-11 hover:text-gray-12",
       "transition-colors",
     ],
   },

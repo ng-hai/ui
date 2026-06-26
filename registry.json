@@ -45,7 +45,7 @@
       "name": "theme",
       "type": "registry:file",
       "title": "Theme",
-      "description": "Default light/dark token contract — :root + .dark CSS variables, an @theme inline mapping, and a single --radius scale ramp. Import after `@import \"tailwindcss\"`.",
+      "description": "Default light/dark token contract — Radix-style 12-step scales (gray / accent / danger, each solid + alpha) following Radix's role-per-step model, with an @theme inline mapping and a single --radius scale ramp. Neutral by default; swap in your brand with theme-generator. Import after `@import \"tailwindcss\"`.",
       "categories": ["theme"],
       "files": [
         {
@@ -93,11 +93,16 @@
       "name": "theme-generator",
       "type": "registry:file",
       "title": "Theme Generator",
-      "description": "Build-time tool: turn brand seeds into accessible light/dark token sets via Adobe Leonardo (contrast-anchored). Fill in your tenants, run it, and it emits per-tenant default.css drop-ins, Tokens Studio JSON for Figma, and a [data-tenant]-scoped tenants.css for the theme-brand lib. Ships no themes of its own — the config is your fill-in slot.",
+      "description": "Build-time CLI script (no npm publish — installed straight from this GitHub registry, lands in scripts/). Turns brand seeds into Radix-style 12-step token sets: pins step 9 to your brand, auto-pairs a tinted gray, supports per-mode (light/dark) seeds, and emits per-tenant default.css drop-ins, Tokens Studio JSON for Figma, and a [data-tenant]-scoped tenants.css for the theme-brand lib, with a WCAG self-check that warns (not fails) on misses. Self-contained: ships its own vendored copy of the generate-radix-colors engine, so run it with `tsx scripts/gen-theme.ts`. Ships no themes of its own — the config is your fill-in slot.",
       "categories": ["theme"],
       "registryDependencies": ["ng-hai/bare-ui/theme", "ng-hai/bare-ui/theme-brand"],
-      "devDependencies": ["@adobe/leonardo-contrast-colors@^1.1.0", "culori@^4.0.0", "tsx@^4.0.0"],
+      "devDependencies": ["@radix-ui/colors@^3.0.0", "colorjs.io@^0.6.1", "bezier-easing@^2.1.0", "tsx@^4.0.0"],
       "files": [
+        {
+          "path": "registry/bare/theme/generate-radix-colors.ts",
+          "type": "registry:file",
+          "target": "scripts/generate-radix-colors.ts"
+        },
         {
           "path": "registry/bare/theme/gen-theme.ts",
           "type": "registry:file",

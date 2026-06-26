@@ -16,7 +16,7 @@ The first two path segments (`ng-hai/bare-ui`) are the GitHub owner and repo; th
 
 > GitHub registries require a recent `shadcn` CLI (the `owner/repo/item` form landed in the 4.x line). Using `shadcn@latest` as above always works.
 
-Available components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `button`, `checkbox`, `checkbox-group`, `collapsible`, `combobox`, `context-menu`, `dialog`, `drawer`, `field`, `fieldset`, `form`, `input`, `menu`, `menubar`, `meter`, `navigation-menu`, `number-field`, `otp-field`, `popover`, `preview-card`, `progress`, `radio`, `scroll-area`, `select`, `separator`, `slider`, `switch`, `tabs`, `toast`, `toggle`, `toggle-group`, `toolbar`, `tooltip`. A default `theme` preset and the shared libs (`tv-config`, `split-variant-props`, `create-style-context`) are pulled in automatically as dependencies.
+Available components: `accordion`, `alert-dialog`, `autocomplete`, `avatar`, `button`, `checkbox`, `checkbox-group`, `collapsible`, `combobox`, `context-menu`, `dialog`, `drawer`, `field`, `fieldset`, `form`, `input`, `menu`, `menubar`, `meter`, `navigation-menu`, `number-field`, `otp-field`, `popover`, `preview-card`, `progress`, `radio`, `scroll-area`, `select`, `separator`, `slider`, `switch`, `tabs`, `toast`, `toggle`, `toggle-group`, `toolbar`, `tooltip`. The shared libs each component needs (`tv-config`, `split-variant-props`, `create-style-context`) are pulled in automatically as dependencies. The `theme` preset is **not** a dependency — components ship unstyled and reference no tokens. It's an *optional* starting palette (a Radix-style token contract + the Tailwind `@theme` wiring our styling examples use); install it with `shadcn add ng-hai/bare-ui/theme`, or skip it and style the components with your own tokens.
 
 ### Pin to a specific version (optional)
 
@@ -87,8 +87,8 @@ export const buttonStyles = tv({
   },
   variants: {
     variant: {
-      solid: { root: "bg-primary text-primary-foreground hover:bg-primary/90" },
-      ghost: { root: "hover:bg-accent" },
+      solid: { root: "bg-accent-9 text-accent-contrast hover:bg-accent-10" },
+      ghost: { root: "text-gray-12 hover:bg-gray-3" },
     },
     size: {
       sm: { root: "h-8 px-3" },
@@ -107,8 +107,8 @@ For multi-part components, add a slot per part and the matching root will publis
 // components/ui/checkbox/styles.ts
 export const checkboxStyles = tv({
   slots: {
-    root: "h-4 w-4 rounded border border-input",
-    indicator: "flex items-center justify-center text-primary",
+    root: "h-4 w-4 rounded border border-gray-7",
+    indicator: "flex items-center justify-center text-accent-9",
   },
 });
 ```
@@ -117,7 +117,7 @@ Every rendered element also emits a `data-slot="<name>"` attribute, so you can r
 
 ```css
 [data-slot="checkbox"][data-checked] {
-  background: hsl(var(--primary));
+  background: var(--accent-9);
 }
 ```
 
@@ -144,7 +144,7 @@ import { Button, buttonStyles } from "@/components/ui/button";
 const danger = tv({
   extend: buttonStyles,
   slots: {
-    root: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+    root: "bg-danger-9 text-danger-contrast hover:bg-danger-10",
   },
 });
 
