@@ -1,5 +1,5 @@
 /**
- * bare-ui default theme — the token contract.
+ * bare-ui default theme — the token contract, Radix Colors style.
  *
  * This is the *tokens* layer (values), kept separate from the *styles* layer
  * (each component's empty `styles.ts` slots). Components only ever reference
@@ -11,122 +11,296 @@
  *   @import "tailwindcss";
  *   @import "./styles/bare-ui-theme.css";
  *
- * Single-brand by design: there is one palette, with a light (`:root`) and a
- * dark (`.dark`) mode. Mode is toggled by adding/removing `.dark` on <html> —
- * see the `theme-mode` lib. Replace these values with your own brand; keep the
- * token *names* (the contract) stable so components never need to change.
+ * Three 12-step scales — `gray` (neutral chrome), `accent` (brand), `danger`
+ * (destructive) — each with a solid (1–12) and an alpha (a1–a12) ramp, following
+ * Radix's role-per-step model (https://www.radix-ui.com/colors/docs/palette-composition/understanding-the-scale):
+ *
+ *   1  app background          7  border / focus ring
+ *   2  subtle background       8  hovered border
+ *   3  component background    9  solid (the pure brand)
+ *   4  hovered component       10 solid hover
+ *   5  active / selected       11 low-contrast text
+ *   6  subtle border           12 high-contrast text
+ *
+ * So a solid button is `bg-accent-9 text-accent-contrast hover:bg-accent-10`; a
+ * soft button `bg-accent-3 text-accent-11 hover:bg-accent-4`; an outline
+ * `border border-gray-7 text-gray-12 hover:bg-gray-3`. Use `*-a*` alpha steps to
+ * tint over imagery, `*-surface` for translucent panels, `overlay` for scrims.
+ *
+ * This default is intentionally neutral (hueless gray chrome + a dark gray accent). Replace the values with
+ * your brand via `shadcn add ng-hai/bare-ui/theme-generator` — keep the token
+ * *names* (the contract) stable so components never need to change. Mode is
+ * toggled by adding/removing `.dark` on <html> (see the `theme-mode` lib).
  */
-
-/* Make `dark:` utilities track the `.dark` class instead of the OS media query,
-   so the same class our mode controller toggles also drives Tailwind variants. */
 @custom-variant dark (&:is(.dark *));
 
 :root {
   color-scheme: light;
+  --gray-1: oklch(0.9913 0.0013 286.38);
+  --gray-2: oklch(0.9827 0.0026 286.35);
+  --gray-3: oklch(0.9552 0.0041 271.37);
+  --gray-4: oklch(0.9314 0.0055 274.96);
+  --gray-5: oklch(0.9104 0.0068 277.16);
+  --gray-6: oklch(0.8866 0.0096 279.67);
+  --gray-7: oklch(0.8533 0.0124 281.05);
+  --gray-8: oklch(0.7938 0.0156 277.79);
+  --gray-9: oklch(0.6453 0.0165 277.7);
+  --gray-10: oklch(0.6086 0.0167 277.67);
+  --gray-11: oklch(0.5019 0.0142 280.82);
+  --gray-12: oklch(0.2404 0.0096 276.67);
+  --gray-a1: oklch(0.2032 0.1408 264.05 / 0.0118);
+  --gray-a2: oklch(0.2032 0.1408 264.05 / 0.0235);
+  --gray-a3: oklch(0.2009 0.0947 262.24 / 0.0627);
+  --gray-a4: oklch(0.1775 0.0865 262.64 / 0.0941);
+  --gray-a5: oklch(0.1678 0.0831 262.83 / 0.1216);
+  --gray-a6: oklch(0.1672 0.0907 263.62 / 0.1529);
+  --gray-a7: oklch(0.1619 0.0893 263.74 / 0.1961);
+  --gray-a8: oklch(0.1628 0.0816 262.95 / 0.2745);
+  --gray-a9: oklch(0.1285 0.0565 261.26 / 0.4549);
+  --gray-a10: oklch(0.126 0.053 260.54 / 0.498);
+  --gray-a11: oklch(0.097 0.0447 261.94 / 0.6157);
+  --gray-a12: oklch(0.0733 0.0304 260.32 / 0.8824);
+
+  --accent-1: oklch(0.994 0 0);
+  --accent-2: oklch(0.9821 0 0);
+  --accent-3: oklch(0.9551 0 0);
+  --accent-4: oklch(0.928 0 0);
+  --accent-5: oklch(0.8975 0 0);
+  --accent-6: oklch(0.8607 0 0);
+  --accent-7: oklch(0.8141 0 0);
+  --accent-8: oklch(0.7444 0 0);
+  --accent-9: oklch(0.3485 0 0);
+  --accent-10: oklch(0.4165 0 0);
+  --accent-11: oklch(0.5138 0 0);
+  --accent-12: oklch(0.329 0 0);
+  --accent-a1: oklch(0 0 0 / 0.0078);
+  --accent-a2: oklch(0 0 0 / 0.0235);
+  --accent-a3: oklch(0 0 0 / 0.0588);
+  --accent-a4: oklch(0 0 0 / 0.0941);
+  --accent-a5: oklch(0 0 0 / 0.1333);
+  --accent-a6: oklch(0 0 0 / 0.1804);
+  --accent-a7: oklch(0 0 0 / 0.2392);
+  --accent-a8: oklch(0 0 0 / 0.3255);
+  --accent-a9: oklch(0 0 0 / 0.7725);
+  --accent-a10: oklch(0 0 0 / 0.702);
+  --accent-a11: oklch(0 0 0 / 0.5961);
+  --accent-a12: oklch(0 0 0 / 0.7922);
+
+  --danger-1: oklch(0.9934 0.0032 17.21);
+  --danger-2: oklch(0.9823 0.0086 17.3);
+  --danger-3: oklch(0.9557 0.0219 21.01);
+  --danger-4: oklch(0.9228 0.0393 23.7);
+  --danger-5: oklch(0.891 0.057 22.28);
+  --danger-6: oklch(0.8566 0.0757 22.77);
+  --danger-7: oklch(0.8068 0.0904 22.61);
+  --danger-8: oklch(0.7448 0.1125 22.79);
+  --danger-9: oklch(0.6256 0.1933 23.03);
+  --danger-10: oklch(0.5847 0.1951 23.18);
+  --danger-11: oklch(0.556 0.1933 22.96);
+  --danger-12: oklch(0.3384 0.1083 23.09);
+  --danger-a1: oklch(0.628 0.2577 29.23 / 0.0118);
+  --danger-a2: oklch(0.628 0.2577 29.23 / 0.0314);
+  --danger-a3: oklch(0.6303 0.2555 29.64 / 0.0824);
+  --danger-a4: oklch(0.6322 0.2536 29.99 / 0.149);
+  --danger-a5: oklch(0.6307 0.2551 29.71 / 0.2078);
+  --danger-a6: oklch(0.6251 0.2527 29.73 / 0.2745);
+  --danger-a7: oklch(0.5776 0.2336 29.64 / 0.3529);
+  --danger-a8: oklch(0.5483 0.2222 29.65 / 0.4549);
+  --danger-a9: oklch(0.56 0.2294 28.69 / 0.7176);
+  --danger-a10: oklch(0.5311 0.2173 28.33 / 0.7804);
+  --danger-a11: oklch(0.5098 0.2082 27.76 / 0.8196);
+  --danger-a12: oklch(0.2804 0.1144 27.4 / 0.9059);
+
+  --accent-contrast: oklch(1 0 0);
+
+  --danger-contrast: oklch(1 0 0);
+
+  --gray-surface: oklch(1 0 0 / 0.8);
+
+  --accent-surface: oklch(0.9791 0 0 / 0.8);
+
+  --danger-surface: oklch(0.9779 0.0107 17.34 / 0.8);
 
   --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
 
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
+  --overlay: oklch(0 0 0 / 0.4);
 
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.985 0 0);
-
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-
-  /* The one knob you liked: a single base radius that a calc() ramp derives the
-     rest from (see @theme inline). Change this one value to retune every corner.
-     Density works the same way via Tailwind's built-in `--spacing` (default
-     0.25rem) — override it here for a compact/comfortable feel. */
   --radius: 0.625rem;
 }
 
 .dark {
   color-scheme: dark;
+  --gray-1: oklch(0.1785 0.0041 285.98);
+  --gray-2: oklch(0.2143 0.0039 286.07);
+  --gray-3: oklch(0.2559 0.004 264.5);
+  --gray-4: oklch(0.2856 0.0074 274.7);
+  --gray-5: oklch(0.3141 0.009 276.85);
+  --gray-6: oklch(0.3498 0.0105 278.3);
+  --gray-7: oklch(0.4024 0.012 273.12);
+  --gray-8: oklch(0.4917 0.0159 281.25);
+  --gray-9: oklch(0.5403 0.0172 277.6);
+  --gray-10: oklch(0.5849 0.0169 277.65);
+  --gray-11: oklch(0.769 0.0142 281.49);
+  --gray-12: oklch(0.9497 0.0027 286.35);
+  --gray-a1: oklch(0.3711 0.239 266.43 / 0.0118);
+  --gray-a2: oklch(0.8572 0.0636 284.98 / 0.0431);
+  --gray-a3: oklch(0.9108 0.034 263.57 / 0.0863);
+  --gray-a4: oklch(0.8893 0.0449 274.36 / 0.1255);
+  --gray-a5: oklch(0.903 0.0443 277.08 / 0.1569);
+  --gray-a6: oklch(0.9061 0.0413 278.05 / 0.2);
+  --gray-a7: oklch(0.915 0.0378 272.52 / 0.2627);
+  --gray-a8: oklch(0.9215 0.0354 280.45 / 0.3765);
+  --gray-a9: oklch(0.9234 0.0342 278.48 / 0.4392);
+  --gray-a10: oklch(0.9315 0.0301 277.59 / 0.4941);
+  --gray-a11: oklch(0.9585 0.0187 282.77 / 0.7255);
+  --gray-a12: oklch(0.9946 0.0026 286.35 / 0.9373);
 
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
+  --accent-1: oklch(0.1776 0 0);
+  --accent-2: oklch(0.2134 0 0);
+  --accent-3: oklch(0.252 0 0);
+  --accent-4: oklch(0.285 0 0);
+  --accent-5: oklch(0.3132 0 0);
+  --accent-6: oklch(0.3485 0 0);
+  --accent-7: oklch(0.4017 0 0);
+  --accent-8: oklch(0.4891 0 0);
+  --accent-9: oklch(0.5382 0 0);
+  --accent-10: oklch(0.4926 0 0);
+  --accent-11: oklch(0.7699 0 0);
+  --accent-12: oklch(0.9491 0 0);
+  --accent-a1: oklch(0 0 0 / 0);
+  --accent-a2: oklch(1 0 0 / 0.0353);
+  --accent-a3: oklch(1 0 0 / 0.0706);
+  --accent-a4: oklch(1 0 0 / 0.1059);
+  --accent-a5: oklch(1 0 0 / 0.1333);
+  --accent-a6: oklch(1 0 0 / 0.1725);
+  --accent-a7: oklch(1 0 0 / 0.2314);
+  --accent-a8: oklch(1 0 0 / 0.3333);
+  --accent-a9: oklch(1 0 0 / 0.3922);
+  --accent-a10: oklch(1 0 0 / 0.3373);
+  --accent-a11: oklch(1 0 0 / 0.6863);
+  --accent-a12: oklch(1 0 0 / 0.9294);
 
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
+  --danger-1: oklch(0.1786 0.0139 26.7);
+  --danger-2: oklch(0.2039 0.0219 24.07);
+  --danger-3: oklch(0.2492 0.0651 23.05);
+  --danger-4: oklch(0.2873 0.0953 22.51);
+  --danger-5: oklch(0.3313 0.106 23.03);
+  --danger-6: oklch(0.3828 0.1113 23.34);
+  --danger-7: oklch(0.4503 0.1203 23.24);
+  --danger-8: oklch(0.5432 0.146 22.79);
+  --danger-9: oklch(0.6256 0.1933 23.03);
+  --danger-10: oklch(0.584 0.1932 23.01);
+  --danger-11: oklch(0.7694 0.1361 22.88);
+  --danger-12: oklch(0.9013 0.0512 24.09);
+  --danger-a1: oklch(0.5922 0.243 29.23 / 0.0275);
+  --danger-a2: oklch(0.6219 0.2299 29.64 / 0.0667);
+  --danger-a3: oklch(0.6335 0.252 28.56 / 0.1765);
+  --danger-a4: oklch(0.6286 0.2541 27.79 / 0.2667);
+  --danger-a5: oklch(0.6394 0.246 26.58 / 0.3373);
+  --danger-a6: oklch(0.66 0.2265 25.54 / 0.4118);
+  --danger-a7: oklch(0.6822 0.2063 24.43 / 0.5176);
+  --danger-a8: oklch(0.6924 0.1975 23.49 / 0.6902);
+  --danger-a9: oklch(0.6733 0.212 23.15 / 0.8941);
+  --danger-a10: oklch(0.6603 0.2239 23.32 / 0.8314);
+  --danger-a11: oklch(0.7694 0.1361 22.88);
+  --danger-a12: oklch(0.9013 0.0512 24.09);
 
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
+  --accent-contrast: oklch(1 0 0);
 
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
+  --danger-contrast: oklch(1 0 0);
 
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
+  --gray-surface: oklch(0 0 0 / 0.05);
 
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
+  --accent-surface: oklch(0.2478 0 0 / 0.502);
 
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
+  --danger-surface: oklch(0.2331 0.0428 25.47 / 0.502);
 
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.985 0 0);
+  --background: oklch(0.1776 0 0);
 
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
+  --overlay: oklch(0 0 0 / 0.6);
 }
 
-/**
- * Expose the tokens to Tailwind so utilities like `bg-background`,
- * `text-muted-foreground`, `rounded-md`, `border-border` exist. `inline` makes
- * the generated utilities reference the var() directly, so they react to the
- * `.dark` overrides above at runtime — no rebuild, no duplicate dark utilities.
- */
 @theme inline {
+  --color-gray-1: var(--gray-1);
+  --color-gray-2: var(--gray-2);
+  --color-gray-3: var(--gray-3);
+  --color-gray-4: var(--gray-4);
+  --color-gray-5: var(--gray-5);
+  --color-gray-6: var(--gray-6);
+  --color-gray-7: var(--gray-7);
+  --color-gray-8: var(--gray-8);
+  --color-gray-9: var(--gray-9);
+  --color-gray-10: var(--gray-10);
+  --color-gray-11: var(--gray-11);
+  --color-gray-12: var(--gray-12);
+  --color-gray-a1: var(--gray-a1);
+  --color-gray-a2: var(--gray-a2);
+  --color-gray-a3: var(--gray-a3);
+  --color-gray-a4: var(--gray-a4);
+  --color-gray-a5: var(--gray-a5);
+  --color-gray-a6: var(--gray-a6);
+  --color-gray-a7: var(--gray-a7);
+  --color-gray-a8: var(--gray-a8);
+  --color-gray-a9: var(--gray-a9);
+  --color-gray-a10: var(--gray-a10);
+  --color-gray-a11: var(--gray-a11);
+  --color-gray-a12: var(--gray-a12);
+  --color-accent-1: var(--accent-1);
+  --color-accent-2: var(--accent-2);
+  --color-accent-3: var(--accent-3);
+  --color-accent-4: var(--accent-4);
+  --color-accent-5: var(--accent-5);
+  --color-accent-6: var(--accent-6);
+  --color-accent-7: var(--accent-7);
+  --color-accent-8: var(--accent-8);
+  --color-accent-9: var(--accent-9);
+  --color-accent-10: var(--accent-10);
+  --color-accent-11: var(--accent-11);
+  --color-accent-12: var(--accent-12);
+  --color-accent-a1: var(--accent-a1);
+  --color-accent-a2: var(--accent-a2);
+  --color-accent-a3: var(--accent-a3);
+  --color-accent-a4: var(--accent-a4);
+  --color-accent-a5: var(--accent-a5);
+  --color-accent-a6: var(--accent-a6);
+  --color-accent-a7: var(--accent-a7);
+  --color-accent-a8: var(--accent-a8);
+  --color-accent-a9: var(--accent-a9);
+  --color-accent-a10: var(--accent-a10);
+  --color-accent-a11: var(--accent-a11);
+  --color-accent-a12: var(--accent-a12);
+  --color-danger-1: var(--danger-1);
+  --color-danger-2: var(--danger-2);
+  --color-danger-3: var(--danger-3);
+  --color-danger-4: var(--danger-4);
+  --color-danger-5: var(--danger-5);
+  --color-danger-6: var(--danger-6);
+  --color-danger-7: var(--danger-7);
+  --color-danger-8: var(--danger-8);
+  --color-danger-9: var(--danger-9);
+  --color-danger-10: var(--danger-10);
+  --color-danger-11: var(--danger-11);
+  --color-danger-12: var(--danger-12);
+  --color-danger-a1: var(--danger-a1);
+  --color-danger-a2: var(--danger-a2);
+  --color-danger-a3: var(--danger-a3);
+  --color-danger-a4: var(--danger-a4);
+  --color-danger-a5: var(--danger-a5);
+  --color-danger-a6: var(--danger-a6);
+  --color-danger-a7: var(--danger-a7);
+  --color-danger-a8: var(--danger-a8);
+  --color-danger-a9: var(--danger-a9);
+  --color-danger-a10: var(--danger-a10);
+  --color-danger-a11: var(--danger-a11);
+  --color-danger-a12: var(--danger-a12);
+  --color-accent-contrast: var(--accent-contrast);
+  --color-danger-contrast: var(--danger-contrast);
+  --color-gray-surface: var(--gray-surface);
+  --color-accent-surface: var(--accent-surface);
+  --color-danger-surface: var(--danger-surface);
   --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-overlay: var(--overlay);
 
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-
-  /* The radius ramp — one seed (--radius) derives the whole family. */
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
