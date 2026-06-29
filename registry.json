@@ -45,7 +45,7 @@
       "name": "theme",
       "type": "registry:file",
       "title": "Theme",
-      "description": "Default light/dark token contract — Radix-style 12-step scales (gray / accent / danger, each solid + alpha) following Radix's role-per-step model, with an @theme inline mapping and a single --radius scale ramp. Neutral by default; swap in your brand with theme-generator. Import after `@import \"tailwindcss\"`.",
+      "description": "Default light/dark token contract — Radix-style 12-step scales (base: gray / accent; status: danger / warning / success / info; each solid + alpha) following Radix's role-per-step model, with an @theme inline mapping and a single --radius scale ramp. Neutral by default; swap in your brand with theme-generator. Import after `@import \"tailwindcss\"`.",
       "categories": ["theme"],
       "files": [
         {

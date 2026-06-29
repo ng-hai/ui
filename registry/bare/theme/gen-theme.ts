@@ -69,14 +69,25 @@ export type ThemeConfig = {
   name: string; // → [data-tenant="<name>"] and themes/<name>/
   accent: Seed; // brand seed — becomes accent step 9
   gray?: Seed; // neutral seed — defaults to the Radix gray paired to the accent's hue
-  danger?: Seed; // destructive/error seed — defaults to a Radix red
+  // Status scales (optional) — each defaults to its Radix hue below. Override per
+  // tenant only when the brand needs a specific red/amber/green/blue.
+  danger?: Seed; // destructive / error  — defaults to Radix red
+  warning?: Seed; // caution            — defaults to Radix amber
+  success?: Seed; // positive / done    — defaults to Radix green
+  info?: Seed; // neutral notice        — defaults to Radix blue
   background?: { light: string; dark: string }; // page bg per mode — defaults to paired gray step 1
 };
 
-// Radix-aligned default for the destructive scale (≈ Radix red 9). For a chromatic
+// Radix-aligned defaults for the status scales (each ≈ the named Radix step 9).
+// These are independent semantic colors — generated exactly like the brand accent
+// (one generateRadixColors run per hue), just seeded by a fixed Radix color so the
+// "bare" default carries a sane feedback palette out of the box. For a chromatic
 // brand the neutral gray + page background come from Radix's own gray scales, picked
 // by the accent's hue (see grayPairName / radixGray); a hueless brand uses NEUTRAL_GRAY.
-const DEFAULT_DANGER = "#e5484d";
+const DEFAULT_DANGER = "#e5484d"; // Radix red 9
+const DEFAULT_WARNING = "#ffc53d"; // Radix amber 9 (algorithm auto-picks dark contrast text)
+const DEFAULT_SUCCESS = "#30a46c"; // Radix green 9
+const DEFAULT_INFO = "#0090ff"; // Radix blue 9
 
 const THEMES: ThemeConfig[] = [
   {
@@ -86,9 +97,18 @@ const THEMES: ThemeConfig[] = [
 ];
 
 // ── scales + token ordering ──────────────────────────────────────────────────
-// Three scales make up the contract: gray (neutral chrome), accent (brand),
-// danger (destructive). Each ships solid (1–12) + alpha (a1–a12).
-const SCALES = ["gray", "accent", "danger"] as const;
+// The contract is two tiers, all 12-step (solid 1–12 + alpha a1–a12):
+//   BASE   — gray (neutral chrome) + accent (brand). Always present.
+//   STATUS — danger / warning / success / info. Feedback colors for components
+//            like banner, badge, callout, alert, toast. Optional: unused vars are
+//            zero-cost, and the (unstyled) bare components don't reference them.
+// Every colored scale (accent + each status) is one generateRadixColors run; only
+// gray is special (it's the gray side of the accent run). Treating danger as just
+// one of the four status hues keeps them symmetric — none is privileged.
+const BASE_SCALES = ["gray", "accent"] as const;
+const STATUS_SCALES = ["danger", "warning", "success", "info"] as const;
+const SCALES = [...BASE_SCALES, ...STATUS_SCALES] as const;
+type StatusScale = (typeof STATUS_SCALES)[number];
 type Appearance = "light" | "dark";
 
 // A resolved palette for one mode: token name -> color string (any CSS color).
@@ -149,41 +169,39 @@ function resolveSeeds(cfg: ThemeConfig, a: Appearance) {
     accent,
     gray: cfg.gray ? pick(cfg.gray, a) : graySeed,
     danger: cfg.danger ? pick(cfg.danger, a) : DEFAULT_DANGER,
+    warning: cfg.warning ? pick(cfg.warning, a) : DEFAULT_WARNING,
+    success: cfg.success ? pick(cfg.success, a) : DEFAULT_SUCCESS,
+    info: cfg.info ? pick(cfg.info, a) : DEFAULT_INFO,
     background: cfg.background ? cfg.background[a] : defaultBg,
   };
 }
 
-// Build every token for one appearance. accent + gray come from one run; danger
-// is a second run seeded by the destructive color (its accentScale is our danger).
+// Build every token for one appearance. gray + accent come from ONE run (gray is
+// its gray side, accent its accent side). Each status scale is its own run seeded
+// by its hue, sharing the app gray + background so its neutral steps and surface
+// blend with the same page — danger is just the first of four equal status hues.
 export function buildModeTokens(cfg: ThemeConfig, appearance: Appearance): ModeTokens {
   const c = resolveSeeds(cfg, appearance);
-  const background = c.background;
-  const main = generateRadixColors({ appearance, accent: c.accent, gray: c.gray, background });
-  const danger = generateRadixColors({ appearance, accent: c.danger, gray: c.gray, background });
-
-  const solid: Record<(typeof SCALES)[number], string[]> = {
-    gray: main.grayScale,
-    accent: main.accentScale,
-    danger: danger.accentScale,
-  };
-  const alpha: Record<(typeof SCALES)[number], string[]> = {
-    gray: main.grayScaleAlpha,
-    accent: main.accentScaleAlpha,
-    danger: danger.accentScaleAlpha,
-  };
+  const { gray, background } = c;
+  const main = generateRadixColors({ appearance, accent: c.accent, gray, background });
+  const status = Object.fromEntries(
+    STATUS_SCALES.map((s) => [s, generateRadixColors({ appearance, accent: c[s], gray, background })]),
+  ) as Record<StatusScale, ReturnType<typeof generateRadixColors>>;
 
   const t: ModeTokens = new Map();
-  for (const s of SCALES) {
-    solid[s].forEach((hex, i) => t.set(`${s}-${i + 1}`, hex));
-    alpha[s].forEach((hex, i) => t.set(`${s}-a${i + 1}`, hex));
-  }
-  // Step-9 foregrounds (legible text/icon on the solid step).
-  t.set("accent-contrast", main.accentContrast);
-  t.set("danger-contrast", danger.accentContrast);
-  // Translucent panel fills (Radix "surface").
+  // A colored scale: solid 1–12 + alpha a1–a12 + step-9 contrast text + surface.
+  const emit = (name: string, r: ReturnType<typeof generateRadixColors>) => {
+    r.accentScale.forEach((hex, i) => t.set(`${name}-${i + 1}`, hex));
+    r.accentScaleAlpha.forEach((hex, i) => t.set(`${name}-a${i + 1}`, hex));
+    t.set(`${name}-contrast`, r.accentContrast); // legible text/icon on the solid step
+    t.set(`${name}-surface`, r.accentSurface); // translucent panel fill
+  };
+  // gray (chrome): the gray side of the main run — no contrast token.
+  main.grayScale.forEach((hex, i) => t.set(`gray-${i + 1}`, hex));
+  main.grayScaleAlpha.forEach((hex, i) => t.set(`gray-a${i + 1}`, hex));
   t.set("gray-surface", main.graySurface);
-  t.set("accent-surface", main.accentSurface);
-  t.set("danger-surface", danger.accentSurface);
+  emit("accent", main);
+  for (const s of STATUS_SCALES) emit(s, status[s]);
   // App-level specials.
   t.set("background", main.background);
   t.set("overlay", appearance === "light" ? "#00000066" : "#00000099");
@@ -297,8 +315,9 @@ function primitiveSet(tokens: ModeTokens) {
   const set: Record<string, Record<string, { value: string; type: "color" }>> = {};
   for (const s of SCALES) set[s] = {};
   const extra: Record<string, { value: string; type: "color" }> = {};
+  const scaleToken = new RegExp(`^(${SCALES.join("|")})-(a?\\d+)$`);
   for (const [name, value] of tokens) {
-    const m = name.match(/^(gray|accent|danger)-(a?\d+)$/);
+    const m = name.match(scaleToken);
     if (m) set[m[1]][m[2]] = { value, type: "color" };
     else extra[name] = { value, type: "color" };
   }
@@ -328,8 +347,9 @@ function verify(name: string, tokens: ModeTokens) {
     ["gray-12", "gray-1", "body text"],
     ["gray-11", "gray-1", "muted text"],
     ["accent-contrast", "accent-9", "solid accent button"],
-    ["danger-contrast", "danger-9", "solid danger button"],
     ["accent-11", "gray-1", "accent text"],
+    // Every status scale's solid-button pair (Radix amber/red 9 land at AA-large).
+    ...STATUS_SCALES.map((s): [string, string, string] => [`${s}-contrast`, `${s}-9`, `solid ${s} button`]),
   ];
   console.log(`  ${name} contrast:`);
   for (const [fg, bg, label] of pairs) {

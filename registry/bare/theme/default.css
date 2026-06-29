@@ -11,9 +11,11 @@
  *   @import "tailwindcss";
  *   @import "./styles/bare-ui-theme.css";
  *
- * Three 12-step scales — `gray` (neutral chrome), `accent` (brand), `danger`
- * (destructive) — each with a solid (1–12) and an alpha (a1–a12) ramp, following
- * Radix's role-per-step model (https://www.radix-ui.com/colors/docs/palette-composition/understanding-the-scale):
+ * Two tiers of 12-step scales. BASE — `gray` (neutral chrome) + `accent` (brand);
+ * always used. STATUS — `danger` / `warning` / `success` / `info`; a feedback
+ * palette for components like banner, badge, callout, alert, toast (optional —
+ * unused vars cost nothing). Each scale carries a solid (1–12) and an alpha
+ * (a1–a12) ramp, following Radix's role-per-step model (https://www.radix-ui.com/colors/docs/palette-composition/understanding-the-scale):
  *
  *   1  app background          7  border / focus ring
  *   2  subtle background       8  hovered border
@@ -60,31 +62,34 @@
   --gray-a10: oklch(0.126 0.053 260.54 / 0.498);
   --gray-a11: oklch(0.097 0.0447 261.94 / 0.6157);
   --gray-a12: oklch(0.0733 0.0304 260.32 / 0.8824);
+  --gray-surface: oklch(1 0 0 / 0.8);
 
-  --accent-1: oklch(0.994 0 0);
+  --accent-1: oklch(0.9911 0 0);
   --accent-2: oklch(0.9821 0 0);
   --accent-3: oklch(0.9551 0 0);
-  --accent-4: oklch(0.928 0 0);
-  --accent-5: oklch(0.8975 0 0);
-  --accent-6: oklch(0.8607 0 0);
-  --accent-7: oklch(0.8141 0 0);
-  --accent-8: oklch(0.7444 0 0);
-  --accent-9: oklch(0.3485 0 0);
-  --accent-10: oklch(0.4165 0 0);
-  --accent-11: oklch(0.5138 0 0);
-  --accent-12: oklch(0.329 0 0);
-  --accent-a1: oklch(0 0 0 / 0.0078);
+  --accent-4: oklch(0.931 0 0);
+  --accent-5: oklch(0.9097 0 0);
+  --accent-6: oklch(0.8853 0 0);
+  --accent-7: oklch(0.8514 0 0);
+  --accent-8: oklch(0.7921 0 0);
+  --accent-9: oklch(0.2046 0 0);
+  --accent-10: oklch(0.3012 0 0);
+  --accent-11: oklch(0.4997 0 0);
+  --accent-12: oklch(0.2393 0 0);
+  --accent-a1: oklch(0 0 0 / 0.0118);
   --accent-a2: oklch(0 0 0 / 0.0235);
   --accent-a3: oklch(0 0 0 / 0.0588);
-  --accent-a4: oklch(0 0 0 / 0.0941);
-  --accent-a5: oklch(0 0 0 / 0.1333);
-  --accent-a6: oklch(0 0 0 / 0.1804);
-  --accent-a7: oklch(0 0 0 / 0.2392);
-  --accent-a8: oklch(0 0 0 / 0.3255);
-  --accent-a9: oklch(0 0 0 / 0.7725);
-  --accent-a10: oklch(0 0 0 / 0.702);
-  --accent-a11: oklch(0 0 0 / 0.5961);
-  --accent-a12: oklch(0 0 0 / 0.7922);
+  --accent-a4: oklch(0 0 0 / 0.0902);
+  --accent-a5: oklch(0 0 0 / 0.1176);
+  --accent-a6: oklch(0 0 0 / 0.149);
+  --accent-a7: oklch(0 0 0 / 0.1922);
+  --accent-a8: oklch(0 0 0 / 0.2667);
+  --accent-a9: oklch(0 0 0 / 0.9098);
+  --accent-a10: oklch(0 0 0 / 0.8196);
+  --accent-a11: oklch(0 0 0 / 0.6118);
+  --accent-a12: oklch(0 0 0 / 0.8784);
+  --accent-contrast: oklch(1 0 0);
+  --accent-surface: oklch(0.9791 0 0 / 0.8);
 
   --danger-1: oklch(0.9934 0.0032 17.21);
   --danger-2: oklch(0.9823 0.0086 17.3);
@@ -110,16 +115,89 @@
   --danger-a10: oklch(0.5311 0.2173 28.33 / 0.7804);
   --danger-a11: oklch(0.5098 0.2082 27.76 / 0.8196);
   --danger-a12: oklch(0.2804 0.1144 27.4 / 0.9059);
-
-  --accent-contrast: oklch(1 0 0);
-
   --danger-contrast: oklch(1 0 0);
-
-  --gray-surface: oklch(1 0 0 / 0.8);
-
-  --accent-surface: oklch(0.9791 0 0 / 0.8);
-
   --danger-surface: oklch(0.9779 0.0107 17.34 / 0.8);
+
+  --warning-1: oklch(0.9943 0.0028 84.56);
+  --warning-2: oklch(0.9847 0.0217 92.5);
+  --warning-3: oklch(0.9599 0.0621 94.41);
+  --warning-4: oklch(0.9354 0.0946 93.3);
+  --warning-5: oklch(0.9087 0.1203 90.75);
+  --warning-6: oklch(0.8818 0.1168 84.51);
+  --warning-7: oklch(0.8288 0.1117 84.23);
+  --warning-8: oklch(0.7586 0.1283 83.94);
+  --warning-9: oklch(0.8625 0.1655 87.91);
+  --warning-10: oklch(0.8405 0.1571 84.52);
+  --warning-11: oklch(0.5716 0.1181 81.02);
+  --warning-12: oklch(0.3544 0.0437 85.46);
+  --warning-a1: oklch(0.6496 0.1377 74.01 / 0.0157);
+  --warning-a2: oklch(0.8479 0.1736 86.06 / 0.0824);
+  --warning-a3: oklch(0.8575 0.1752 88.49 / 0.2353);
+  --warning-a4: oklch(0.8498 0.1739 86.55 / 0.3725);
+  --warning-a5: oklch(0.8384 0.1722 83.57 / 0.502);
+  --warning-a6: oklch(0.794 0.1678 74.55 / 0.5216);
+  --warning-a7: oklch(0.7133 0.1508 74.48 / 0.5686);
+  --warning-a8: oklch(0.6794 0.1424 76.48 / 0.7333);
+  --warning-a9: oklch(0.8384 0.1722 83.57 / 0.8157);
+  --warning-a10: oklch(0.8057 0.1676 78.64 / 0.7843);
+  --warning-a11: oklch(0.5716 0.1181 81.02);
+  --warning-a12: oklch(0.2458 0.0505 83.62 / 0.8745);
+  --warning-contrast: oklch(0.251 0.0399 83.46);
+  --warning-surface: oklch(0.9815 0.027 93.1 / 0.8);
+
+  --success-1: oklch(0.9942 0.0041 157.18);
+  --success-2: oklch(0.9817 0.0091 161.36);
+  --success-3: oklch(0.9575 0.0231 157.6);
+  --success-4: oklch(0.9335 0.0372 156.43);
+  --success-5: oklch(0.8988 0.0489 157.25);
+  --success-6: oklch(0.8558 0.0641 158.2);
+  --success-7: oklch(0.7982 0.0842 157.38);
+  --success-8: oklch(0.7142 0.1124 157.48);
+  --success-9: oklch(0.6406 0.1329 157.68);
+  --success-10: oklch(0.5991 0.126 157.83);
+  --success-11: oklch(0.5306 0.1276 156.47);
+  --success-12: oklch(0.3232 0.0475 157.49);
+  --success-a1: oklch(0.7031 0.2136 146.2 / 0.0157);
+  --success-a2: oklch(0.6247 0.176 149.07 / 0.0431);
+  --success-a3: oklch(0.6344 0.1894 146.84 / 0.102);
+  --success-a4: oklch(0.6368 0.1927 146.35 / 0.1608);
+  --success-a5: oklch(0.6037 0.1782 147.21 / 0.2314);
+  --success-a6: oklch(0.5872 0.1688 148.27 / 0.3216);
+  --success-a7: oklch(0.5699 0.1641 148.21 / 0.4392);
+  --success-a8: oklch(0.5623 0.1552 149.9 / 0.6235);
+  --success-a9: oklch(0.5697 0.1476 152.69 / 0.8118);
+  --success-a10: oklch(0.5349 0.1369 153.28 / 0.8431);
+  --success-a11: oklch(0.5306 0.1276 156.47);
+  --success-a12: oklch(0.2213 0.0547 154.99 / 0.8863);
+  --success-contrast: oklch(1 0 0);
+  --success-surface: oklch(0.977 0.0115 162.05 / 0.8);
+
+  --info-1: oklch(0.9931 0.0034 247.86);
+  --info-2: oklch(0.982 0.0092 242.83);
+  --info-3: oklch(0.9602 0.0194 252.88);
+  --info-4: oklch(0.9368 0.0324 245.3);
+  --info-5: oklch(0.9043 0.0487 248.36);
+  --info-6: oklch(0.864 0.0689 251.93);
+  --info-7: oklch(0.8097 0.0887 251.96);
+  --info-8: oklch(0.7339 0.1213 252.11);
+  --info-9: oklch(0.6493 0.193 251.78);
+  --info-10: oklch(0.6105 0.183 252.06);
+  --info-11: oklch(0.5628 0.1835 254.7);
+  --info-12: oklch(0.3235 0.0969 252.05);
+  --info-a1: oklch(0.6152 0.2108 256.1 / 0.0157);
+  --info-a2: oklch(0.6406 0.1974 252.97 / 0.0431);
+  --info-a3: oklch(0.5906 0.2247 258.6 / 0.0863);
+  --info-a4: oklch(0.6299 0.2029 254.36 / 0.149);
+  --info-a5: oklch(0.6152 0.2108 256.1 / 0.2196);
+  --info-a6: oklch(0.5987 0.22 257.83 / 0.302);
+  --info-a7: oklch(0.5736 0.2108 257.84 / 0.4078);
+  --info-a8: oklch(0.564 0.2045 257.51 / 0.5686);
+  --info-a9: oklch(0.6493 0.193 251.78);
+  --info-a10: oklch(0.6105 0.183 252.06);
+  --info-a11: oklch(0.5628 0.1835 254.7);
+  --info-a12: oklch(0.3235 0.0969 252.05);
+  --info-contrast: oklch(1 0 0);
+  --info-surface: oklch(0.9778 0.0117 239.9 / 0.8);
 
   --background: oklch(1 0 0);
 
@@ -154,31 +232,34 @@
   --gray-a10: oklch(0.9315 0.0301 277.59 / 0.4941);
   --gray-a11: oklch(0.9585 0.0187 282.77 / 0.7255);
   --gray-a12: oklch(0.9946 0.0026 286.35 / 0.9373);
+  --gray-surface: oklch(0 0 0 / 0.05);
 
   --accent-1: oklch(0.1776 0 0);
-  --accent-2: oklch(0.2134 0 0);
+  --accent-2: oklch(0.209 0 0);
   --accent-3: oklch(0.252 0 0);
-  --accent-4: oklch(0.285 0 0);
+  --accent-4: oklch(0.2809 0 0);
   --accent-5: oklch(0.3132 0 0);
   --accent-6: oklch(0.3485 0 0);
   --accent-7: oklch(0.4017 0 0);
   --accent-8: oklch(0.4891 0 0);
   --accent-9: oklch(0.5382 0 0);
   --accent-10: oklch(0.4926 0 0);
-  --accent-11: oklch(0.7699 0 0);
-  --accent-12: oklch(0.9491 0 0);
+  --accent-11: oklch(0.7668 0 0);
+  --accent-12: oklch(0.9461 0 0);
   --accent-a1: oklch(0 0 0 / 0);
-  --accent-a2: oklch(1 0 0 / 0.0353);
+  --accent-a2: oklch(1 0 0 / 0.0314);
   --accent-a3: oklch(1 0 0 / 0.0706);
-  --accent-a4: oklch(1 0 0 / 0.1059);
+  --accent-a4: oklch(1 0 0 / 0.102);
   --accent-a5: oklch(1 0 0 / 0.1333);
   --accent-a6: oklch(1 0 0 / 0.1725);
   --accent-a7: oklch(1 0 0 / 0.2314);
   --accent-a8: oklch(1 0 0 / 0.3333);
   --accent-a9: oklch(1 0 0 / 0.3922);
   --accent-a10: oklch(1 0 0 / 0.3373);
-  --accent-a11: oklch(1 0 0 / 0.6863);
-  --accent-a12: oklch(1 0 0 / 0.9294);
+  --accent-a11: oklch(1 0 0 / 0.6824);
+  --accent-a12: oklch(1 0 0 / 0.9255);
+  --accent-contrast: oklch(1 0 0);
+  --accent-surface: oklch(0.2393 0 0 / 0.502);
 
   --danger-1: oklch(0.1786 0.0139 26.7);
   --danger-2: oklch(0.2039 0.0219 24.07);
@@ -204,16 +285,89 @@
   --danger-a10: oklch(0.6603 0.2239 23.32 / 0.8314);
   --danger-a11: oklch(0.7694 0.1361 22.88);
   --danger-a12: oklch(0.9013 0.0512 24.09);
-
-  --accent-contrast: oklch(1 0 0);
-
   --danger-contrast: oklch(1 0 0);
-
-  --gray-surface: oklch(0 0 0 / 0.05);
-
-  --accent-surface: oklch(0.2478 0 0 / 0.502);
-
   --danger-surface: oklch(0.2331 0.0428 25.47 / 0.502);
+
+  --warning-1: oklch(0.1782 0.0104 88.81);
+  --warning-2: oklch(0.211 0.0162 84.42);
+  --warning-3: oklch(0.258 0.0383 85.04);
+  --warning-4: oklch(0.2945 0.0606 82.91);
+  --warning-5: oklch(0.3362 0.0691 83.24);
+  --warning-6: oklch(0.3873 0.0682 84.94);
+  --warning-7: oklch(0.4544 0.0714 84.48);
+  --warning-8: oklch(0.5351 0.0842 84.51);
+  --warning-9: oklch(0.8537 0.1572 84.13);
+  --warning-10: oklch(0.8223 0.1572 84.43);
+  --warning-11: oklch(0.8682 0.1513 86.51);
+  --warning-12: oklch(0.9356 0.0634 84.02);
+  --warning-a1: oklch(0.5024 0.1993 30.37 / 0.0118);
+  --warning-a2: oklch(0.7898 0.1686 72.6 / 0.0471);
+  --warning-a3: oklch(0.7962 0.1708 71.71 / 0.1137);
+  --warning-a4: oklch(0.772 0.1738 64.55 / 0.1765);
+  --warning-a5: oklch(0.7909 0.1712 70.15 / 0.2314);
+  --warning-a6: oklch(0.8294 0.1684 80.45 / 0.2863);
+  --warning-a7: oklch(0.8462 0.1534 82.83 / 0.3725);
+  --warning-a8: oklch(0.8547 0.1476 83.73 / 0.4863);
+  --warning-a9: oklch(0.8537 0.1572 84.13);
+  --warning-a10: oklch(0.8462 0.1623 84.1 / 0.9569);
+  --warning-a11: oklch(0.8682 0.1513 86.51);
+  --warning-a12: oklch(0.9386 0.0634 84.02 / 0.9961);
+  --warning-contrast: oklch(0.251 0.0399 83.46);
+  --warning-surface: oklch(0.2443 0.0286 82.4 / 0.502);
+
+  --success-1: oklch(0.1779 0.0135 159.6);
+  --success-2: oklch(0.2113 0.0165 160.27);
+  --success-3: oklch(0.2696 0.0382 157.74);
+  --success-4: oklch(0.3179 0.0573 158.19);
+  --success-5: oklch(0.3657 0.0668 156.86);
+  --success-6: oklch(0.4129 0.0734 157.3);
+  --success-7: oklch(0.4676 0.0826 157.9);
+  --success-8: oklch(0.5286 0.0966 157.5);
+  --success-9: oklch(0.6406 0.1329 157.68);
+  --success-10: oklch(0.5992 0.1326 157.64);
+  --success-11: oklch(0.7803 0.1332 157.71);
+  --success-12: oklch(0.9054 0.0822 157.81);
+  --success-a1: oklch(0.6863 0.2335 142.5 / 0.0118);
+  --success-a2: oklch(0.8633 0.2195 151.85 / 0.0431);
+  --success-a3: oklch(0.8811 0.2175 152.32 / 0.1137);
+  --success-a4: oklch(0.8791 0.22 153.15 / 0.1765);
+  --success-a5: oklch(0.8835 0.209 153.61 / 0.2353);
+  --success-a6: oklch(0.8891 0.194 155.01 / 0.2941);
+  --success-a7: oklch(0.8876 0.1831 156.17 / 0.3686);
+  --success-a8: oklch(0.8936 0.1828 156.16 / 0.451);
+  --success-a9: oklch(0.8877 0.194 156.7 / 0.6196);
+  --success-a10: oklch(0.8822 0.2064 156.21 / 0.5647);
+  --success-a11: oklch(0.905 0.1581 157.51 / 0.8078);
+  --success-a12: oklch(0.9447 0.0861 158.06 / 0.9412);
+  --success-contrast: oklch(1 0 0);
+  --success-surface: oklch(0.2451 0.0308 158.73 / 0.502);
+
+  --info-1: oklch(0.178 0.0257 249.14);
+  --info-2: oklch(0.21 0.0305 253.27);
+  --info-3: oklch(0.2733 0.0675 252.3);
+  --info-4: oklch(0.3176 0.0981 253.05);
+  --info-5: oklch(0.3653 0.1085 251.74);
+  --info-6: oklch(0.4153 0.1119 251.65);
+  --info-7: oklch(0.475 0.1203 251.49);
+  --info-8: oklch(0.5415 0.1398 251.76);
+  --info-9: oklch(0.6493 0.193 251.78);
+  --info-10: oklch(0.6117 0.1902 253.27);
+  --info-11: oklch(0.7642 0.1257 249.46);
+  --info-12: oklch(0.905 0.0481 249.32);
+  --info-a1: oklch(0.4678 0.2952 264.2 / 0.0471);
+  --info-a2: oklch(0.5668 0.2301 259.91 / 0.0902);
+  --info-a3: oklch(0.5967 0.2212 258.03 / 0.2275);
+  --info-a4: oklch(0.5866 0.227 258.96 / 0.3412);
+  --info-a5: oklch(0.6095 0.2106 256.32 / 0.4235);
+  --info-a6: oklch(0.636 0.196 253.77 / 0.4941);
+  --info-a7: oklch(0.662 0.1845 252.59 / 0.5882);
+  --info-a8: oklch(0.6643 0.1814 252.46 / 0.7255);
+  --info-a9: oklch(0.6493 0.193 251.78);
+  --info-a10: oklch(0.6363 0.1996 253.54 / 0.9412);
+  --info-a11: oklch(0.7642 0.1257 249.46);
+  --info-a12: oklch(0.905 0.0481 249.32);
+  --info-contrast: oklch(1 0 0);
+  --info-surface: oklch(0.246 0.0566 255.05 / 0.502);
 
   --background: oklch(0.1776 0 0);
 
@@ -245,6 +399,7 @@
   --color-gray-a10: var(--gray-a10);
   --color-gray-a11: var(--gray-a11);
   --color-gray-a12: var(--gray-a12);
+  --color-gray-surface: var(--gray-surface);
   --color-accent-1: var(--accent-1);
   --color-accent-2: var(--accent-2);
   --color-accent-3: var(--accent-3);
@@ -269,6 +424,8 @@
   --color-accent-a10: var(--accent-a10);
   --color-accent-a11: var(--accent-a11);
   --color-accent-a12: var(--accent-a12);
+  --color-accent-contrast: var(--accent-contrast);
+  --color-accent-surface: var(--accent-surface);
   --color-danger-1: var(--danger-1);
   --color-danger-2: var(--danger-2);
   --color-danger-3: var(--danger-3);
@@ -293,11 +450,86 @@
   --color-danger-a10: var(--danger-a10);
   --color-danger-a11: var(--danger-a11);
   --color-danger-a12: var(--danger-a12);
-  --color-accent-contrast: var(--accent-contrast);
   --color-danger-contrast: var(--danger-contrast);
-  --color-gray-surface: var(--gray-surface);
-  --color-accent-surface: var(--accent-surface);
   --color-danger-surface: var(--danger-surface);
+  --color-warning-1: var(--warning-1);
+  --color-warning-2: var(--warning-2);
+  --color-warning-3: var(--warning-3);
+  --color-warning-4: var(--warning-4);
+  --color-warning-5: var(--warning-5);
+  --color-warning-6: var(--warning-6);
+  --color-warning-7: var(--warning-7);
+  --color-warning-8: var(--warning-8);
+  --color-warning-9: var(--warning-9);
+  --color-warning-10: var(--warning-10);
+  --color-warning-11: var(--warning-11);
+  --color-warning-12: var(--warning-12);
+  --color-warning-a1: var(--warning-a1);
+  --color-warning-a2: var(--warning-a2);
+  --color-warning-a3: var(--warning-a3);
+  --color-warning-a4: var(--warning-a4);
+  --color-warning-a5: var(--warning-a5);
+  --color-warning-a6: var(--warning-a6);
+  --color-warning-a7: var(--warning-a7);
+  --color-warning-a8: var(--warning-a8);
+  --color-warning-a9: var(--warning-a9);
+  --color-warning-a10: var(--warning-a10);
+  --color-warning-a11: var(--warning-a11);
+  --color-warning-a12: var(--warning-a12);
+  --color-warning-contrast: var(--warning-contrast);
+  --color-warning-surface: var(--warning-surface);
+  --color-success-1: var(--success-1);
+  --color-success-2: var(--success-2);
+  --color-success-3: var(--success-3);
+  --color-success-4: var(--success-4);
+  --color-success-5: var(--success-5);
+  --color-success-6: var(--success-6);
+  --color-success-7: var(--success-7);
+  --color-success-8: var(--success-8);
+  --color-success-9: var(--success-9);
+  --color-success-10: var(--success-10);
+  --color-success-11: var(--success-11);
+  --color-success-12: var(--success-12);
+  --color-success-a1: var(--success-a1);
+  --color-success-a2: var(--success-a2);
+  --color-success-a3: var(--success-a3);
+  --color-success-a4: var(--success-a4);
+  --color-success-a5: var(--success-a5);
+  --color-success-a6: var(--success-a6);
+  --color-success-a7: var(--success-a7);
+  --color-success-a8: var(--success-a8);
+  --color-success-a9: var(--success-a9);
+  --color-success-a10: var(--success-a10);
+  --color-success-a11: var(--success-a11);
+  --color-success-a12: var(--success-a12);
+  --color-success-contrast: var(--success-contrast);
+  --color-success-surface: var(--success-surface);
+  --color-info-1: var(--info-1);
+  --color-info-2: var(--info-2);
+  --color-info-3: var(--info-3);
+  --color-info-4: var(--info-4);
+  --color-info-5: var(--info-5);
+  --color-info-6: var(--info-6);
+  --color-info-7: var(--info-7);
+  --color-info-8: var(--info-8);
+  --color-info-9: var(--info-9);
+  --color-info-10: var(--info-10);
+  --color-info-11: var(--info-11);
+  --color-info-12: var(--info-12);
+  --color-info-a1: var(--info-a1);
+  --color-info-a2: var(--info-a2);
+  --color-info-a3: var(--info-a3);
+  --color-info-a4: var(--info-a4);
+  --color-info-a5: var(--info-a5);
+  --color-info-a6: var(--info-a6);
+  --color-info-a7: var(--info-a7);
+  --color-info-a8: var(--info-a8);
+  --color-info-a9: var(--info-a9);
+  --color-info-a10: var(--info-a10);
+  --color-info-a11: var(--info-a11);
+  --color-info-a12: var(--info-a12);
+  --color-info-contrast: var(--info-contrast);
+  --color-info-surface: var(--info-surface);
   --color-background: var(--background);
   --color-overlay: var(--overlay);
 
