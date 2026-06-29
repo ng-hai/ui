@@ -38,6 +38,7 @@
  * theme-generator registry item). Install: `npx shadcn@latest add ng-hai/bare-ui/theme-generator`.
  */
 import Color from "colorjs.io";
+import * as RadixColors from "@radix-ui/colors";
 import { generateRadixColors } from "./generate-radix-colors";
 import { mkdirSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
@@ -56,26 +57,26 @@ const OUT_DIR = resolve(process.cwd(), "themes");
 // A brand color tuned for a white page often needs brightening on dark; that's
 // what the per-mode form is for: `accent: { light: "#2563eb", dark: "#5b7cf0" }`.
 //
-// `gray` defaults to a low-chroma gray DERIVED from the accent's hue — Radix's
-// "natural pairing" (blue→slate, jade→sage, orange→sand) — so the neutral carries
-// the brand's tint instead of being one flat gray. Pass an explicit gray to override.
+// `gray` defaults to one of Radix's five tinted gray scales, paired to the accent by
+// hue — Radix's "natural pairing" (blue→slate, jade→sage, orange→sand; warm hues→cool
+// mauve) — so the neutral carries a clean, calibrated tint instead of a synthesized
+// one (a hueless brand gets a near-neutral gray). `background` defaults to that paired
+// gray's step 1 (the "app background" role). Pass an explicit gray / background to override.
 // ──────────────────────────────────────────────────────────────────────────
 type Seed = string | { light: string; dark: string };
 
 export type ThemeConfig = {
   name: string; // → [data-tenant="<name>"] and themes/<name>/
   accent: Seed; // brand seed — becomes accent step 9
-  gray?: Seed; // neutral seed — defaults to a paired gray derived from the accent
+  gray?: Seed; // neutral seed — defaults to the Radix gray paired to the accent's hue
   danger?: Seed; // destructive/error seed — defaults to a Radix red
-  background?: { light: string; dark: string }; // page bg per mode
+  background?: { light: string; dark: string }; // page bg per mode — defaults to paired gray step 1
 };
 
-// Radix-aligned defaults. danger ≈ Radix red 9; bg = white / near-black (Radix's
-// own defaultPalette also uses a flat #111 for dark). NEUTRAL_GRAY is the fallback
-// when the accent is hueless (so a gray brand stays a pure gray).
+// Radix-aligned default for the destructive scale (≈ Radix red 9). For a chromatic
+// brand the neutral gray + page background come from Radix's own gray scales, picked
+// by the accent's hue (see grayPairName / radixGray); a hueless brand uses NEUTRAL_GRAY.
 const DEFAULT_DANGER = "#e5484d";
-const DEFAULT_BG = { light: "#ffffff", dark: "#111111" };
-const NEUTRAL_GRAY = "#8b8d98";
 
 const THEMES: ThemeConfig[] = [
   {
@@ -95,37 +96,60 @@ type ModeTokens = Map<string, string>;
 
 const pick = (seed: Seed, a: Appearance): string => (typeof seed === "string" ? seed : seed[a]);
 
-// Radix's "natural pairing": a low-chroma gray seed at the accent's hue → the
-// generator picks the matching tinted reference (slate/sage/sand/mauve), so the
-// neutral carries the brand tint. A hueless accent falls back to a pure neutral.
-function pairedGray(accent: string): string {
+// Radix's five *tinted* gray scales. We never synthesize a gray — we pick one of
+// these by the accent's hue and let generateRadixColors re-light it to the page, so
+// the neutral stays as clean as Radix's own (a synthesized gray over-saturates and,
+// for warm accents, goes muddy). Radix's *pure* `gray` is intentionally absent: it
+// has zero chroma, and generateRadixColors divides 0/0 on a chroma-less seed.
+type GrayName = "mauve" | "slate" | "sage" | "olive" | "sand";
+
+// Hueless brands still need a neutral, but a chroma-0 seed crashes the generator (see
+// above), so use a barely-tinted neutral — visually pure, numerically safe (≈ Radix gray 9).
+const NEUTRAL_GRAY = "#8b8d98";
+
+// Accent OKLCH hue → paired gray scale, or null for a hueless / near-neutral accent
+// (→ NEUTRAL_GRAY). These are color families, not exact-hue matches: warm accents
+// (red/pink/purple) pair with the cool mauve, never a muddy warm gray.
+// https://www.radix-ui.com/colors/docs/palette-composition/composing-a-palette
+function grayPairName(accent: string): GrayName | null {
   const c = new Color(accent).to("oklch");
-  const chroma = c.coords[1] ?? 0;
   const h = c.coords[2];
-  if (h == null || Number.isNaN(h) || chroma < 0.02) return NEUTRAL_GRAY;
-  return new Color("oklch", [0.6, 0.035, h]).to("srgb").toString({ format: "hex" });
+  const chroma = c.coords[1] ?? 0;
+  if (h == null || Number.isNaN(h) || chroma < 0.02) return null;
+  if (h >= 60 && h < 120) return "sand"; // yellow / amber / orange / brown
+  if (h >= 120 && h < 160) return "olive"; // grass / lime
+  if (h >= 160 && h < 220) return "sage"; // green / jade / teal / mint
+  if (h >= 220 && h < 300) return "slate"; // blue / indigo / cyan / sky
+  return "mauve"; // red / pink / crimson / plum / purple / violet (wraps 300→60)
 }
 
-// Default page background, tinted toward the accent so each brand's dark mode is
-// distinct (a flat #111 everywhere reads as the same theme). Radix's `bg-dark`
-// seed; a hueless accent falls back to flat white / near-black.
-function tintedBg(accent: string, a: Appearance): string {
-  const c = new Color(accent).to("oklch");
-  const chroma = c.coords[1] ?? 0;
-  const h = c.coords[2];
-  if (h == null || Number.isNaN(h) || chroma < 0.02) return DEFAULT_BG[a];
-  const [L, C] = a === "light" ? [0.994, 0.006] : [0.16, 0.03];
-  return new Color("oklch", [L, C, h]).to("srgb").toString({ format: "hex" });
+// A step (1-based) from a Radix reference gray, in the given appearance. These are
+// package constants, so using step 1 as the background seed is NOT circular: the
+// value exists before generateRadixColors runs (which then re-lights gray-1 ≈ it).
+function radixGray(name: GrayName, a: Appearance, step: number): string {
+  const scale = (RadixColors as Record<string, Record<string, string>>)[
+    a === "light" ? `${name}P3` : `${name}DarkP3`
+  ];
+  // Normalize to an sRGB hex seed: generateRadixColors' alpha math expects a plain
+  // hex background, and the wide-gamut output is regenerated from the seed anyway.
+  return new Color(Object.values(scale)[step - 1]).to("srgb").toString({ format: "hex" });
 }
 
-// Resolve the four seeds for one appearance (gray + bg default off the accent).
+// Resolve the four seeds for one appearance. When the brand is chromatic, gray +
+// background default to the paired Radix gray — its step 9 as the gray seed (peak
+// chroma, reproduces the scale), its step 1 (the "app background" role) as the page.
+// A hueless brand gets NEUTRAL_GRAY on a flat white / near-black page. Both stay
+// overridable per tenant via cfg.gray / cfg.background.
 function resolveSeeds(cfg: ThemeConfig, a: Appearance) {
   const accent = pick(cfg.accent, a);
+  const pair = grayPairName(accent);
+  const graySeed = pair ? radixGray(pair, a, 9) : NEUTRAL_GRAY;
+  const defaultBg = pair ? radixGray(pair, a, 1) : a === "light" ? "#ffffff" : "#111111";
   return {
     accent,
-    gray: cfg.gray ? pick(cfg.gray, a) : pairedGray(accent),
+    gray: cfg.gray ? pick(cfg.gray, a) : graySeed,
     danger: cfg.danger ? pick(cfg.danger, a) : DEFAULT_DANGER,
-    background: cfg.background ? cfg.background[a] : tintedBg(accent, a),
+    background: cfg.background ? cfg.background[a] : defaultBg,
   };
 }
 
