@@ -42,6 +42,18 @@
       ]
     },
     {
+      "name": "get-initials",
+      "type": "registry:lib",
+      "title": "Get Initials",
+      "description": "Derive 1–2 letter initials from a display name or email, for Avatar.Fallback. Unicode-safe (splits on code points, not UTF-16 units).",
+      "files": [
+        {
+          "path": "registry/bare/lib/get-initials.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
       "name": "theme",
       "type": "registry:file",
       "title": "Theme",
