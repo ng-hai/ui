@@ -892,6 +892,32 @@
         { "path": "registry/bare/ui/otp-field/index.parts.ts", "type": "registry:ui" },
         { "path": "registry/bare/ui/otp-field/index.ts", "type": "registry:ui" }
       ]
+    },
+    {
+      "name": "table",
+      "type": "registry:ui",
+      "title": "Table",
+      "description": "Unstyled semantic table with expandable rows via row group, expand trigger, panel row, built on Base UI Collapsible",
+      "categories": ["display"],
+      "registryDependencies": ["ng-hai/bare-ui/create-style-context", "ng-hai/bare-ui/split-variant-props", "ng-hai/bare-ui/tv-config"],
+      "dependencies": ["@base-ui/react@^1.6.0"],
+      "files": [
+        { "path": "registry/bare/ui/table/table-root.tsx", "type": "registry:ui" },
+        { "path": "registry/bare/ui/table/table-caption.tsx", "type": "registry:ui" },
+        { "path": "registry/bare/ui/table/table-header.tsx", "type": "registry:ui" },
+        { "path": "registry/bare/ui/table/table-body.tsx", "type": "registry:ui" },
+        { "path": "registry/bare/ui/table/table-footer.tsx", "type": "registry:ui" },
+        { "path": "registry/bare/ui/table/table-row.tsx", "type": "registry:ui" },
+        { "path": "registry/bare/ui/table/table-header-cell.tsx", "type": "registry:ui" },
+        { "path": "registry/bare/ui/table/table-cell.tsx", "type": "registry:ui" },
+        { "path": "registry/bare/ui/table/table-row-group.tsx", "type": "registry:ui" },
+        { "path": "registry/bare/ui/table/table-expand-trigger.tsx", "type": "registry:ui" },
+        { "path": "registry/bare/ui/table/table-panel-row.tsx", "type": "registry:ui" },
+        { "path": "registry/bare/ui/table/table-panel-cell.tsx", "type": "registry:ui" },
+        { "path": "registry/bare/ui/table/styles.ts", "type": "registry:ui" },
+        { "path": "registry/bare/ui/table/index.parts.ts", "type": "registry:ui" },
+        { "path": "registry/bare/ui/table/index.ts", "type": "registry:ui" }
+      ]
     }
   ]
 }

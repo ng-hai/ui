@@ -1,0 +1,12 @@
+export { TableRoot as Root } from "./table-root";
+export { TableCaption as Caption } from "./table-caption";
+export { TableHeader as Header } from "./table-header";
+export { TableBody as Body } from "./table-body";
+export { TableFooter as Footer } from "./table-footer";
+export { TableRow as Row } from "./table-row";
+export { TableHeaderCell as HeaderCell } from "./table-header-cell";
+export { TableCell as Cell } from "./table-cell";
+export { TableRowGroup as RowGroup } from "./table-row-group";
+export { TableExpandTrigger as ExpandTrigger } from "./table-expand-trigger";
+export { TablePanelRow as PanelRow } from "./table-panel-row";
+export { TablePanelCell as PanelCell } from "./table-panel-cell";
