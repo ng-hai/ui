@@ -411,14 +411,15 @@ function getAlphaColor(
 	// Is the background color lighter, RGB-wise, than target color?
 	// Decide whether we want to add as little color or as much color as possible,
 	// darkening or lightening the background respectively.
-	// If at least one of the bits of the target RGB value
-	// is lighter than the background, we want to lighten it.
+	// DEVIATION FROM UPSTREAM: compare total luminance (channel sum), not any
+	// single channel. A single channel can clip to the gamut boundary (e.g.
+	// R=255) while the color is still overall darker than the background —
+	// upstream's any-channel check then forces alpha to 1 for that channel.
+	// This only bites with a non-white/non-black background (this repo tints
+	// its default background off-white/off-black), so upstream never hit it.
+	// Re-apply this if re-vendoring.
 	let desiredRgb = 0;
-	if (tr > br) {
-		desiredRgb = rgbPrecision;
-	} else if (tg > bg) {
-		desiredRgb = rgbPrecision;
-	} else if (tb > bb) {
+	if (tr + tg + tb > br + bg + bb) {
 		desiredRgb = rgbPrecision;
 	}
 
@@ -437,7 +438,22 @@ function getAlphaColor(
 
 	const clampRgb = (n: number) => (isNaN(n) ? 0 : Math.min(rgbPrecision, Math.max(0, n)));
 	const clampA = (n: number) => (isNaN(n) ? 0 : Math.min(alphaPrecision, Math.max(0, n)));
-	const maxAlpha = targetAlpha ?? Math.max(alphaR, alphaG, alphaB);
+	let maxAlpha = targetAlpha ?? Math.max(alphaR, alphaG, alphaB);
+
+	// DEVIATION FROM UPSTREAM: when a target channel sits on the sRGB boundary
+	// (0 or 255) that the background doesn't share, exact reconstruction is only
+	// possible at alpha 1, so the step silently ships fully opaque. Accept up to
+	// ~2/255 error on such channels instead, keeping the step translucent. Only
+	// kicks in when the exact solve demands full opacity; every other step stays
+	// byte-identical to upstream. Re-apply this if re-vendoring.
+	if (targetAlpha === undefined && maxAlpha >= 1) {
+		const edgeTolerance = (2 / 255) * rgbPrecision;
+		const relaxedAlpha = (t: number, b: number) =>
+			Math.abs(t - b) <= edgeTolerance
+				? 0
+				: (t - Math.sign(t - b) * edgeTolerance - b) / (desiredRgb - b);
+		maxAlpha = Math.max(relaxedAlpha(tr, br), relaxedAlpha(tg, bg), relaxedAlpha(tb, bb));
+	}
 
 	const A = clampA(Math.ceil(maxAlpha * alphaPrecision)) / alphaPrecision;
 	let R = clampRgb(((br * (1 - A) - tr) / A) * -1);
@@ -481,6 +497,13 @@ function getAlphaColor(
 			B = tb > blendedB ? B + 1 : B - 1;
 		}
 	}
+
+	// DEVIATION FROM UPSTREAM: the rounding corrections above assume exact
+	// reconstruction is possible; with a relaxed boundary channel they can push
+	// a foreground value out of range. Clamp again — no-op for unrelaxed colors.
+	R = Math.min(rgbPrecision, Math.max(0, R));
+	G = Math.min(rgbPrecision, Math.max(0, G));
+	B = Math.min(rgbPrecision, Math.max(0, B));
 
 	// Convert back to 0-1 values
 	R = R / rgbPrecision;
