@@ -1,0 +1,13 @@
+export { SidebarRoot as Root } from "./sidebar-root";
+export { SidebarHeader as Header } from "./sidebar-header";
+export { SidebarContent as Content } from "./sidebar-content";
+export { SidebarFooter as Footer } from "./sidebar-footer";
+export { SidebarGroup as Group } from "./sidebar-group";
+export { SidebarGroupTrigger as GroupTrigger } from "./sidebar-group-trigger";
+export { SidebarGroupLabel as GroupLabel } from "./sidebar-group-label";
+export { SidebarGroupContent as GroupContent } from "./sidebar-group-content";
+export { SidebarItem as Item } from "./sidebar-item";
+export { SidebarItemIcon as ItemIcon } from "./sidebar-item-icon";
+export { SidebarItemLabel as ItemLabel } from "./sidebar-item-label";
+export { SidebarItemBadge as ItemBadge } from "./sidebar-item-badge";
+export { SidebarSeparator as Separator } from "./sidebar-separator";

@@ -918,6 +918,33 @@
         { "path": "registry/bare/ui/table/index.parts.ts", "type": "registry:ui" },
         { "path": "registry/bare/ui/table/index.ts", "type": "registry:ui" }
       ]
+    },
+    {
+      "name": "sidebar",
+      "type": "registry:ui",
+      "title": "Sidebar",
+      "description": "Unstyled sidebar navigation with header, content, footer, collapsible groups, and items with icon, label, badge, built on Base UI Collapsible",
+      "categories": ["navigation"],
+      "registryDependencies": ["ng-hai/bare-ui/create-style-context", "ng-hai/bare-ui/split-variant-props", "ng-hai/bare-ui/tv-config"],
+      "dependencies": ["@base-ui/react@^1.6.0"],
+      "files": [
+        { "path": "registry/bare/ui/sidebar/sidebar-root.tsx", "type": "registry:ui" },
+        { "path": "registry/bare/ui/sidebar/sidebar-header.tsx", "type": "registry:ui" },
+        { "path": "registry/bare/ui/sidebar/sidebar-content.tsx", "type": "registry:ui" },
+        { "path": "registry/bare/ui/sidebar/sidebar-footer.tsx", "type": "registry:ui" },
+        { "path": "registry/bare/ui/sidebar/sidebar-group.tsx", "type": "registry:ui" },
+        { "path": "registry/bare/ui/sidebar/sidebar-group-trigger.tsx", "type": "registry:ui" },
+        { "path": "registry/bare/ui/sidebar/sidebar-group-label.tsx", "type": "registry:ui" },
+        { "path": "registry/bare/ui/sidebar/sidebar-group-content.tsx", "type": "registry:ui" },
+        { "path": "registry/bare/ui/sidebar/sidebar-item.tsx", "type": "registry:ui" },
+        { "path": "registry/bare/ui/sidebar/sidebar-item-icon.tsx", "type": "registry:ui" },
+        { "path": "registry/bare/ui/sidebar/sidebar-item-label.tsx", "type": "registry:ui" },
+        { "path": "registry/bare/ui/sidebar/sidebar-item-badge.tsx", "type": "registry:ui" },
+        { "path": "registry/bare/ui/sidebar/sidebar-separator.tsx", "type": "registry:ui" },
+        { "path": "registry/bare/ui/sidebar/styles.ts", "type": "registry:ui" },
+        { "path": "registry/bare/ui/sidebar/index.parts.ts", "type": "registry:ui" },
+        { "path": "registry/bare/ui/sidebar/index.ts", "type": "registry:ui" }
+      ]
     }
   ]
 }
