@@ -105,7 +105,7 @@
       "name": "theme-generator",
       "type": "registry:file",
       "title": "Theme Generator",
-      "description": "Build-time CLI script (no npm publish — installed straight from this GitHub registry, lands in scripts/). Turns brand seeds into Radix-style 12-step token sets: pins step 9 to your brand, auto-pairs a tinted gray, supports per-mode (light/dark) seeds, and emits per-tenant default.css drop-ins, Tokens Studio JSON for Figma, and a [data-tenant]-scoped tenants.css for the theme-brand lib, with a WCAG self-check that warns (not fails) on misses. Self-contained: ships its own vendored copy of the generate-radix-colors engine, so run it with `tsx scripts/gen-theme.ts`. Ships no themes of its own — the config is your fill-in slot.",
+      "description": "Build-time CLI script (no npm publish — installed straight from this GitHub registry, lands in scripts/). Turns brand seeds into Radix-style 12-step token sets: pins step 9 to your brand, auto-pairs a tinted gray, supports per-mode (light/dark) seeds, and emits per-tenant default.css drop-ins and a [data-tenant]-scoped tenants.css for the theme-brand lib, with a WCAG self-check that warns (not fails) on misses. Self-contained: ships its own vendored copy of the generate-radix-colors engine, so run it with `tsx scripts/gen-theme.ts`. Ships no themes of its own — the config is your fill-in slot.",
       "categories": ["theme"],
       "registryDependencies": ["ng-hai/bare-ui/theme", "ng-hai/bare-ui/theme-brand"],
       "devDependencies": ["@radix-ui/colors@^3.0.0", "colorjs.io@^0.6.1", "bezier-easing@^2.1.0", "tsx@^4.0.0"],

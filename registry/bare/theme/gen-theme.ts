@@ -10,7 +10,6 @@
  *
  * Per tenant it emits (under ./themes by default — change OUT_DIR):
  *   themes/<name>/<name>.css         — full token contract (drop-in default.css)
- *   themes/<name>/<name>.tokens.json — Tokens Studio file (Figma Light/Dark modes)
  * plus one combined:
  *   themes/tenants.css               — [data-tenant]-scoped, render-blocking; pair
  *                                      with the `theme-brand` lib + neutral `theme`.
@@ -105,9 +104,8 @@ const THEMES: ThemeConfig[] = [
 // Every colored scale (accent + each status) is one generateRadixColors run; only
 // gray is special (it's the gray side of the accent run). Treating danger as just
 // one of the four status hues keeps them symmetric — none is privileged.
-const BASE_SCALES = ["gray", "accent"] as const;
+// (base = gray + accent, emitted directly in buildModeTokens)
 const STATUS_SCALES = ["danger", "warning", "success", "info"] as const;
-const SCALES = [...BASE_SCALES, ...STATUS_SCALES] as const;
 type StatusScale = (typeof STATUS_SCALES)[number];
 type Appearance = "light" | "dark";
 
@@ -310,35 +308,6 @@ ${blocks}
 `;
 }
 
-// ── Tokens Studio output ─────────────────────────────────────────────────────
-function primitiveSet(tokens: ModeTokens) {
-  const set: Record<string, Record<string, { value: string; type: "color" }>> = {};
-  for (const s of SCALES) set[s] = {};
-  const extra: Record<string, { value: string; type: "color" }> = {};
-  const scaleToken = new RegExp(`^(${SCALES.join("|")})-(a?\\d+)$`);
-  for (const [name, value] of tokens) {
-    const m = name.match(scaleToken);
-    if (m) set[m[1]][m[2]] = { value, type: "color" };
-    else extra[name] = { value, type: "color" };
-  }
-  return { ...set, tokens: extra };
-}
-
-function renderTokens(light: ModeTokens, dark: ModeTokens) {
-  // A Tokens Studio GROUP becomes a Figma collection; its themes become that
-  // collection's MODES (needs Tokens Studio Pro to "Export to Figma → from
-  // Themes"). One Primitives collection here, Light/Dark modes.
-  return {
-    $metadata: { tokenSetOrder: ["primitives-light", "primitives-dark"] },
-    $themes: [
-      { id: "prim-light", name: "Light", group: "Primitives", selectedTokenSets: { "primitives-light": "enabled" } },
-      { id: "prim-dark", name: "Dark", group: "Primitives", selectedTokenSets: { "primitives-dark": "enabled" } },
-    ],
-    "primitives-light": primitiveSet(light),
-    "primitives-dark": primitiveSet(dark),
-  };
-}
-
 // ── contrast self-check (printed, so you SEE the guarantee — or its absence) ──
 function verify(name: string, tokens: ModeTokens) {
   const ratio = (fg: string, bg: string) =>
@@ -372,9 +341,8 @@ export function main(themes: ThemeConfig[] = THEMES) {
     mkdirSync(outDir, { recursive: true });
 
     writeFileSync(resolve(outDir, `${cfg.name}.css`), renderCss(cfg.name, light, dark));
-    writeFileSync(resolve(outDir, `${cfg.name}.tokens.json`), JSON.stringify(renderTokens(light, dark), null, 2) + "\n");
 
-    console.log(`\n✓ ${cfg.name}  →  themes/${cfg.name}/${cfg.name}.css  +  ${cfg.name}.tokens.json`);
+    console.log(`\n✓ ${cfg.name}  →  themes/${cfg.name}/${cfg.name}.css`);
     verify("light", light);
     verify("dark", dark);
     built.push({ cfg, light, dark });
