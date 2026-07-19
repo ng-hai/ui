@@ -128,7 +128,7 @@ Add a `variants` block and `defaultVariants` to the `tv()` call. `createPropSpli
 
 ### Design tokens — the Radix 12-step contract
 
-The token contract is **not** the shadcn `--primary`/`--secondary`/`--muted` set. It follows [Radix Colors](https://www.radix-ui.com/colors/docs/palette-composition/understanding-the-scale): three 12-step scales — `gray` (neutral chrome), `accent` (brand), `danger` (destructive) — each shipping a **solid** ramp (`1`–`12`) and an **alpha** ramp (`a1`–`a12`), in light (`:root`) and dark (`.dark`). Each step has a fixed role:
+The token contract is **not** the shadcn `--primary`/`--secondary`/`--muted` set. It follows [Radix Colors](https://www.radix-ui.com/colors/docs/palette-composition/understanding-the-scale): two tiers of 12-step scales — **base**: `gray` (neutral chrome) + `accent` (brand); **status**: `danger` / `warning` / `success` / `info` (feedback) — each shipping a **solid** ramp (`1`–`12`) and an **alpha** ramp (`a1`–`a12`), in light (`:root`) and dark (`.dark`). Each step has a fixed role:
 
 | Step | Role | Step | Role |
 |---|---|---|---|
@@ -139,7 +139,7 @@ The token contract is **not** the shadcn `--primary`/`--secondary`/`--muted` set
 | 5 | active / selected | 11 | low-contrast text |
 | 6 | subtle border / separator | 12 | high-contrast text |
 
-Plus specials: `--accent-contrast` / `--danger-contrast` (legible text on step 9), `--{gray,accent,danger}-surface` (translucent panels), `--background` (page), `--overlay` (scrims). All are exposed to Tailwind via `@theme inline`, so utilities like `bg-accent-9`, `text-gray-11`, `border-gray-6`, `bg-accent-a3`, `text-accent-contrast` exist.
+Plus specials: `--<scale>-contrast` (legible text on step 9, for `accent` + every status scale), `--<scale>-surface` (translucent panels), `--background` (page), `--overlay` (scrims). All are exposed to Tailwind via `@theme inline`, so utilities like `bg-accent-9`, `text-gray-11`, `border-gray-6`, `bg-accent-a3`, `text-accent-contrast`, `bg-danger-3` exist.
 
 Pick by role, not by guessing a shade:
 
@@ -153,7 +153,18 @@ card:    "bg-gray-2 text-gray-12 border border-gray-6"
 muted:   "text-gray-11"
 ```
 
-The contract ships **neutral** (accent == a dark gray) via the `theme` preset (`shadcn add ng-hai/bare-ui/theme`). To brand it, install `theme-generator`, drop your brand hex into its `THEMES` config, and run it — it regenerates the whole contract (pinning `accent-9` to your brand) with a printed WCAG self-check. Keep the token *names* stable; only the values change.
+The contract ships **neutral** (accent == a dark gray) via the `theme` preset (`shadcn add ng-hai/bare-ui/theme`). To brand it, install `theme-generator`, drop your brand seeds into its `THEMES` config, and run it — it regenerates the whole contract (pinning step 9 of each scale to its seed) with a printed WCAG self-check. Keep the token *names* stable; only the values change.
+
+### Multiple accents — `data-accent-color`
+
+Generated themes can carry an **accent pool**: the generator's `accents` map holds named scales (first key = the default `--accent-*`), each also emitted as `--<name>-*` tokens, `bg-<name>-9` utilities, and a `[data-accent-color="<name>"]` swap block. Setting that attribute on any element re-points every `accent-*` token (incl. `-contrast`) for its subtree — one slot fill in `accent-*` utilities yields every pool hue, no extra variants:
+
+```tsx
+<Badge.Root data-accent-color="jade">Active</Badge.Root>   {/* data-* passes through — no API needed */}
+<section data-accent-color="purple">…whole area re-tints…</section>
+```
+
+Semantic roles stay meaning, not identity: `semantics: { danger: "red", premium: "jade" }` aliases a role onto a pool scale (zero extra scales) or seeds a private one from a color; roles never swap via the attribute. Style *stateful feedback* (alert, callout, destructive buttons) against role tokens (`bg-danger-9`); style *categorical identity* (badges, avatars, tags, section theming) against `accent-*` + the attribute.
 
 ### One-off overrides
 
