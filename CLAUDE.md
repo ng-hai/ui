@@ -8,13 +8,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 The repo ships a single registry:
 
-- **`registry.json`** (root) — the "bare" components under `registry/bare/**`. Styles are intentionally empty slots; consumers fill them in themselves.
+- **`registry.json`** (root) — the unstyled components under `registry/**`. Styles are intentionally empty slots; consumers fill them in themselves.
 
 This is a [GitHub registry](https://ui.shadcn.com/docs/registry/github): the `shadcn` CLI reads `registry.json` and the referenced source files directly from this repo. Consumers install with `shadcn add ng-hai/ui/<name>` — no `components.json` registry config, no namespace, and no pre-built JSON to host or commit.
 
 ## Presets and theme files
 
-Theme docs — how presets ship as `registry:file` items, the Radix 12-step token contract, and the `theme-generator` pipeline — live in `registry/bare/theme/CLAUDE.md`, loaded automatically when working under `registry/bare/theme/`.
+Theme docs — how presets ship as `registry:file` items, the Radix 12-step token contract, and the `theme-generator` pipeline — live in `registry/theme/CLAUDE.md`, loaded automatically when working under `registry/theme/`.
 
 ## Commands
 
@@ -42,7 +42,7 @@ There are no version tags to cut and no `public/r` artifact to keep in sync. Con
 Every component follows the same layering, and Claude should preserve it when adding new components:
 
 1. **Primitive** — `@base-ui/react/<component>` provides behavior/ARIA.
-2. **Styles (`styles.ts`)** — a `tv({ slots, variants })` call from `@/registry/bare/lib/tv.config`. Slot arrays are empty strings — consumers fill them in after install. Slot names define the public surface (`root`, `trigger`, `popup`, etc.).
+2. **Styles (`styles.ts`)** — a `tv({ slots, variants })` call from `@/registry/lib/tv.config`. Slot arrays are empty strings — consumers fill them in after install. Slot names define the public surface (`root`, `trigger`, `popup`, etc.).
 3. **Root (`<name>-root.tsx`)** — imports the primitive `Root`, runs `createPropSplitter(styles)` to separate TV variant props from HTML props, resolves styles via `styles ?? componentStyles(variantProps)`, and renders `<Primitive.Root className={s.root({ class: className })} data-slot="<name>" />`. For multi-part components it wraps children in `<StyleContext value={s}>` from `createStyleContext<StylesType>("Name")`.
 4. **Parts (`<name>-<part>.tsx`, one file per part)** — each sibling part lives in its own file named `<name>-<part>.tsx` (e.g. `select-trigger.tsx`, `dialog-popup.tsx`), calls `useStyles()` from the root's style context, and applies the matching slot, e.g. `className={styles.trigger({ class: className })}`. All parts must set `data-slot` for consumer CSS hooks. Don't combine multiple parts into a single `<name>-parts.tsx` file.
 5. **Barrels**
@@ -61,7 +61,7 @@ Every component — including single-part ones like `button` and `input` — fol
 
 ## Adding or modifying a component
 
-1. Create files under `registry/bare/ui/<name>/` following the structure of a sibling (use `dialog/` or `select/` for multi-part — one file per part, `button/` for single-part). Every component ships both `index.ts` and `index.parts.ts`.
+1. Create files under `registry/ui/<name>/` following the structure of a sibling (use `dialog/` or `select/` for multi-part — one file per part, `button/` for single-part). Every component ships both `index.ts` and `index.parts.ts`.
 2. Add an entry to **`registry.json`**:
    - `type: "registry:ui"` for components, `registry:lib` for shared utils.
    - `registryDependencies` uses the full GitHub item address `ng-hai/ui/<dep>` (e.g. `ng-hai/ui/tv-config`, `ng-hai/ui/split-variant-props`, and — for multi-part — `ng-hai/ui/create-style-context`). That is how same-repo dependencies are referenced in a GitHub registry; don't use the old `@ui/<dep>` namespace form or raw GitHub URLs.
@@ -72,4 +72,4 @@ Every component — including single-part ones like `button` and `input` — fol
 
 ## Path aliases
 
-`tsconfig.json` maps `@/*` to the repo root. Component source uses `@/registry/bare/lib/...` — the `shadcn` CLI rewrites these imports to the consumer's aliases when it installs, so don't flatten them to relative paths.
+`tsconfig.json` maps `@/*` to the repo root. Component source uses `@/registry/lib/...` — the `shadcn` CLI rewrites these imports to the consumer's aliases when it installs, so don't flatten them to relative paths.

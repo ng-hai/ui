@@ -14,7 +14,7 @@ ui is a [shadcn GitHub registry](https://ui.shadcn.com/docs/registry/github). Th
 
 The component architecture (layering, barrels, `createPropSplitter`, `createStyleContext`, the `styles` prop, invariants) is documented in **`CLAUDE.md`** — follow it. In short:
 
-1. Create files under `registry/bare/ui/<name>/`, mirroring a sibling (`dialog/` or `select/` for multi-part, `button/` for single-part). Every component ships both `index.ts` and `index.parts.ts`.
+1. Create files under `registry/ui/<name>/`, mirroring a sibling (`dialog/` or `select/` for multi-part, `button/` for single-part). Every component ships both `index.ts` and `index.parts.ts`.
 2. Add an entry to **`registry.json`**:
    - `type: "registry:ui"` for components, `registry:lib` for shared utils.
    - `registryDependencies` uses the full GitHub item address `ng-hai/ui/<dep>` (e.g. `ng-hai/ui/tv-config`, `ng-hai/ui/split-variant-props`, `ng-hai/ui/create-style-context`). Don't use the old `@ui/<dep>` namespace form or raw GitHub URLs.

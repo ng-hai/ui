@@ -268,7 +268,7 @@ import { Select } from "@/components/ui/select";
 
 ### Approach 2 — copy-in icon registry
 
-Ship raw SVG files as `registry:file` items and let consumers process them with their own toolchain ([SVGR](https://react-svgr.com), [unplugin-icons](https://github.com/unplugin/unplugin-icons), [vite-plugin-svgr](https://github.com/pd4d10/vite-plugin-svgr)). Each SVG lives in `registry/bare/icons/<name>.svg` and lands in the consumer project at a predictable path:
+Ship raw SVG files as `registry:file` items and let consumers process them with their own toolchain ([SVGR](https://react-svgr.com), [unplugin-icons](https://github.com/unplugin/unplugin-icons), [vite-plugin-svgr](https://github.com/pd4d10/vite-plugin-svgr)). Each SVG lives in `registry/icons/<name>.svg` and lands in the consumer project at a predictable path:
 
 ```json
 {
@@ -279,7 +279,7 @@ Ship raw SVG files as `registry:file` items and let consumers process them with 
   "categories": ["icons"],
   "files": [
     {
-      "path": "registry/bare/icons/chevron-down.svg",
+      "path": "registry/icons/chevron-down.svg",
       "type": "registry:file",
       "target": "assets/icons/chevron-down.svg"
     }

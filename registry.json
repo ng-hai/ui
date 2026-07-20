@@ -12,7 +12,7 @@
       "dependencies": ["tailwind-variants@^3.2.0", "tailwind-merge@^3.0.0"],
       "files": [
         {
-          "path": "registry/bare/lib/tv.config.ts",
+          "path": "registry/lib/tv.config.ts",
           "type": "registry:lib"
         }
       ]
@@ -24,7 +24,7 @@
       "description": "React context utility for injecting styles into multi-part components",
       "files": [
         {
-          "path": "registry/bare/lib/create-style-context.ts",
+          "path": "registry/lib/create-style-context.ts",
           "type": "registry:lib"
         }
       ]
@@ -36,7 +36,7 @@
       "description": "Generic prop splitter that separates TV variant props from HTML props using variantKeys",
       "files": [
         {
-          "path": "registry/bare/lib/split-variant-props.ts",
+          "path": "registry/lib/split-variant-props.ts",
           "type": "registry:lib"
         }
       ]
@@ -48,7 +48,7 @@
       "description": "Derive 1–2 letter initials from a display name or email, for Avatar.Fallback. Unicode-safe (splits on code points, not UTF-16 units).",
       "files": [
         {
-          "path": "registry/bare/lib/get-initials.ts",
+          "path": "registry/lib/get-initials.ts",
           "type": "registry:lib"
         }
       ]
@@ -61,7 +61,7 @@
       "categories": ["theme"],
       "files": [
         {
-          "path": "registry/bare/theme/default.css",
+          "path": "registry/theme/default.css",
           "type": "registry:file",
           "target": "styles/ui-theme.css"
         }
@@ -75,11 +75,11 @@
       "categories": ["theme"],
       "files": [
         {
-          "path": "registry/bare/lib/theme-mode.ts",
+          "path": "registry/lib/theme-mode.ts",
           "type": "registry:lib"
         },
         {
-          "path": "registry/bare/lib/use-theme-mode.ts",
+          "path": "registry/lib/use-theme-mode.ts",
           "type": "registry:lib"
         }
       ]
@@ -92,11 +92,11 @@
       "categories": ["theme"],
       "files": [
         {
-          "path": "registry/bare/lib/theme-brand.ts",
+          "path": "registry/lib/theme-brand.ts",
           "type": "registry:lib"
         },
         {
-          "path": "registry/bare/lib/use-theme-brand.ts",
+          "path": "registry/lib/use-theme-brand.ts",
           "type": "registry:lib"
         }
       ]
@@ -111,12 +111,12 @@
       "devDependencies": ["@radix-ui/colors@^3.0.0", "colorjs.io@^0.6.1", "bezier-easing@^2.1.0", "tsx@^4.0.0"],
       "files": [
         {
-          "path": "registry/bare/theme/generate-radix-colors.ts",
+          "path": "registry/theme/generate-radix-colors.ts",
           "type": "registry:file",
           "target": "scripts/generate-radix-colors.ts"
         },
         {
-          "path": "registry/bare/theme/gen-theme.ts",
+          "path": "registry/theme/gen-theme.ts",
           "type": "registry:file",
           "target": "scripts/gen-theme.ts"
         }
@@ -131,10 +131,10 @@
       "registryDependencies": ["ng-hai/ui/split-variant-props", "ng-hai/ui/tv-config"],
       "dependencies": ["@base-ui/react@^1.6.0"],
       "files": [
-        { "path": "registry/bare/ui/button/button-root.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/button/styles.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/button/index.parts.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/button/index.ts", "type": "registry:ui" }
+        { "path": "registry/ui/button/button-root.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/button/styles.ts", "type": "registry:ui" },
+        { "path": "registry/ui/button/index.parts.ts", "type": "registry:ui" },
+        { "path": "registry/ui/button/index.ts", "type": "registry:ui" }
       ]
     },
     {
@@ -146,10 +146,10 @@
       "registryDependencies": ["ng-hai/ui/split-variant-props", "ng-hai/ui/tv-config"],
       "dependencies": ["@base-ui/react@^1.6.0"],
       "files": [
-        { "path": "registry/bare/ui/input/input-root.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/input/styles.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/input/index.parts.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/input/index.ts", "type": "registry:ui" }
+        { "path": "registry/ui/input/input-root.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/input/styles.ts", "type": "registry:ui" },
+        { "path": "registry/ui/input/index.parts.ts", "type": "registry:ui" },
+        { "path": "registry/ui/input/index.ts", "type": "registry:ui" }
       ]
     },
     {
@@ -161,11 +161,11 @@
       "registryDependencies": ["ng-hai/ui/create-style-context", "ng-hai/ui/split-variant-props", "ng-hai/ui/tv-config"],
       "dependencies": ["@base-ui/react@^1.6.0"],
       "files": [
-        { "path": "registry/bare/ui/checkbox/checkbox-root.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/checkbox/checkbox-indicator.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/checkbox/styles.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/checkbox/index.parts.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/checkbox/index.ts", "type": "registry:ui" }
+        { "path": "registry/ui/checkbox/checkbox-root.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/checkbox/checkbox-indicator.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/checkbox/styles.ts", "type": "registry:ui" },
+        { "path": "registry/ui/checkbox/index.parts.ts", "type": "registry:ui" },
+        { "path": "registry/ui/checkbox/index.ts", "type": "registry:ui" }
       ]
     },
     {
@@ -177,12 +177,12 @@
       "registryDependencies": ["ng-hai/ui/create-style-context", "ng-hai/ui/split-variant-props", "ng-hai/ui/tv-config"],
       "dependencies": ["@base-ui/react@^1.6.0"],
       "files": [
-        { "path": "registry/bare/ui/avatar/avatar-root.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/avatar/avatar-image.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/avatar/avatar-fallback.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/avatar/styles.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/avatar/index.parts.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/avatar/index.ts", "type": "registry:ui" }
+        { "path": "registry/ui/avatar/avatar-root.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/avatar/avatar-image.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/avatar/avatar-fallback.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/avatar/styles.ts", "type": "registry:ui" },
+        { "path": "registry/ui/avatar/index.parts.ts", "type": "registry:ui" },
+        { "path": "registry/ui/avatar/index.ts", "type": "registry:ui" }
       ]
     },
     {
@@ -194,24 +194,24 @@
       "registryDependencies": ["ng-hai/ui/create-style-context", "ng-hai/ui/split-variant-props", "ng-hai/ui/tv-config"],
       "dependencies": ["@base-ui/react@^1.6.0"],
       "files": [
-        { "path": "registry/bare/ui/select/select-root.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/select/select-trigger.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/select/select-value.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/select/select-icon.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/select/select-portal.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/select/select-backdrop.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/select/select-positioner.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/select/select-popup.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/select/select-item.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/select/select-item-text.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/select/select-item-indicator.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/select/select-group.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/select/select-group-label.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/select/select-arrow.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/select/select-separator.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/select/styles.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/select/index.parts.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/select/index.ts", "type": "registry:ui" }
+        { "path": "registry/ui/select/select-root.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/select/select-trigger.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/select/select-value.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/select/select-icon.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/select/select-portal.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/select/select-backdrop.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/select/select-positioner.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/select/select-popup.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/select/select-item.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/select/select-item-text.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/select/select-item-indicator.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/select/select-group.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/select/select-group-label.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/select/select-arrow.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/select/select-separator.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/select/styles.ts", "type": "registry:ui" },
+        { "path": "registry/ui/select/index.parts.ts", "type": "registry:ui" },
+        { "path": "registry/ui/select/index.ts", "type": "registry:ui" }
       ]
     },
     {
@@ -223,18 +223,18 @@
       "registryDependencies": ["ng-hai/ui/create-style-context", "ng-hai/ui/split-variant-props", "ng-hai/ui/tv-config"],
       "dependencies": ["@base-ui/react@^1.6.0"],
       "files": [
-        { "path": "registry/bare/ui/dialog/dialog-root.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/dialog/dialog-trigger.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/dialog/dialog-portal.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/dialog/dialog-backdrop.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/dialog/dialog-popup.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/dialog/dialog-viewport.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/dialog/dialog-title.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/dialog/dialog-description.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/dialog/dialog-close.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/dialog/styles.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/dialog/index.parts.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/dialog/index.ts", "type": "registry:ui" }
+        { "path": "registry/ui/dialog/dialog-root.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/dialog/dialog-trigger.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/dialog/dialog-portal.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/dialog/dialog-backdrop.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/dialog/dialog-popup.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/dialog/dialog-viewport.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/dialog/dialog-title.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/dialog/dialog-description.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/dialog/dialog-close.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/dialog/styles.ts", "type": "registry:ui" },
+        { "path": "registry/ui/dialog/index.parts.ts", "type": "registry:ui" },
+        { "path": "registry/ui/dialog/index.ts", "type": "registry:ui" }
       ]
     },
     {
@@ -246,19 +246,19 @@
       "registryDependencies": ["ng-hai/ui/create-style-context", "ng-hai/ui/split-variant-props", "ng-hai/ui/tv-config"],
       "dependencies": ["@base-ui/react@^1.6.0"],
       "files": [
-        { "path": "registry/bare/ui/popover/popover-root.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/popover/popover-trigger.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/popover/popover-portal.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/popover/popover-backdrop.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/popover/popover-positioner.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/popover/popover-popup.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/popover/popover-arrow.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/popover/popover-title.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/popover/popover-description.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/popover/popover-close.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/popover/styles.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/popover/index.parts.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/popover/index.ts", "type": "registry:ui" }
+        { "path": "registry/ui/popover/popover-root.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/popover/popover-trigger.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/popover/popover-portal.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/popover/popover-backdrop.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/popover/popover-positioner.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/popover/popover-popup.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/popover/popover-arrow.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/popover/popover-title.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/popover/popover-description.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/popover/popover-close.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/popover/styles.ts", "type": "registry:ui" },
+        { "path": "registry/ui/popover/index.parts.ts", "type": "registry:ui" },
+        { "path": "registry/ui/popover/index.ts", "type": "registry:ui" }
       ]
     },
     {
@@ -270,14 +270,14 @@
       "registryDependencies": ["ng-hai/ui/create-style-context", "ng-hai/ui/split-variant-props", "ng-hai/ui/tv-config"],
       "dependencies": ["@base-ui/react@^1.6.0"],
       "files": [
-        { "path": "registry/bare/ui/tabs/tabs-root.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/tabs/tabs-list.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/tabs/tabs-tab.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/tabs/tabs-indicator.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/tabs/tabs-panel.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/tabs/styles.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/tabs/index.parts.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/tabs/index.ts", "type": "registry:ui" }
+        { "path": "registry/ui/tabs/tabs-root.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/tabs/tabs-list.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/tabs/tabs-tab.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/tabs/tabs-indicator.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/tabs/tabs-panel.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/tabs/styles.ts", "type": "registry:ui" },
+        { "path": "registry/ui/tabs/index.parts.ts", "type": "registry:ui" },
+        { "path": "registry/ui/tabs/index.ts", "type": "registry:ui" }
       ]
     },
     {
@@ -289,14 +289,14 @@
       "registryDependencies": ["ng-hai/ui/create-style-context", "ng-hai/ui/split-variant-props", "ng-hai/ui/tv-config"],
       "dependencies": ["@base-ui/react@^1.6.0"],
       "files": [
-        { "path": "registry/bare/ui/accordion/accordion-root.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/accordion/accordion-item.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/accordion/accordion-header.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/accordion/accordion-trigger.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/accordion/accordion-panel.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/accordion/styles.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/accordion/index.parts.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/accordion/index.ts", "type": "registry:ui" }
+        { "path": "registry/ui/accordion/accordion-root.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/accordion/accordion-item.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/accordion/accordion-header.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/accordion/accordion-trigger.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/accordion/accordion-panel.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/accordion/styles.ts", "type": "registry:ui" },
+        { "path": "registry/ui/accordion/index.parts.ts", "type": "registry:ui" },
+        { "path": "registry/ui/accordion/index.ts", "type": "registry:ui" }
       ]
     },
     {
@@ -308,15 +308,15 @@
       "registryDependencies": ["ng-hai/ui/create-style-context", "ng-hai/ui/split-variant-props", "ng-hai/ui/tv-config"],
       "dependencies": ["@base-ui/react@^1.6.0"],
       "files": [
-        { "path": "registry/bare/ui/tooltip/tooltip-root.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/tooltip/tooltip-trigger.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/tooltip/tooltip-portal.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/tooltip/tooltip-positioner.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/tooltip/tooltip-popup.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/tooltip/tooltip-arrow.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/tooltip/styles.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/tooltip/index.parts.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/tooltip/index.ts", "type": "registry:ui" }
+        { "path": "registry/ui/tooltip/tooltip-root.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/tooltip/tooltip-trigger.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/tooltip/tooltip-portal.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/tooltip/tooltip-positioner.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/tooltip/tooltip-popup.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/tooltip/tooltip-arrow.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/tooltip/styles.ts", "type": "registry:ui" },
+        { "path": "registry/ui/tooltip/index.parts.ts", "type": "registry:ui" },
+        { "path": "registry/ui/tooltip/index.ts", "type": "registry:ui" }
       ]
     },
     {
@@ -328,10 +328,10 @@
       "registryDependencies": ["ng-hai/ui/split-variant-props", "ng-hai/ui/tv-config"],
       "dependencies": ["@base-ui/react@^1.6.0"],
       "files": [
-        { "path": "registry/bare/ui/separator/separator-root.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/separator/styles.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/separator/index.parts.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/separator/index.ts", "type": "registry:ui" }
+        { "path": "registry/ui/separator/separator-root.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/separator/styles.ts", "type": "registry:ui" },
+        { "path": "registry/ui/separator/index.parts.ts", "type": "registry:ui" },
+        { "path": "registry/ui/separator/index.ts", "type": "registry:ui" }
       ]
     },
     {
@@ -343,10 +343,10 @@
       "registryDependencies": ["ng-hai/ui/split-variant-props", "ng-hai/ui/tv-config"],
       "dependencies": ["@base-ui/react@^1.6.0"],
       "files": [
-        { "path": "registry/bare/ui/toggle/toggle-root.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/toggle/styles.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/toggle/index.parts.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/toggle/index.ts", "type": "registry:ui" }
+        { "path": "registry/ui/toggle/toggle-root.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/toggle/styles.ts", "type": "registry:ui" },
+        { "path": "registry/ui/toggle/index.parts.ts", "type": "registry:ui" },
+        { "path": "registry/ui/toggle/index.ts", "type": "registry:ui" }
       ]
     },
     {
@@ -358,10 +358,10 @@
       "registryDependencies": ["ng-hai/ui/split-variant-props", "ng-hai/ui/tv-config"],
       "dependencies": ["@base-ui/react@^1.6.0"],
       "files": [
-        { "path": "registry/bare/ui/toggle-group/toggle-group-root.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/toggle-group/styles.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/toggle-group/index.parts.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/toggle-group/index.ts", "type": "registry:ui" }
+        { "path": "registry/ui/toggle-group/toggle-group-root.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/toggle-group/styles.ts", "type": "registry:ui" },
+        { "path": "registry/ui/toggle-group/index.parts.ts", "type": "registry:ui" },
+        { "path": "registry/ui/toggle-group/index.ts", "type": "registry:ui" }
       ]
     },
     {
@@ -373,10 +373,10 @@
       "registryDependencies": ["ng-hai/ui/split-variant-props", "ng-hai/ui/tv-config"],
       "dependencies": ["@base-ui/react@^1.6.0"],
       "files": [
-        { "path": "registry/bare/ui/checkbox-group/checkbox-group-root.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/checkbox-group/styles.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/checkbox-group/index.parts.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/checkbox-group/index.ts", "type": "registry:ui" }
+        { "path": "registry/ui/checkbox-group/checkbox-group-root.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/checkbox-group/styles.ts", "type": "registry:ui" },
+        { "path": "registry/ui/checkbox-group/index.parts.ts", "type": "registry:ui" },
+        { "path": "registry/ui/checkbox-group/index.ts", "type": "registry:ui" }
       ]
     },
     {
@@ -388,10 +388,10 @@
       "registryDependencies": ["ng-hai/ui/split-variant-props", "ng-hai/ui/tv-config"],
       "dependencies": ["@base-ui/react@^1.6.0"],
       "files": [
-        { "path": "registry/bare/ui/menubar/menubar-root.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/menubar/styles.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/menubar/index.parts.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/menubar/index.ts", "type": "registry:ui" }
+        { "path": "registry/ui/menubar/menubar-root.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/menubar/styles.ts", "type": "registry:ui" },
+        { "path": "registry/ui/menubar/index.parts.ts", "type": "registry:ui" },
+        { "path": "registry/ui/menubar/index.ts", "type": "registry:ui" }
       ]
     },
     {
@@ -402,8 +402,8 @@
       "categories": ["form"],
       "dependencies": ["@base-ui/react@^1.6.0"],
       "files": [
-        { "path": "registry/bare/ui/form/index.parts.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/form/index.ts", "type": "registry:ui" }
+        { "path": "registry/ui/form/index.parts.ts", "type": "registry:ui" },
+        { "path": "registry/ui/form/index.ts", "type": "registry:ui" }
       ]
     },
     {
@@ -415,12 +415,12 @@
       "registryDependencies": ["ng-hai/ui/create-style-context", "ng-hai/ui/split-variant-props", "ng-hai/ui/tv-config"],
       "dependencies": ["@base-ui/react@^1.6.0"],
       "files": [
-        { "path": "registry/bare/ui/collapsible/collapsible-root.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/collapsible/collapsible-trigger.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/collapsible/collapsible-panel.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/collapsible/styles.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/collapsible/index.parts.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/collapsible/index.ts", "type": "registry:ui" }
+        { "path": "registry/ui/collapsible/collapsible-root.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/collapsible/collapsible-trigger.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/collapsible/collapsible-panel.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/collapsible/styles.ts", "type": "registry:ui" },
+        { "path": "registry/ui/collapsible/index.parts.ts", "type": "registry:ui" },
+        { "path": "registry/ui/collapsible/index.ts", "type": "registry:ui" }
       ]
     },
     {
@@ -432,11 +432,11 @@
       "registryDependencies": ["ng-hai/ui/create-style-context", "ng-hai/ui/split-variant-props", "ng-hai/ui/tv-config"],
       "dependencies": ["@base-ui/react@^1.6.0"],
       "files": [
-        { "path": "registry/bare/ui/switch/switch-root.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/switch/switch-thumb.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/switch/styles.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/switch/index.parts.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/switch/index.ts", "type": "registry:ui" }
+        { "path": "registry/ui/switch/switch-root.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/switch/switch-thumb.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/switch/styles.ts", "type": "registry:ui" },
+        { "path": "registry/ui/switch/index.parts.ts", "type": "registry:ui" },
+        { "path": "registry/ui/switch/index.ts", "type": "registry:ui" }
       ]
     },
     {
@@ -448,12 +448,12 @@
       "registryDependencies": ["ng-hai/ui/create-style-context", "ng-hai/ui/split-variant-props", "ng-hai/ui/tv-config"],
       "dependencies": ["@base-ui/react@^1.6.0"],
       "files": [
-        { "path": "registry/bare/ui/radio/radio-root.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/radio/radio-item.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/radio/radio-indicator.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/radio/styles.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/radio/index.parts.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/radio/index.ts", "type": "registry:ui" }
+        { "path": "registry/ui/radio/radio-root.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/radio/radio-item.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/radio/radio-indicator.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/radio/styles.ts", "type": "registry:ui" },
+        { "path": "registry/ui/radio/index.parts.ts", "type": "registry:ui" },
+        { "path": "registry/ui/radio/index.ts", "type": "registry:ui" }
       ]
     },
     {
@@ -465,11 +465,11 @@
       "registryDependencies": ["ng-hai/ui/create-style-context", "ng-hai/ui/split-variant-props", "ng-hai/ui/tv-config"],
       "dependencies": ["@base-ui/react@^1.6.0"],
       "files": [
-        { "path": "registry/bare/ui/fieldset/fieldset-root.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/fieldset/fieldset-legend.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/fieldset/styles.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/fieldset/index.parts.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/fieldset/index.ts", "type": "registry:ui" }
+        { "path": "registry/ui/fieldset/fieldset-root.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/fieldset/fieldset-legend.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/fieldset/styles.ts", "type": "registry:ui" },
+        { "path": "registry/ui/fieldset/index.parts.ts", "type": "registry:ui" },
+        { "path": "registry/ui/fieldset/index.ts", "type": "registry:ui" }
       ]
     },
     {
@@ -481,14 +481,14 @@
       "registryDependencies": ["ng-hai/ui/create-style-context", "ng-hai/ui/split-variant-props", "ng-hai/ui/tv-config"],
       "dependencies": ["@base-ui/react@^1.6.0"],
       "files": [
-        { "path": "registry/bare/ui/meter/meter-root.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/meter/meter-track.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/meter/meter-indicator.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/meter/meter-value.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/meter/meter-label.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/meter/styles.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/meter/index.parts.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/meter/index.ts", "type": "registry:ui" }
+        { "path": "registry/ui/meter/meter-root.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/meter/meter-track.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/meter/meter-indicator.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/meter/meter-value.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/meter/meter-label.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/meter/styles.ts", "type": "registry:ui" },
+        { "path": "registry/ui/meter/index.parts.ts", "type": "registry:ui" },
+        { "path": "registry/ui/meter/index.ts", "type": "registry:ui" }
       ]
     },
     {
@@ -500,14 +500,14 @@
       "registryDependencies": ["ng-hai/ui/create-style-context", "ng-hai/ui/split-variant-props", "ng-hai/ui/tv-config"],
       "dependencies": ["@base-ui/react@^1.6.0"],
       "files": [
-        { "path": "registry/bare/ui/progress/progress-root.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/progress/progress-track.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/progress/progress-indicator.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/progress/progress-value.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/progress/progress-label.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/progress/styles.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/progress/index.parts.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/progress/index.ts", "type": "registry:ui" }
+        { "path": "registry/ui/progress/progress-root.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/progress/progress-track.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/progress/progress-indicator.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/progress/progress-value.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/progress/progress-label.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/progress/styles.ts", "type": "registry:ui" },
+        { "path": "registry/ui/progress/index.parts.ts", "type": "registry:ui" },
+        { "path": "registry/ui/progress/index.ts", "type": "registry:ui" }
       ]
     },
     {
@@ -519,16 +519,16 @@
       "registryDependencies": ["ng-hai/ui/create-style-context", "ng-hai/ui/split-variant-props", "ng-hai/ui/tv-config"],
       "dependencies": ["@base-ui/react@^1.6.0"],
       "files": [
-        { "path": "registry/bare/ui/field/field-root.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/field/field-label.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/field/field-error.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/field/field-description.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/field/field-control.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/field/field-validity.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/field/field-item.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/field/styles.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/field/index.parts.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/field/index.ts", "type": "registry:ui" }
+        { "path": "registry/ui/field/field-root.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/field/field-label.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/field/field-error.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/field/field-description.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/field/field-control.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/field/field-validity.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/field/field-item.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/field/styles.ts", "type": "registry:ui" },
+        { "path": "registry/ui/field/index.parts.ts", "type": "registry:ui" },
+        { "path": "registry/ui/field/index.ts", "type": "registry:ui" }
       ]
     },
     {
@@ -540,15 +540,15 @@
       "registryDependencies": ["ng-hai/ui/create-style-context", "ng-hai/ui/split-variant-props", "ng-hai/ui/tv-config"],
       "dependencies": ["@base-ui/react@^1.6.0"],
       "files": [
-        { "path": "registry/bare/ui/scroll-area/scroll-area-root.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/scroll-area/scroll-area-viewport.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/scroll-area/scroll-area-content.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/scroll-area/scroll-area-scrollbar.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/scroll-area/scroll-area-thumb.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/scroll-area/scroll-area-corner.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/scroll-area/styles.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/scroll-area/index.parts.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/scroll-area/index.ts", "type": "registry:ui" }
+        { "path": "registry/ui/scroll-area/scroll-area-root.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/scroll-area/scroll-area-viewport.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/scroll-area/scroll-area-content.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/scroll-area/scroll-area-scrollbar.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/scroll-area/scroll-area-thumb.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/scroll-area/scroll-area-corner.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/scroll-area/styles.ts", "type": "registry:ui" },
+        { "path": "registry/ui/scroll-area/index.parts.ts", "type": "registry:ui" },
+        { "path": "registry/ui/scroll-area/index.ts", "type": "registry:ui" }
       ]
     },
     {
@@ -560,16 +560,16 @@
       "registryDependencies": ["ng-hai/ui/create-style-context", "ng-hai/ui/split-variant-props", "ng-hai/ui/tv-config"],
       "dependencies": ["@base-ui/react@^1.6.0"],
       "files": [
-        { "path": "registry/bare/ui/slider/slider-root.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/slider/slider-label.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/slider/slider-value.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/slider/slider-control.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/slider/slider-track.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/slider/slider-thumb.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/slider/slider-indicator.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/slider/styles.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/slider/index.parts.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/slider/index.ts", "type": "registry:ui" }
+        { "path": "registry/ui/slider/slider-root.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/slider/slider-label.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/slider/slider-value.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/slider/slider-control.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/slider/slider-track.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/slider/slider-thumb.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/slider/slider-indicator.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/slider/styles.ts", "type": "registry:ui" },
+        { "path": "registry/ui/slider/index.parts.ts", "type": "registry:ui" },
+        { "path": "registry/ui/slider/index.ts", "type": "registry:ui" }
       ]
     },
     {
@@ -581,17 +581,17 @@
       "registryDependencies": ["ng-hai/ui/create-style-context", "ng-hai/ui/split-variant-props", "ng-hai/ui/tv-config"],
       "dependencies": ["@base-ui/react@^1.6.0"],
       "files": [
-        { "path": "registry/bare/ui/preview-card/preview-card-root.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/preview-card/preview-card-trigger.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/preview-card/preview-card-portal.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/preview-card/preview-card-backdrop.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/preview-card/preview-card-positioner.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/preview-card/preview-card-popup.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/preview-card/preview-card-arrow.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/preview-card/preview-card-viewport.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/preview-card/styles.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/preview-card/index.parts.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/preview-card/index.ts", "type": "registry:ui" }
+        { "path": "registry/ui/preview-card/preview-card-root.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/preview-card/preview-card-trigger.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/preview-card/preview-card-portal.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/preview-card/preview-card-backdrop.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/preview-card/preview-card-positioner.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/preview-card/preview-card-popup.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/preview-card/preview-card-arrow.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/preview-card/preview-card-viewport.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/preview-card/styles.ts", "type": "registry:ui" },
+        { "path": "registry/ui/preview-card/index.parts.ts", "type": "registry:ui" },
+        { "path": "registry/ui/preview-card/index.ts", "type": "registry:ui" }
       ]
     },
     {
@@ -603,16 +603,16 @@
       "registryDependencies": ["ng-hai/ui/create-style-context", "ng-hai/ui/split-variant-props", "ng-hai/ui/tv-config"],
       "dependencies": ["@base-ui/react@^1.6.0"],
       "files": [
-        { "path": "registry/bare/ui/number-field/number-field-root.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/number-field/number-field-group.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/number-field/number-field-increment.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/number-field/number-field-decrement.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/number-field/number-field-input.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/number-field/number-field-scrub-area.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/number-field/number-field-scrub-area-cursor.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/number-field/styles.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/number-field/index.parts.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/number-field/index.ts", "type": "registry:ui" }
+        { "path": "registry/ui/number-field/number-field-root.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/number-field/number-field-group.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/number-field/number-field-increment.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/number-field/number-field-decrement.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/number-field/number-field-input.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/number-field/number-field-scrub-area.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/number-field/number-field-scrub-area-cursor.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/number-field/styles.ts", "type": "registry:ui" },
+        { "path": "registry/ui/number-field/index.parts.ts", "type": "registry:ui" },
+        { "path": "registry/ui/number-field/index.ts", "type": "registry:ui" }
       ]
     },
     {
@@ -624,15 +624,15 @@
       "registryDependencies": ["ng-hai/ui/create-style-context", "ng-hai/ui/split-variant-props", "ng-hai/ui/tv-config"],
       "dependencies": ["@base-ui/react@^1.6.0"],
       "files": [
-        { "path": "registry/bare/ui/toolbar/toolbar-root.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/toolbar/toolbar-group.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/toolbar/toolbar-button.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/toolbar/toolbar-link.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/toolbar/toolbar-input.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/toolbar/toolbar-separator.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/toolbar/styles.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/toolbar/index.parts.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/toolbar/index.ts", "type": "registry:ui" }
+        { "path": "registry/ui/toolbar/toolbar-root.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/toolbar/toolbar-group.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/toolbar/toolbar-button.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/toolbar/toolbar-link.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/toolbar/toolbar-input.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/toolbar/toolbar-separator.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/toolbar/styles.ts", "type": "registry:ui" },
+        { "path": "registry/ui/toolbar/index.parts.ts", "type": "registry:ui" },
+        { "path": "registry/ui/toolbar/index.ts", "type": "registry:ui" }
       ]
     },
     {
@@ -644,23 +644,23 @@
       "registryDependencies": ["ng-hai/ui/create-style-context", "ng-hai/ui/split-variant-props", "ng-hai/ui/tv-config"],
       "dependencies": ["@base-ui/react@^1.6.0"],
       "files": [
-        { "path": "registry/bare/ui/drawer/drawer-root.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/drawer/drawer-provider.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/drawer/drawer-trigger.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/drawer/drawer-portal.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/drawer/drawer-backdrop.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/drawer/drawer-popup.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/drawer/drawer-swipe-area.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/drawer/drawer-content.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/drawer/drawer-viewport.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/drawer/drawer-title.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/drawer/drawer-description.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/drawer/drawer-close.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/drawer/drawer-indent.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/drawer/drawer-indent-background.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/drawer/styles.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/drawer/index.parts.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/drawer/index.ts", "type": "registry:ui" }
+        { "path": "registry/ui/drawer/drawer-root.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/drawer/drawer-provider.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/drawer/drawer-trigger.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/drawer/drawer-portal.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/drawer/drawer-backdrop.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/drawer/drawer-popup.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/drawer/drawer-swipe-area.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/drawer/drawer-content.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/drawer/drawer-viewport.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/drawer/drawer-title.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/drawer/drawer-description.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/drawer/drawer-close.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/drawer/drawer-indent.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/drawer/drawer-indent-background.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/drawer/styles.ts", "type": "registry:ui" },
+        { "path": "registry/ui/drawer/index.parts.ts", "type": "registry:ui" },
+        { "path": "registry/ui/drawer/index.ts", "type": "registry:ui" }
       ]
     },
     {
@@ -672,20 +672,20 @@
       "registryDependencies": ["ng-hai/ui/create-style-context", "ng-hai/ui/split-variant-props", "ng-hai/ui/tv-config"],
       "dependencies": ["@base-ui/react@^1.6.0"],
       "files": [
-        { "path": "registry/bare/ui/toast/toast-root.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/toast/toast-provider.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/toast/toast-portal.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/toast/toast-viewport.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/toast/toast-positioner.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/toast/toast-content.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/toast/toast-title.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/toast/toast-description.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/toast/toast-action.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/toast/toast-close.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/toast/toast-arrow.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/toast/styles.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/toast/index.parts.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/toast/index.ts", "type": "registry:ui" }
+        { "path": "registry/ui/toast/toast-root.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/toast/toast-provider.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/toast/toast-portal.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/toast/toast-viewport.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/toast/toast-positioner.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/toast/toast-content.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/toast/toast-title.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/toast/toast-description.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/toast/toast-action.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/toast/toast-close.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/toast/toast-arrow.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/toast/styles.ts", "type": "registry:ui" },
+        { "path": "registry/ui/toast/index.parts.ts", "type": "registry:ui" },
+        { "path": "registry/ui/toast/index.ts", "type": "registry:ui" }
       ]
     },
     {
@@ -697,22 +697,22 @@
       "registryDependencies": ["ng-hai/ui/create-style-context", "ng-hai/ui/split-variant-props", "ng-hai/ui/tv-config"],
       "dependencies": ["@base-ui/react@^1.6.0"],
       "files": [
-        { "path": "registry/bare/ui/navigation-menu/navigation-menu-root.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/navigation-menu/navigation-menu-list.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/navigation-menu/navigation-menu-item.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/navigation-menu/navigation-menu-trigger.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/navigation-menu/navigation-menu-icon.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/navigation-menu/navigation-menu-content.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/navigation-menu/navigation-menu-link.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/navigation-menu/navigation-menu-portal.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/navigation-menu/navigation-menu-backdrop.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/navigation-menu/navigation-menu-positioner.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/navigation-menu/navigation-menu-popup.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/navigation-menu/navigation-menu-viewport.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/navigation-menu/navigation-menu-arrow.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/navigation-menu/styles.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/navigation-menu/index.parts.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/navigation-menu/index.ts", "type": "registry:ui" }
+        { "path": "registry/ui/navigation-menu/navigation-menu-root.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/navigation-menu/navigation-menu-list.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/navigation-menu/navigation-menu-item.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/navigation-menu/navigation-menu-trigger.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/navigation-menu/navigation-menu-icon.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/navigation-menu/navigation-menu-content.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/navigation-menu/navigation-menu-link.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/navigation-menu/navigation-menu-portal.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/navigation-menu/navigation-menu-backdrop.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/navigation-menu/navigation-menu-positioner.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/navigation-menu/navigation-menu-popup.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/navigation-menu/navigation-menu-viewport.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/navigation-menu/navigation-menu-arrow.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/navigation-menu/styles.ts", "type": "registry:ui" },
+        { "path": "registry/ui/navigation-menu/index.parts.ts", "type": "registry:ui" },
+        { "path": "registry/ui/navigation-menu/index.ts", "type": "registry:ui" }
       ]
     },
     {
@@ -724,28 +724,28 @@
       "registryDependencies": ["ng-hai/ui/create-style-context", "ng-hai/ui/split-variant-props", "ng-hai/ui/tv-config"],
       "dependencies": ["@base-ui/react@^1.6.0"],
       "files": [
-        { "path": "registry/bare/ui/menu/menu-root.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/menu/menu-submenu-root.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/menu/menu-trigger.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/menu/menu-submenu-trigger.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/menu/menu-portal.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/menu/menu-backdrop.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/menu/menu-positioner.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/menu/menu-popup.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/menu/menu-viewport.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/menu/menu-arrow.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/menu/menu-item.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/menu/menu-link-item.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/menu/menu-group.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/menu/menu-group-label.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/menu/menu-radio-group.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/menu/menu-radio-item.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/menu/menu-radio-item-indicator.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/menu/menu-checkbox-item.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/menu/menu-checkbox-item-indicator.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/menu/styles.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/menu/index.parts.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/menu/index.ts", "type": "registry:ui" }
+        { "path": "registry/ui/menu/menu-root.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/menu/menu-submenu-root.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/menu/menu-trigger.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/menu/menu-submenu-trigger.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/menu/menu-portal.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/menu/menu-backdrop.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/menu/menu-positioner.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/menu/menu-popup.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/menu/menu-viewport.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/menu/menu-arrow.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/menu/menu-item.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/menu/menu-link-item.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/menu/menu-group.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/menu/menu-group-label.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/menu/menu-radio-group.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/menu/menu-radio-item.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/menu/menu-radio-item-indicator.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/menu/menu-checkbox-item.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/menu/menu-checkbox-item-indicator.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/menu/styles.ts", "type": "registry:ui" },
+        { "path": "registry/ui/menu/index.parts.ts", "type": "registry:ui" },
+        { "path": "registry/ui/menu/index.ts", "type": "registry:ui" }
       ]
     },
     {
@@ -757,34 +757,34 @@
       "registryDependencies": ["ng-hai/ui/create-style-context", "ng-hai/ui/split-variant-props", "ng-hai/ui/tv-config"],
       "dependencies": ["@base-ui/react@^1.6.0"],
       "files": [
-        { "path": "registry/bare/ui/combobox/combobox-root.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/combobox/combobox-value.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/combobox/combobox-collection.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/combobox/combobox-portal.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/combobox/combobox-label.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/combobox/combobox-trigger.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/combobox/combobox-input.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/combobox/combobox-input-group.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/combobox/combobox-chips.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/combobox/combobox-chip.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/combobox/combobox-chip-remove.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/combobox/combobox-clear.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/combobox/combobox-icon.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/combobox/combobox-backdrop.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/combobox/combobox-positioner.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/combobox/combobox-popup.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/combobox/combobox-arrow.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/combobox/combobox-list.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/combobox/combobox-row.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/combobox/combobox-item.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/combobox/combobox-item-indicator.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/combobox/combobox-group.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/combobox/combobox-group-label.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/combobox/combobox-empty.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/combobox/combobox-status.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/combobox/styles.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/combobox/index.parts.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/combobox/index.ts", "type": "registry:ui" }
+        { "path": "registry/ui/combobox/combobox-root.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/combobox/combobox-value.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/combobox/combobox-collection.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/combobox/combobox-portal.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/combobox/combobox-label.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/combobox/combobox-trigger.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/combobox/combobox-input.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/combobox/combobox-input-group.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/combobox/combobox-chips.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/combobox/combobox-chip.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/combobox/combobox-chip-remove.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/combobox/combobox-clear.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/combobox/combobox-icon.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/combobox/combobox-backdrop.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/combobox/combobox-positioner.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/combobox/combobox-popup.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/combobox/combobox-arrow.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/combobox/combobox-list.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/combobox/combobox-row.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/combobox/combobox-item.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/combobox/combobox-item-indicator.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/combobox/combobox-group.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/combobox/combobox-group-label.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/combobox/combobox-empty.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/combobox/combobox-status.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/combobox/styles.ts", "type": "registry:ui" },
+        { "path": "registry/ui/combobox/index.parts.ts", "type": "registry:ui" },
+        { "path": "registry/ui/combobox/index.ts", "type": "registry:ui" }
       ]
     },
     {
@@ -796,18 +796,18 @@
       "registryDependencies": ["ng-hai/ui/create-style-context", "ng-hai/ui/split-variant-props", "ng-hai/ui/tv-config"],
       "dependencies": ["@base-ui/react@^1.6.0"],
       "files": [
-        { "path": "registry/bare/ui/alert-dialog/alert-dialog-root.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/alert-dialog/alert-dialog-trigger.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/alert-dialog/alert-dialog-portal.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/alert-dialog/alert-dialog-backdrop.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/alert-dialog/alert-dialog-popup.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/alert-dialog/alert-dialog-viewport.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/alert-dialog/alert-dialog-title.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/alert-dialog/alert-dialog-description.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/alert-dialog/alert-dialog-close.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/alert-dialog/styles.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/alert-dialog/index.parts.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/alert-dialog/index.ts", "type": "registry:ui" }
+        { "path": "registry/ui/alert-dialog/alert-dialog-root.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/alert-dialog/alert-dialog-trigger.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/alert-dialog/alert-dialog-portal.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/alert-dialog/alert-dialog-backdrop.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/alert-dialog/alert-dialog-popup.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/alert-dialog/alert-dialog-viewport.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/alert-dialog/alert-dialog-title.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/alert-dialog/alert-dialog-description.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/alert-dialog/alert-dialog-close.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/alert-dialog/styles.ts", "type": "registry:ui" },
+        { "path": "registry/ui/alert-dialog/index.parts.ts", "type": "registry:ui" },
+        { "path": "registry/ui/alert-dialog/index.ts", "type": "registry:ui" }
       ]
     },
     {
@@ -819,27 +819,27 @@
       "registryDependencies": ["ng-hai/ui/create-style-context", "ng-hai/ui/split-variant-props", "ng-hai/ui/tv-config"],
       "dependencies": ["@base-ui/react@^1.6.0"],
       "files": [
-        { "path": "registry/bare/ui/context-menu/context-menu-root.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/context-menu/context-menu-trigger.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/context-menu/context-menu-portal.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/context-menu/context-menu-submenu-root.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/context-menu/context-menu-submenu-trigger.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/context-menu/context-menu-backdrop.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/context-menu/context-menu-positioner.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/context-menu/context-menu-popup.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/context-menu/context-menu-arrow.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/context-menu/context-menu-item.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/context-menu/context-menu-link-item.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/context-menu/context-menu-group.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/context-menu/context-menu-group-label.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/context-menu/context-menu-radio-group.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/context-menu/context-menu-radio-item.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/context-menu/context-menu-radio-item-indicator.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/context-menu/context-menu-checkbox-item.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/context-menu/context-menu-checkbox-item-indicator.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/context-menu/styles.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/context-menu/index.parts.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/context-menu/index.ts", "type": "registry:ui" }
+        { "path": "registry/ui/context-menu/context-menu-root.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/context-menu/context-menu-trigger.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/context-menu/context-menu-portal.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/context-menu/context-menu-submenu-root.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/context-menu/context-menu-submenu-trigger.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/context-menu/context-menu-backdrop.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/context-menu/context-menu-positioner.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/context-menu/context-menu-popup.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/context-menu/context-menu-arrow.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/context-menu/context-menu-item.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/context-menu/context-menu-link-item.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/context-menu/context-menu-group.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/context-menu/context-menu-group-label.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/context-menu/context-menu-radio-group.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/context-menu/context-menu-radio-item.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/context-menu/context-menu-radio-item-indicator.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/context-menu/context-menu-checkbox-item.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/context-menu/context-menu-checkbox-item-indicator.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/context-menu/styles.ts", "type": "registry:ui" },
+        { "path": "registry/ui/context-menu/index.parts.ts", "type": "registry:ui" },
+        { "path": "registry/ui/context-menu/index.ts", "type": "registry:ui" }
       ]
     },
     {
@@ -851,29 +851,29 @@
       "registryDependencies": ["ng-hai/ui/create-style-context", "ng-hai/ui/split-variant-props", "ng-hai/ui/tv-config"],
       "dependencies": ["@base-ui/react@^1.6.0"],
       "files": [
-        { "path": "registry/bare/ui/autocomplete/autocomplete-root.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/autocomplete/autocomplete-value.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/autocomplete/autocomplete-collection.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/autocomplete/autocomplete-portal.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/autocomplete/autocomplete-trigger.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/autocomplete/autocomplete-input.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/autocomplete/autocomplete-input-group.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/autocomplete/autocomplete-icon.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/autocomplete/autocomplete-clear.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/autocomplete/autocomplete-backdrop.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/autocomplete/autocomplete-positioner.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/autocomplete/autocomplete-popup.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/autocomplete/autocomplete-arrow.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/autocomplete/autocomplete-list.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/autocomplete/autocomplete-row.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/autocomplete/autocomplete-item.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/autocomplete/autocomplete-group.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/autocomplete/autocomplete-group-label.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/autocomplete/autocomplete-empty.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/autocomplete/autocomplete-status.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/autocomplete/styles.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/autocomplete/index.parts.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/autocomplete/index.ts", "type": "registry:ui" }
+        { "path": "registry/ui/autocomplete/autocomplete-root.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/autocomplete/autocomplete-value.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/autocomplete/autocomplete-collection.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/autocomplete/autocomplete-portal.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/autocomplete/autocomplete-trigger.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/autocomplete/autocomplete-input.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/autocomplete/autocomplete-input-group.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/autocomplete/autocomplete-icon.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/autocomplete/autocomplete-clear.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/autocomplete/autocomplete-backdrop.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/autocomplete/autocomplete-positioner.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/autocomplete/autocomplete-popup.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/autocomplete/autocomplete-arrow.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/autocomplete/autocomplete-list.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/autocomplete/autocomplete-row.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/autocomplete/autocomplete-item.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/autocomplete/autocomplete-group.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/autocomplete/autocomplete-group-label.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/autocomplete/autocomplete-empty.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/autocomplete/autocomplete-status.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/autocomplete/styles.ts", "type": "registry:ui" },
+        { "path": "registry/ui/autocomplete/index.parts.ts", "type": "registry:ui" },
+        { "path": "registry/ui/autocomplete/index.ts", "type": "registry:ui" }
       ]
     },
     {
@@ -885,12 +885,12 @@
       "registryDependencies": ["ng-hai/ui/create-style-context", "ng-hai/ui/split-variant-props", "ng-hai/ui/tv-config"],
       "dependencies": ["@base-ui/react@^1.6.0"],
       "files": [
-        { "path": "registry/bare/ui/otp-field/otp-field-root.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/otp-field/otp-field-input.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/otp-field/otp-field-separator.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/otp-field/styles.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/otp-field/index.parts.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/otp-field/index.ts", "type": "registry:ui" }
+        { "path": "registry/ui/otp-field/otp-field-root.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/otp-field/otp-field-input.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/otp-field/otp-field-separator.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/otp-field/styles.ts", "type": "registry:ui" },
+        { "path": "registry/ui/otp-field/index.parts.ts", "type": "registry:ui" },
+        { "path": "registry/ui/otp-field/index.ts", "type": "registry:ui" }
       ]
     },
     {
@@ -902,21 +902,21 @@
       "registryDependencies": ["ng-hai/ui/create-style-context", "ng-hai/ui/split-variant-props", "ng-hai/ui/tv-config"],
       "dependencies": ["@base-ui/react@^1.6.0"],
       "files": [
-        { "path": "registry/bare/ui/table/table-root.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/table/table-caption.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/table/table-header.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/table/table-body.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/table/table-footer.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/table/table-row.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/table/table-header-cell.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/table/table-cell.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/table/table-row-group.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/table/table-expand-trigger.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/table/table-panel-row.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/table/table-panel-cell.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/table/styles.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/table/index.parts.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/table/index.ts", "type": "registry:ui" }
+        { "path": "registry/ui/table/table-root.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/table/table-caption.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/table/table-header.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/table/table-body.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/table/table-footer.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/table/table-row.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/table/table-header-cell.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/table/table-cell.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/table/table-row-group.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/table/table-expand-trigger.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/table/table-panel-row.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/table/table-panel-cell.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/table/styles.ts", "type": "registry:ui" },
+        { "path": "registry/ui/table/index.parts.ts", "type": "registry:ui" },
+        { "path": "registry/ui/table/index.ts", "type": "registry:ui" }
       ]
     },
     {
@@ -928,22 +928,22 @@
       "registryDependencies": ["ng-hai/ui/create-style-context", "ng-hai/ui/split-variant-props", "ng-hai/ui/tv-config"],
       "dependencies": ["@base-ui/react@^1.6.0"],
       "files": [
-        { "path": "registry/bare/ui/sidebar/sidebar-root.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/sidebar/sidebar-header.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/sidebar/sidebar-content.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/sidebar/sidebar-footer.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/sidebar/sidebar-group.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/sidebar/sidebar-group-trigger.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/sidebar/sidebar-group-label.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/sidebar/sidebar-group-content.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/sidebar/sidebar-item.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/sidebar/sidebar-item-icon.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/sidebar/sidebar-item-label.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/sidebar/sidebar-item-badge.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/sidebar/sidebar-separator.tsx", "type": "registry:ui" },
-        { "path": "registry/bare/ui/sidebar/styles.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/sidebar/index.parts.ts", "type": "registry:ui" },
-        { "path": "registry/bare/ui/sidebar/index.ts", "type": "registry:ui" }
+        { "path": "registry/ui/sidebar/sidebar-root.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/sidebar/sidebar-header.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/sidebar/sidebar-content.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/sidebar/sidebar-footer.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/sidebar/sidebar-group.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/sidebar/sidebar-group-trigger.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/sidebar/sidebar-group-label.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/sidebar/sidebar-group-content.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/sidebar/sidebar-item.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/sidebar/sidebar-item-icon.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/sidebar/sidebar-item-label.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/sidebar/sidebar-item-badge.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/sidebar/sidebar-separator.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/sidebar/styles.ts", "type": "registry:ui" },
+        { "path": "registry/ui/sidebar/index.parts.ts", "type": "registry:ui" },
+        { "path": "registry/ui/sidebar/index.ts", "type": "registry:ui" }
       ]
     }
   ]
