@@ -1,11 +1,11 @@
 ---
-name: bare-ui
-description: Use when installing, styling, or extending bare-ui components. Triggers: `shadcn add ng-hai/bare-ui/<name>` (GitHub registry); `components/ui/<name>/` with `<name>-root.tsx` + per-part files + `styles.ts` (`tv({ slots })`) + `index.parts.ts`; imports from `@/lib/tv.config`, `@/lib/create-style-context`, or `@/lib/split-variant-props`; `data-slot`/`useStyles`/`StyleContext` usage; preset injection via `styles` prop.
+name: ui
+description: Use when installing, styling, or extending ui components. Triggers: `shadcn add ng-hai/ui/<name>` (GitHub registry); `components/ui/<name>/` with `<name>-root.tsx` + per-part files + `styles.ts` (`tv({ slots })`) + `index.parts.ts`; imports from `@/lib/tv.config`, `@/lib/create-style-context`, or `@/lib/split-variant-props`; `data-slot`/`useStyles`/`StyleContext` usage; preset injection via `styles` prop.
 ---
 
-# bare-ui
+# ui
 
-bare-ui is an unstyled component registry built on [@base-ui/react](https://base-ui.com). It is a [shadcn GitHub registry](https://ui.shadcn.com/docs/registry/github): install components with `shadcn add ng-hai/bare-ui/<name>` (no `components.json` setup or namespace needed) and they are copied into your project under `components/ui/<name>/`. There is no npm package — you own the code. Styles are intentionally empty; you fill them in with Tailwind classes.
+ui is an unstyled component registry built on [@base-ui/react](https://base-ui.com). It is a [shadcn GitHub registry](https://ui.shadcn.com/docs/registry/github): install components with `shadcn add ng-hai/ui/<name>` (no `components.json` setup or namespace needed) and they are copied into your project under `components/ui/<name>/`. There is no npm package — you own the code. Styles are intentionally empty; you fill them in with Tailwind classes.
 
 ## Component anatomy
 
@@ -153,7 +153,7 @@ card:    "bg-gray-2 text-gray-12 border border-gray-6"
 muted:   "text-gray-11"
 ```
 
-The contract ships **neutral** (accent == a dark gray) via the `theme` preset (`shadcn add ng-hai/bare-ui/theme`). To brand it, install `theme-generator`, drop your brand seeds into its `THEMES` config, and run it — it regenerates the whole contract (pinning step 9 of each scale to its seed) with a printed WCAG self-check. Keep the token *names* stable; only the values change.
+The contract ships **neutral** (accent == a dark gray) via the `theme` preset (`shadcn add ng-hai/ui/theme`). To brand it, install `theme-generator`, drop your brand seeds into its `THEMES` config, and run it — it regenerates the whole contract (pinning step 9 of each scale to its seed) with a printed WCAG self-check. Keep the token *names* stable; only the values change.
 
 ### Multiple accents — `data-accent-color`
 
@@ -262,9 +262,9 @@ import { Select } from "@/components/ui/select";
 <Select.Icon><ChevronDown /></Select.Icon>
 ```
 
-**When to choose this.** The consumer already has an icon library, wants a consistent set across their app, and doesn't need to edit individual glyphs. Zero friction at install time — bare-ui has nothing to copy for icons.
+**When to choose this.** The consumer already has an icon library, wants a consistent set across their app, and doesn't need to edit individual glyphs. Zero friction at install time — ui has nothing to copy for icons.
 
-**Registry implications.** No `dependencies` entry for the icon library in `registry.json` — bare-ui stays library-agnostic. Document the convention in the component's README or example block, not in the component code.
+**Registry implications.** No `dependencies` entry for the icon library in `registry.json` — ui stays library-agnostic. Document the convention in the component's README or example block, not in the component code.
 
 ### Approach 2 — copy-in icon registry
 
@@ -287,7 +287,7 @@ Ship raw SVG files as `registry:file` items and let consumers process them with 
 }
 ```
 
-Consumers install with `shadcn add ng-hai/bare-ui/icon-chevron-down`, then process via their bundler. Example consumer setup with SVGR + Vite:
+Consumers install with `shadcn add ng-hai/ui/icon-chevron-down`, then process via their bundler. Example consumer setup with SVGR + Vite:
 
 ```tsx
 // svgr turns the SVG import into a React component
@@ -299,7 +299,7 @@ import ChevronDown from "@/assets/icons/chevron-down.svg?react";
 Or with unplugin-icons (works with any icon set, including local SVGs):
 
 ```tsx
-import ChevronDown from "~icons/bare-ui/chevron-down";
+import ChevronDown from "~icons/ui/chevron-down";
 ```
 
 **When to choose this.** The consumer wants editable glyphs (path tweaks, custom strokes) without pulling a whole icon library, or wants SVGs as first-class assets (sprite sheets, inline components, both).
@@ -318,11 +318,11 @@ Neither is universally right. Document both in the component's example block so 
 - **Tight visual control, custom strokes, or no icon library** → copy-in SVGs.
 - **Mixed** → peer-dep for most, copy-in for the 3–5 icons that need custom geometry.
 
-What bare-ui must not do: bundle glyphs inside component `.tsx` files as hardcoded inline SVGs. That locks aesthetic decisions into behavior code and breaks both approaches above.
+What ui must not do: bundle glyphs inside component `.tsx` files as hardcoded inline SVGs. That locks aesthetic decisions into behavior code and breaks both approaches above.
 
 ## Rules
 
-These are invariants. Never break them when modifying bare-ui components.
+These are invariants. Never break them when modifying ui components.
 
 - **All styling goes in `styles.ts`.** Never put Tailwind classes directly in `.tsx` files. The only exception is the `className` prop pass-through for consumer overrides.
 - **Never hand-pluck variant props.** The root component uses `createPropSplitter` which reads `variantKeys` at runtime. When you add variants to `styles.ts`, the root component picks them up automatically. Don't destructure variant props manually.
@@ -335,37 +335,37 @@ These are invariants. Never break them when modifying bare-ui components.
 
 ## Installing from the registry
 
-bare-ui is a [shadcn GitHub registry](https://ui.shadcn.com/docs/registry/github). For the public `ng-hai/bare-ui` repo there is **no setup and no auth** — install straight from the repo:
+ui is a [shadcn GitHub registry](https://ui.shadcn.com/docs/registry/github). For the public `ng-hai/ui` repo there is **no setup and no auth** — install straight from the repo:
 
 ```bash
-pnpm dlx shadcn@latest add ng-hai/bare-ui/button
+pnpm dlx shadcn@latest add ng-hai/ui/button
 ```
 
-The first two path segments (`ng-hai/bare-ui`) are the GitHub owner and repo; the rest (`button`) is the registry item. Transitive deps (`ng-hai/bare-ui/tv-config`, `ng-hai/bare-ui/split-variant-props`, `ng-hai/bare-ui/create-style-context`) resolve automatically from the same repo. The CLI reads `registry.json` and the source files directly — there is no pre-built JSON, no `public/r`, and no `components.json` registry entry to configure.
+The first two path segments (`ng-hai/ui`) are the GitHub owner and repo; the rest (`button`) is the registry item. Transitive deps (`ng-hai/ui/tv-config`, `ng-hai/ui/split-variant-props`, `ng-hai/ui/create-style-context`) resolve automatically from the same repo. The CLI reads `registry.json` and the source files directly — there is no pre-built JSON, no `public/r`, and no `components.json` registry entry to configure.
 
 > Requires a recent `shadcn` CLI; the `owner/repo/item` form landed in the 4.x line. Use `shadcn@latest`.
 
 ### Pin to a ref
 
-A bare `ng-hai/bare-ui/button` tracks the repo's default branch (`main`). Append `#<ref>` — a branch or commit SHA — to lock an install:
+A bare `ng-hai/ui/button` tracks the repo's default branch (`main`). Append `#<ref>` — a branch or commit SHA — to lock an install:
 
 ```bash
-pnpm dlx shadcn@latest add ng-hai/bare-ui/button#c0ffee2   # immutable commit SHA → reproducible
-pnpm dlx shadcn@latest add ng-hai/bare-ui/button#main      # explicit default branch
+pnpm dlx shadcn@latest add ng-hai/ui/button#c0ffee2   # immutable commit SHA → reproducible
+pnpm dlx shadcn@latest add ng-hai/ui/button#main      # explicit default branch
 ```
 
 There are no version tags; reproducibility comes from pinning a commit SHA (or just committing the installed source into your own repo).
 
 ### Private forks
 
-GitHub addresses (`owner/repo/item`) work for **public repos only** — *"Private repositories and GitHub Enterprise hosts are not currently supported by GitHub addresses."* If you fork bare-ui into a private repo, the `ng-hai/bare-ui/<name>` form will not resolve.
+GitHub addresses (`owner/repo/item`) work for **public repos only** — *"Private repositories and GitHub Enterprise hosts are not currently supported by GitHub addresses."* If you fork ui into a private repo, the `ng-hai/ui/<name>` form will not resolve.
 
 For a private fork, serve the registry behind an authenticated URL and reference it as a [namespace with authentication](https://ui.shadcn.com/docs/registry/authentication) in `components.json` — shadcn substitutes `${ENV_VAR}` into headers/params:
 
 ```json
 {
   "registries": {
-    "@bare-ui": {
+    "@ui": {
       "url": "https://your-registry.example.com/r/{name}.json",
       "headers": { "Authorization": "Bearer ${REGISTRY_TOKEN}" }
     }

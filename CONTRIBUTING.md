@@ -4,10 +4,10 @@ This doc is written to be executable by both humans and AI assistants.
 
 ## Distribution model
 
-bare-ui is a [shadcn GitHub registry](https://ui.shadcn.com/docs/registry/github). There is **no build artifact and no npm release**. The `shadcn` CLI reads `registry.json` and the referenced source files directly from this repo, so:
+ui is a [shadcn GitHub registry](https://ui.shadcn.com/docs/registry/github). There is **no build artifact and no npm release**. The `shadcn` CLI reads `registry.json` and the referenced source files directly from this repo, so:
 
-- **`main` is the only channel.** Anything merged is immediately installable via `shadcn add ng-hai/bare-ui/<name>`.
-- **No version tags.** Consumers who want a reproducible install pin to a commit SHA at install time — `shadcn add ng-hai/bare-ui/<name>#<sha>` — so the repo never needs to cut or maintain release tags.
+- **`main` is the only channel.** Anything merged is immediately installable via `shadcn add ng-hai/ui/<name>`.
+- **No version tags.** Consumers who want a reproducible install pin to a commit SHA at install time — `shadcn add ng-hai/ui/<name>#<sha>` — so the repo never needs to cut or maintain release tags.
 - **Nothing to regenerate.** Editing component source and `registry.json` is the whole change; there is no `public/r` output to rebuild or commit.
 
 ## Add or modify a component
@@ -17,7 +17,7 @@ The component architecture (layering, barrels, `createPropSplitter`, `createStyl
 1. Create files under `registry/bare/ui/<name>/`, mirroring a sibling (`dialog/` or `select/` for multi-part, `button/` for single-part). Every component ships both `index.ts` and `index.parts.ts`.
 2. Add an entry to **`registry.json`**:
    - `type: "registry:ui"` for components, `registry:lib` for shared utils.
-   - `registryDependencies` uses the full GitHub item address `ng-hai/bare-ui/<dep>` (e.g. `ng-hai/bare-ui/tv-config`, `ng-hai/bare-ui/split-variant-props`, `ng-hai/bare-ui/create-style-context`). Don't use the old `@bare-ui/<dep>` namespace form or raw GitHub URLs.
+   - `registryDependencies` uses the full GitHub item address `ng-hai/ui/<dep>` (e.g. `ng-hai/ui/tv-config`, `ng-hai/ui/split-variant-props`, `ng-hai/ui/create-style-context`). Don't use the old `@ui/<dep>` namespace form or raw GitHub URLs.
    - `dependencies: ["@base-ui/react"]` for runtime npm packages.
    - `categories: [...]` for discoverability.
    - List every file in the folder under `files` (including `index.parts.ts`), each `type: "registry:ui"`.

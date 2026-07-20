@@ -11,7 +11,7 @@ import { describeSlots } from "@/registry/bare/lib/testing-utils";
  * renders Toast.Root so child parts (Title, Description, Close, Action,
  * Content) can access the Toast.Root StyleContext.
  *
- * The bare-ui Portal/Viewport wrappers also call useToastStyles(), so they
+ * The ui Portal/Viewport wrappers also call useToastStyles(), so they
  * too must be rendered inside Toast.Root in tests.
  */
 function ToastHarness({ children }: { children: ReactNode }) {

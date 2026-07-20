@@ -17,7 +17,7 @@ interface DescribeSlotsOptions {
 }
 
 /**
- * Generates standard tests for a bare-ui component's parts:
+ * Generates standard tests for a ui component's parts:
  * - data-slot attribute presence
  * - className merge into slot
  * - Context error when rendered outside wrapper (multi-part only)

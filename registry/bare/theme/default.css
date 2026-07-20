@@ -1,15 +1,15 @@
 /**
- * bare-ui default theme — the token contract, Radix Colors style.
+ * ui default theme — the token contract, Radix Colors style.
  *
  * This is the *tokens* layer (values), kept separate from the *styles* layer
  * (each component's empty `styles.ts` slots). Components only ever reference
  * these token names, so the whole app re-themes by swapping the values below.
  *
- * Install: `shadcn add ng-hai/bare-ui/theme` (lands at styles/bare-ui-theme.css),
+ * Install: `shadcn add ng-hai/ui/theme` (lands at styles/ui-theme.css),
  * then import it AFTER Tailwind in your global stylesheet:
  *
  *   @import "tailwindcss";
- *   @import "./styles/bare-ui-theme.css";
+ *   @import "./styles/ui-theme.css";
  *
  * Two tiers of 12-step scales. BASE — `gray` (neutral chrome) + `accent` (brand);
  * always used. STATUS — `danger` / `warning` / `success` / `info`; a feedback
@@ -30,7 +30,7 @@
  * tint over imagery, `*-surface` for translucent panels, `overlay` for scrims.
  *
  * This default is intentionally neutral (hueless gray chrome + a dark gray accent). Replace the values with
- * your brand via `shadcn add ng-hai/bare-ui/theme-generator` — keep the token
+ * your brand via `shadcn add ng-hai/ui/theme-generator` — keep the token
  * *names* (the contract) stable so components never need to change. Mode is
  * toggled by adding/removing `.dark` on <html> (see the `theme-mode` lib).
  */
