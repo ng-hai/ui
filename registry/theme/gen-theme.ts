@@ -43,9 +43,14 @@
  * string matching a pool key is an alias; anything else must parse as a CSS
  * color. Roles express meaning and are NOT swappable via data-accent-color —
  * if you want a role's hue as a swappable identity too, put it in the pool and
- * alias it. Defaults (private seeds, each ≈ the named Radix step 9):
- * danger=red, warning=amber, success=green, info=blue. Your `semantics` merges
- * over them per key; custom roles (e.g. `premium: "jade"`) are allowed.
+ * alias it. Roles are OPT-IN: a theme without `semantics` generates the accent
+ * pool only — no status scales. danger / warning / success / info are the
+ * contract's conventional status roles (good seeds ≈ the named Radix step 9:
+ * red #e5484d, amber #ffc53d, green #30a46c, blue #0090ff); custom roles
+ * (e.g. `premium: "jade"`) are allowed. Note the standalone per-theme CSS then
+ * contains only what you declared — if your components use `text-danger-11`,
+ * declare `danger`. Under tenants.css an undeclared role simply falls through
+ * to the neutral default.css values it layers over.
  *
  * Radix's seed model applies per scale — every seed is either a `string` (same
  * in both modes) or `{ light, dark }` (https://www.radix-ui.com/colors/custom):
@@ -99,9 +104,10 @@ export type ThemeConfig = {
   /** Pool of named identity scales. FIRST key = the default accent (--accent-*). */
   accents: Record<string, Seed>;
   /**
-   * Role → `accents` key (alias) | color seed (private scale). Merges over the
-   * defaults (danger / warning / success / info). A pool key wins over a
-   * same-named CSS color; custom roles are allowed.
+   * Role → `accents` key (alias) | color seed (private scale). Opt-in — omit
+   * it and no role scales are generated. Conventional names: danger / warning
+   * / success / info. A pool key wins over a same-named CSS color; custom
+   * roles are allowed.
    */
   semantics?: Record<string, string | Seed>;
   gray?: Seed; // neutral seed — defaults to the Radix gray paired to the default accent
@@ -122,16 +128,11 @@ export function defineTheme<const A extends Record<string, Seed>>(config: {
   return config;
 }
 
-// Radix-aligned defaults for the semantic roles (each ≈ the named Radix step 9).
-// Private scales unless you alias them — generated exactly like a pool entry
-// (one generateRadixColors run per hue, shared gray + background) so the "bare"
-// default carries a sane feedback palette out of the box.
-const DEFAULT_SEMANTICS: Record<string, Seed> = {
-  danger: "#e5484d", // Radix red 9
-  warning: "#ffc53d", // Radix amber 9 (algorithm auto-picks dark contrast text)
-  success: "#30a46c", // Radix green 9
-  info: "#0090ff", // Radix blue 9
-};
+// Status roles the neutral default.css defines and registers utilities for.
+// The generator does NOT seed them by itself — semantics are opt-in — but
+// tenants.css layers over default.css, so its delta @theme inline must not
+// re-register these names.
+const CONTRACT_ROLES = ["danger", "warning", "success", "info"];
 
 // ──────────────────────────────────────────────────────────────────────────
 // YOUR THEMES — fill this in. One entry per brand.
@@ -143,8 +144,10 @@ const THEMES: ThemeConfig[] = [
     // each swappable per subtree via data-accent-color="<key>", e.g.:
     //   accents: { blue: "#2563eb", jade: "#29a383", purple: { light: "#8e4ec6", dark: "#9a5cd0" } },
     accents: { blue: "#2563eb" },
-    // Semantic roles: alias a pool key (zero extra scales) or seed a private one:
-    //   semantics: { info: "blue", danger: "#dc2626", premium: "jade" },
+    // Semantic roles are opt-in — omit `semantics` and none are generated.
+    // Alias a pool key (zero extra scales) or seed a private one; the Radix
+    // step-9 seeds make good starting points:
+    //   semantics: { info: "blue", danger: "#e5484d", warning: "#ffc53d", success: "#30a46c" },
   }),
 ];
 
@@ -178,7 +181,7 @@ type Roles = {
 function resolveRoles(cfg: ThemeConfig): Roles {
   const aliased = new Map<string, string>();
   const seeded = new Map<string, Seed>();
-  for (const [role, value] of Object.entries({ ...DEFAULT_SEMANTICS, ...cfg.semantics })) {
+  for (const [role, value] of Object.entries(cfg.semantics ?? {})) {
     if (typeof value === "string" && value in cfg.accents) {
       aliased.set(role, value); // a pool key wins over a same-named CSS color
       continue;
@@ -203,7 +206,7 @@ function validate(cfg: ThemeConfig): void {
   if (poolNames.length === 0) {
     throw new Error(`theme "${cfg.name}": accents needs at least one entry — the first key is the default accent`);
   }
-  const roleNames = Object.keys({ ...DEFAULT_SEMANTICS, ...cfg.semantics });
+  const roleNames = Object.keys(cfg.semantics ?? {});
   for (const n of [...poolNames, ...roleNames]) {
     if (!NAME_RE.test(n)) {
       throw new Error(`theme "${cfg.name}": "${n}" must be lowercase kebab-case (it becomes --${n}-* / bg-${n}-9)`);
@@ -490,7 +493,7 @@ export function renderTenantsCss(builtAll: BuiltTheme[]): string {
     })
     .join("\n\n");
 
-  const contractRoles = new Set(["accent", ...Object.keys(DEFAULT_SEMANTICS)]);
+  const contractRoles = new Set(["accent", ...CONTRACT_ROLES]);
   const extraNames = [
     ...new Set(
       builtAll.flatMap((b) => [

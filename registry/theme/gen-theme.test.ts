@@ -28,11 +28,17 @@ describe("buildTheme", () => {
     expect(built.valueNames).not.toContain("danger-1");
   });
 
-  it("keeps non-aliased default roles as private scales", () => {
+  it("generates no scales for undeclared roles (semantics are opt-in)", () => {
     for (const role of ["warning", "success", "info"]) {
-      expect(built.seededRoles).toContain(role);
-      expect(built.valueNames).toContain(`${role}-1`);
+      expect(built.seededRoles).not.toContain(role);
+      expect(built.valueNames).not.toContain(`${role}-1`);
     }
+  });
+
+  it("generates nothing but the pool when semantics is omitted", () => {
+    const t = buildTheme(defineTheme({ name: "t", accents: { blue: "#2563eb" } }));
+    expect(t.seededRoles).toEqual([]);
+    expect([...t.aliases.keys()]).toEqual(["accent"]);
   });
 
   it("generates custom seeded roles as private scales", () => {
@@ -70,7 +76,9 @@ describe("validation", () => {
   });
 
   it("rejects a pool key that collides with a semantic role", () => {
-    expect(() => buildTheme({ name: "t", accents: { danger: "#e5484d" } })).toThrow(/both an accents key and a semantic role/);
+    expect(() =>
+      buildTheme({ name: "t", accents: { danger: "#e5484d" }, semantics: { danger: "#dc2626" } }),
+    ).toThrow(/both an accents key and a semantic role/);
   });
 
   it("rejects a semantics value that is neither a pool key nor a color", () => {
