@@ -32,6 +32,11 @@
  *
  * Only `accents` keys are valid attribute values; an unknown name is your bug.
  *
+ * Every theme also carries the contract's fixed `--black-a1..12` /
+ * `--white-a1..12` ramps (Radix blackA/whiteA) — mode-independent tints for
+ * imagery, scrims, and text/icons on colored solids. `black` and `white` are
+ * therefore reserved names.
+ *
  * `semantics` maps role names to either an `accents` KEY (alias — the role's
  * tokens become pointers to that pool scale; zero extra generation) or a color
  * seed (a private scale — values only: no swap block, no named utilities). A
@@ -163,7 +168,7 @@ const SCALE_SUFFIXES = [
 // Pool / role names become CSS vars (--<name>-9) and Tailwind utilities
 // (bg-<name>-9), so keep them kebab-safe and away from the contract's own names.
 const NAME_RE = /^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/;
-const RESERVED = new Set(["gray", "accent", "background", "overlay", "radius"]);
+const RESERVED = new Set(["gray", "accent", "background", "overlay", "radius", "black", "white"]);
 
 type Roles = {
   aliased: Map<string, string>; // role -> pool name
@@ -351,6 +356,20 @@ function oklch(input: string): string {
   return `oklch(${L} ${C} ${H}${alpha})`;
 }
 
+// Radix's fixed black/white alpha ramps (@radix-ui/colors blackA / whiteA).
+// Mode-independent constants — declared once in :root, never per mode; tenants.css
+// skips them entirely (they come from the neutral default.css it layers over).
+const BW_SCALES = ["black", "white"] as const;
+const bwNames = BW_SCALES.flatMap((n) => Array.from({ length: 12 }, (_, i) => `${n}-a${i + 1}`));
+function bwDeclarations(indent = "  "): string {
+  return BW_SCALES.map((name) => {
+    const ramp = (RadixColors as unknown as Record<string, Record<string, string>>)[`${name}A`];
+    return Object.values(ramp)
+      .map((v, i) => `${indent}--${name}-a${i + 1}: ${oklch(v)};`)
+      .join("\n");
+  }).join("\n\n");
+}
+
 // ── CSS rendering ────────────────────────────────────────────────────────────
 function declarations(built: BuiltTheme, mode: Appearance, indent = "  "): string {
   const tokens = built[mode];
@@ -398,6 +417,7 @@ function themeInline(built: BuiltTheme): string {
   const names = [
     ...built.valueNames.filter((n) => n !== "background" && n !== "overlay"),
     ...[...built.aliases.keys()].flatMap((role) => SCALE_SUFFIXES.map((s) => `${role}-${s}`)),
+    ...bwNames,
     "background",
     "overlay",
   ];
@@ -428,6 +448,9 @@ export function renderCss(built: BuiltTheme, header?: string): string {
 :root {
   color-scheme: light;
 ${declarations(built, "light")}
+
+  /* black/white alpha ramps — Radix blackA/whiteA, mode-independent */
+${bwDeclarations()}
 
   --radius: 0.625rem;
 

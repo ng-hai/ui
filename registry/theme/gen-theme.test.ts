@@ -132,6 +132,34 @@ describe("renderCss", () => {
   });
 });
 
+describe("black/white alpha ramps", () => {
+  it("emits the fixed ramps once in :root, not per mode", () => {
+    const root = block(css, ":root");
+    expect(root).toContain("--black-a1: oklch(0 0 0 / 0.05);");
+    expect(root).toContain("--white-a12: oklch(1 0 0 / 0.95);");
+    expect(block(css, ".dark")).not.toContain("--black-a");
+    expect(block(css, ".dark")).not.toContain("--white-a");
+  });
+
+  it("registers black/white utilities in @theme inline", () => {
+    const theme = block(css, "@theme inline");
+    expect(theme).toContain("--color-black-a6: var(--black-a6);");
+    expect(theme).toContain("--color-white-a6: var(--white-a6);");
+  });
+
+  it("leaves them out of tenants.css (they come from the neutral default.css)", () => {
+    expect(tenants).not.toContain("--black-a");
+    expect(tenants).not.toContain("--white-a");
+  });
+
+  it("reserves black/white as pool and role names", () => {
+    expect(() => buildTheme({ name: "t", accents: { black: "#000000" } })).toThrow(/reserved/);
+    expect(() =>
+      buildTheme({ name: "t", accents: { blue: "#2563eb" }, semantics: { white: "#ffffff" } }),
+    ).toThrow(/reserved/);
+  });
+});
+
 describe("renderTenantsCss", () => {
   it("scopes values + pointers per tenant, dark values separately", () => {
     const base = block(tenants, ':root[data-tenant="acme"]');

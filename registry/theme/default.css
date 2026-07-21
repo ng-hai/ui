@@ -28,6 +28,9 @@
  * soft button `bg-accent-3 text-accent-11 hover:bg-accent-4`; an outline
  * `border border-gray-7 text-gray-12 hover:bg-gray-3`. Use `*-a*` alpha steps to
  * tint over imagery, `*-surface` for translucent panels, `overlay` for scrims.
+ * Fixed `black`/`white` alpha ramps (Radix blackA/whiteA — `bg-black-a6`,
+ * `text-white-a11`) are mode-independent: tints and scrims that must NOT flip
+ * with `.dark`, e.g. text/icons over a colored solid or a photo.
  *
  * This default is intentionally neutral (hueless gray chrome + a dark gray accent). Replace the values with
  * your brand via `shadcn add ng-hai/ui/theme-generator` — keep the token
@@ -202,6 +205,33 @@
   --background: oklch(1 0 0);
 
   --overlay: oklch(0 0 0 / 0.4);
+
+  /* black/white alpha ramps — Radix blackA/whiteA, mode-independent */
+  --black-a1: oklch(0 0 0 / 0.05);
+  --black-a2: oklch(0 0 0 / 0.1);
+  --black-a3: oklch(0 0 0 / 0.15);
+  --black-a4: oklch(0 0 0 / 0.2);
+  --black-a5: oklch(0 0 0 / 0.3);
+  --black-a6: oklch(0 0 0 / 0.4);
+  --black-a7: oklch(0 0 0 / 0.5);
+  --black-a8: oklch(0 0 0 / 0.6);
+  --black-a9: oklch(0 0 0 / 0.7);
+  --black-a10: oklch(0 0 0 / 0.8);
+  --black-a11: oklch(0 0 0 / 0.9);
+  --black-a12: oklch(0 0 0 / 0.95);
+
+  --white-a1: oklch(1 0 0 / 0.05);
+  --white-a2: oklch(1 0 0 / 0.1);
+  --white-a3: oklch(1 0 0 / 0.15);
+  --white-a4: oklch(1 0 0 / 0.2);
+  --white-a5: oklch(1 0 0 / 0.3);
+  --white-a6: oklch(1 0 0 / 0.4);
+  --white-a7: oklch(1 0 0 / 0.5);
+  --white-a8: oklch(1 0 0 / 0.6);
+  --white-a9: oklch(1 0 0 / 0.7);
+  --white-a10: oklch(1 0 0 / 0.8);
+  --white-a11: oklch(1 0 0 / 0.9);
+  --white-a12: oklch(1 0 0 / 0.95);
 
   --radius: 0.625rem;
 }
@@ -530,6 +560,30 @@
   --color-info-a12: var(--info-a12);
   --color-info-contrast: var(--info-contrast);
   --color-info-surface: var(--info-surface);
+  --color-black-a1: var(--black-a1);
+  --color-black-a2: var(--black-a2);
+  --color-black-a3: var(--black-a3);
+  --color-black-a4: var(--black-a4);
+  --color-black-a5: var(--black-a5);
+  --color-black-a6: var(--black-a6);
+  --color-black-a7: var(--black-a7);
+  --color-black-a8: var(--black-a8);
+  --color-black-a9: var(--black-a9);
+  --color-black-a10: var(--black-a10);
+  --color-black-a11: var(--black-a11);
+  --color-black-a12: var(--black-a12);
+  --color-white-a1: var(--white-a1);
+  --color-white-a2: var(--white-a2);
+  --color-white-a3: var(--white-a3);
+  --color-white-a4: var(--white-a4);
+  --color-white-a5: var(--white-a5);
+  --color-white-a6: var(--white-a6);
+  --color-white-a7: var(--white-a7);
+  --color-white-a8: var(--white-a8);
+  --color-white-a9: var(--white-a9);
+  --color-white-a10: var(--white-a10);
+  --color-white-a11: var(--white-a11);
+  --color-white-a12: var(--white-a12);
   --color-background: var(--background);
   --color-overlay: var(--overlay);
 
