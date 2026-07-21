@@ -945,6 +945,22 @@
         { "path": "registry/ui/sidebar/index.parts.ts", "type": "registry:ui" },
         { "path": "registry/ui/sidebar/index.ts", "type": "registry:ui" }
       ]
+    },
+    {
+      "name": "panel",
+      "type": "registry:ui",
+      "title": "Panel",
+      "description": "Unstyled panel surface with inset well sections",
+      "docs": "Well corners are meant to nest concentrically inside Root. Suggested starting point in styles.ts — root: [--panel-radius:1rem] [--panel-padding:0.25rem] rounded-(--panel-radius) p-(--panel-padding), well: rounded-[calc(var(--panel-radius)-var(--panel-padding))].",
+      "categories": ["display"],
+      "registryDependencies": ["ng-hai/ui/create-style-context", "ng-hai/ui/split-variant-props", "ng-hai/ui/tv-config"],
+      "files": [
+        { "path": "registry/ui/panel/panel-root.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/panel/panel-well.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/panel/styles.ts", "type": "registry:ui" },
+        { "path": "registry/ui/panel/index.parts.ts", "type": "registry:ui" },
+        { "path": "registry/ui/panel/index.ts", "type": "registry:ui" }
+      ]
     }
   ]
 }
