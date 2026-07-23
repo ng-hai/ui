@@ -171,7 +171,7 @@ const SCALE_SUFFIXES = [
 // Pool / role names become CSS vars (--<name>-9) and Tailwind utilities
 // (bg-<name>-9), so keep them kebab-safe and away from the contract's own names.
 const NAME_RE = /^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/;
-const RESERVED = new Set(["gray", "accent", "background", "overlay", "radius", "black", "white"]);
+const RESERVED = new Set(["gray", "accent", "background", "radius", "black", "white"]);
 
 type Roles = {
   aliased: Map<string, string>; // role -> pool name
@@ -321,9 +321,8 @@ function buildModeTokens(cfg: ThemeConfig, roles: Roles, appearance: Appearance)
   for (const n of poolNames.slice(1)) emit(n, run(pick(cfg.accents[n], appearance)));
   // private (seeded) roles — same machine.
   for (const [role, seed] of roles.seeded) emit(role, run(pick(seed, appearance)));
-  // App-level specials.
+  // App-level special.
   t.set("background", main.background);
-  t.set("overlay", appearance === "light" ? "#00000066" : "#00000099");
   return t;
 }
 
@@ -418,11 +417,10 @@ function swapBlocks(built: BuiltTheme, scope?: string): string {
 
 function themeInline(built: BuiltTheme): string {
   const names = [
-    ...built.valueNames.filter((n) => n !== "background" && n !== "overlay"),
+    ...built.valueNames.filter((n) => n !== "background"),
     ...[...built.aliases.keys()].flatMap((role) => SCALE_SUFFIXES.map((s) => `${role}-${s}`)),
     ...bwNames,
     "background",
-    "overlay",
   ];
   return names.map((name) => `  --color-${name}: var(--${name});`).join("\n");
 }

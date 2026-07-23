@@ -27,10 +27,10 @@
  * So a solid button is `bg-accent-9 text-accent-contrast hover:bg-accent-10`; a
  * soft button `bg-accent-3 text-accent-11 hover:bg-accent-4`; an outline
  * `border border-gray-7 text-gray-12 hover:bg-gray-3`. Use `*-a*` alpha steps to
- * tint over imagery, `*-surface` for translucent panels, `overlay` for scrims.
- * Fixed `black`/`white` alpha ramps (Radix blackA/whiteA — `bg-black-a6`,
- * `text-white-a11`) are mode-independent: tints and scrims that must NOT flip
- * with `.dark`, e.g. text/icons over a colored solid or a photo.
+ * tint over imagery and `*-surface` for translucent panels. Fixed `black`/`white`
+ * alpha ramps (Radix blackA/whiteA — `bg-black-a6`, `text-white-a11`) are
+ * mode-independent: scrims and tints that must NOT flip with `.dark`, e.g. a
+ * dialog backdrop, or text/icons over a colored solid or a photo.
  *
  * This default is intentionally neutral (hueless gray chrome + a dark gray accent). Replace the values with
  * your brand via `shadcn add ng-hai/ui/theme-generator` — keep the token
@@ -203,8 +203,6 @@
   --info-surface: oklch(0.9778 0.0117 239.9 / 0.8);
 
   --background: oklch(1 0 0);
-
-  --overlay: oklch(0 0 0 / 0.4);
 
   /* black/white alpha ramps — Radix blackA/whiteA, mode-independent */
   --black-a1: oklch(0 0 0 / 0.05);
@@ -400,8 +398,6 @@
   --info-surface: oklch(0.246 0.0566 255.05 / 0.502);
 
   --background: oklch(0.1776 0 0);
-
-  --overlay: oklch(0 0 0 / 0.6);
 }
 
 @theme inline {
@@ -585,7 +581,6 @@
   --color-white-a11: var(--white-a11);
   --color-white-a12: var(--white-a12);
   --color-background: var(--background);
-  --color-overlay: var(--overlay);
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);

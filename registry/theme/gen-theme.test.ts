@@ -160,6 +160,12 @@ describe("black/white alpha ramps", () => {
     expect(tenants).not.toContain("--white-a");
   });
 
+  it("ships no --overlay token (scrims use the black ramp directly)", () => {
+    expect(built.valueNames).not.toContain("overlay");
+    expect(css).not.toContain("--overlay");
+    expect(tenants).not.toContain("--overlay");
+  });
+
   it("reserves black/white as pool and role names", () => {
     expect(() => buildTheme({ name: "t", accents: { black: "#000000" } })).toThrow(/reserved/);
     expect(() =>
