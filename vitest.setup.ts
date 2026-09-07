@@ -1,8 +1,9 @@
 import "@testing-library/jest-dom/vitest";
+import { cleanup } from "@testing-library/react";
 import { afterEach } from "vitest";
 
-// Flush pending React scheduler work before jsdom environment tears down.
-// React 19 schedules async microtasks that reference `window`; without this
-// tick they fire after jsdom cleanup and produce spurious "window is not
-// defined" unhandled errors.
-afterEach(() => new Promise((resolve) => setTimeout(resolve, 0)));
+// `globals` is off, so Testing Library cannot register its own afterEach.
+// Unmount every tree ourselves; otherwise the last render in a file (often
+// an open Dialog/Drawer popup) outlives the jsdom environment and its
+// scheduled React work throws "window is not defined".
+afterEach(cleanup);

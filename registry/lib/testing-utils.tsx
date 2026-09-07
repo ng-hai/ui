@@ -47,7 +47,6 @@ export function describeSlots(
       }
 
       it(`renders with data-slot="${config.slot}"`, () => {
-        cleanup();
         const ui = <Part />;
         render(wrapper ? (wrapper(ui) as any) : ui);
         const el = document.querySelector(`[data-slot="${config.slot}"]`);
@@ -55,7 +54,6 @@ export function describeSlots(
       });
 
       it("merges className into slot", () => {
-        cleanup();
         const ui = <Part className="__test-class__" />;
         render(wrapper ? (wrapper(ui) as any) : ui);
         const el = document.querySelector(`[data-slot="${config.slot}"]`);
