@@ -193,7 +193,7 @@ Semantic roles stay meaning, not identity: `semantics: { danger: "red", premium:
 
 ### Gray as accent (neutral buttons)
 
-**Buttons are gray by default.** `Button.Root` sets `data-accent-color="gray"` before spreading props, so a bare button renders as the high-contrast neutral. Pass `data-accent-color="<pool key>"` to opt a button into the brand or any pool hue — the consumer's value wins.
+**Buttons inherit the hue.** `Button.Root` pins no accent: inside a subtree that sets `data-accent-color` it takes that hue, like any other accent-built slot, so an action button inside a red alert reads red. Pass `data-accent-color="gray"` at the call site for a neutral button — the high-contrast neutral below — and a pool key to opt into the brand or any other hue.
 
 `data-accent-color="gray"` is **always available** — `default.css` and every generated theme ship Radix Themes' gray remap (`accent-*` tokens → the theme's `gray-*` ramp; `"gray"` is reserved as a pool key). It neutralizes any accent-built slot per subtree or per element. Gray-9 solids are deliberately muted (below AA in light mode), so the swap block bakes in Radix's high-contrast treatment: `accent-9` → `gray-12`, `accent-10` → `--gray-12-hover`, `accent-contrast` → `gray-1` (alphas and all other steps stay 1:1). A solid built from `bg-accent-9 text-accent-contrast hover:bg-accent-10` therefore renders as a near-black (light) / near-white (dark) neutral at ~16:1 with no extra classes:
 

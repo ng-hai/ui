@@ -10,12 +10,12 @@ describe("Button", () => {
 });
 
 describe("Button accent", () => {
-  it("defaults to the gray accent", () => {
+  it("pins no accent, so the button inherits its subtree's hue", () => {
     const { container } = render(<Button.Root>Save</Button.Root>);
-    expect(container.querySelector("button")).toHaveAttribute("data-accent-color", "gray");
+    expect(container.querySelector("button")).not.toHaveAttribute("data-accent-color");
   });
 
-  it("lets a consumer's data-accent-color override the default", () => {
+  it("forwards a consumer's data-accent-color", () => {
     const { container } = render(<Button.Root data-accent-color="jade">Upgrade</Button.Root>);
     expect(container.querySelector("button")).toHaveAttribute("data-accent-color", "jade");
   });
