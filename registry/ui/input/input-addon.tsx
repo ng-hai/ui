@@ -1,4 +1,5 @@
 import type { ComponentProps } from "react";
+import { useInputGroupStyles } from "./input-group";
 import { inputStyles } from "./styles";
 
 interface InputAddonProps extends ComponentProps<"span"> {
@@ -11,6 +12,6 @@ interface InputAddonProps extends ComponentProps<"span"> {
  * addons focus the input while interactive children remain clickable.
  */
 export function InputAddon({ className, ...props }: InputAddonProps) {
-  const styles = inputStyles();
+  const styles = useInputGroupStyles() ?? inputStyles();
   return <span {...props} className={styles.addon({ class: className })} data-slot="input-addon" />;
 }
