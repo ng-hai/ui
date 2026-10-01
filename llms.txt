@@ -2,7 +2,7 @@
 
 > A shadcn GitHub registry of unstyled React components built on @base-ui/react. Install with `pnpm dlx shadcn@latest add ng-hai/ui/<name>` — the CLI reads registry.json and the source files straight from this repo's `main` branch; there is no hosted JSON, no npm package, and no version tags. Pin installs with `#<full-commit-sha>`; refs are not inherited by dependencies, so pin those explicitly too.
 
-Components are unstyled: behavior and ARIA come from Base UI, styling is left to the consumer via empty tailwind-variants slots in each component's `styles.ts`. Every rendered part sets a `data-slot` attribute for CSS hooks. Shared libs (`tv-config`, `split-variant-props`, `create-style-context`) are pulled in automatically as registry dependencies. The `theme` preset is optional and never a dependency.
+Components are unstyled: behavior and ARIA come from Base UI, styling is left to the consumer via empty tailwind-variants slots in each component's `styles.ts`. Every rendered part sets a `data-slot` attribute for CSS hooks. Shared libs (`tv-config`, `split-variant-props`, `create-style-context`) are pulled in automatically as registry dependencies. Components reference no theme tokens and work with any token system (shadcn vars, your own `@theme`, Radix); the `theme` preset is an optional Radix-style adapter and never a dependency.
 
 ## Docs
 
@@ -18,5 +18,5 @@ accordion, alert, alert-dialog, autocomplete, avatar, button, checkbox, checkbox
 
 ## Optional
 
-- theme (registry:file): Radix-style 12-step token contract + Tailwind `@theme` wiring, installed to `styles/ui-theme.css`
-- theme-generator (registry:file): CLI that generates the token CSS for a custom brand palette, installed to `scripts/`
+- theme (registry:file): optional Radix-style adapter — 12-step token contract + Tailwind `@theme` wiring, installed to `styles/ui-theme.css`
+- theme-generator (registry:file): adapter tooling — CLI that generates the token CSS for a custom brand palette, installed to `scripts/`

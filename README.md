@@ -16,7 +16,7 @@ The first two path segments (`ng-hai/ui`) are the GitHub owner and repo; the res
 
 > Use `shadcn@latest`; older CLIs do not understand the `owner/repo/item` form.
 
-Available components: `accordion`, `alert`, `alert-dialog`, `autocomplete`, `avatar`, `button`, `checkbox`, `checkbox-group`, `collapsible`, `combobox`, `context-menu`, `dialog`, `drawer`, `field`, `fieldset`, `form`, `input`, `menu`, `menubar`, `meter`, `navigation-menu`, `number-field`, `otp-field`, `panel`, `popover`, `preview-card`, `progress`, `radio`, `scroll-area`, `select`, `separator`, `sidebar`, `slider`, `switch`, `table`, `tabs`, `toast`, `toggle`, `toggle-group`, `toolbar`, `tooltip`. The shared libs each component needs (`tv-config`, `split-variant-props`, `create-style-context`) are pulled in automatically as dependencies. The `theme` preset is **not** a dependency — components ship unstyled and reference no tokens. It's an *optional* starting palette (a Radix-style token contract + the Tailwind `@theme` wiring our styling examples use); install it with `shadcn add ng-hai/ui/theme`, or skip it and style the components with your own tokens.
+Available components: `accordion`, `alert`, `alert-dialog`, `autocomplete`, `avatar`, `button`, `checkbox`, `checkbox-group`, `collapsible`, `combobox`, `context-menu`, `dialog`, `drawer`, `field`, `fieldset`, `form`, `input`, `menu`, `menubar`, `meter`, `navigation-menu`, `number-field`, `otp-field`, `panel`, `popover`, `preview-card`, `progress`, `radio`, `scroll-area`, `select`, `separator`, `sidebar`, `slider`, `switch`, `table`, `tabs`, `toast`, `toggle`, `toggle-group`, `toolbar`, `tooltip`. The shared libs each component needs (`tv-config`, `split-variant-props`, `create-style-context`) are pulled in automatically as dependencies. The `theme` preset is **not** a dependency — components ship unstyled and reference no tokens. It's an *optional* Radix-style reference adapter (a 12-step token contract + the Tailwind `@theme` wiring our styling examples use) — components work with any token system; install it with `shadcn add ng-hai/ui/theme`, or skip it and style the components with your own tokens.
 
 ### Pin to a specific version (optional)
 
@@ -80,11 +80,11 @@ import { Select } from "@/components/ui/select";
 </Select.Root>;
 ```
 
-Out of the box every component renders with no classes. Styling happens in one place: the component's own `styles.ts`.
+Out of the box every component renders with no classes. Styling happens in one place: the component's own `styles.ts`, filled with whatever tokens your project already has — shadcn vars, your own `@theme`, anything. Components reference no theme tokens.
 
 ## Styling
 
-Each installed component folder contains a `styles.ts` file with a `tv({ slots, variants })` call. Fill in the slot arrays and add variants:
+Each installed component folder contains a `styles.ts` file with a `tv({ slots, variants })` call. Fill in the slot arrays and add variants (the examples below use the optional Radix-style adapter's tokens; swap in yours, e.g. `bg-primary text-primary-foreground`):
 
 ```ts
 // components/ui/button/styles.ts

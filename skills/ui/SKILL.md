@@ -5,7 +5,12 @@ description: "Use when installing, styling, or extending ui components. Triggers
 
 # ui
 
-ui is an unstyled component registry built on [@base-ui/react](https://base-ui.com). It is a [shadcn GitHub registry](https://ui.shadcn.com/docs/registry/github): install components with `shadcn add ng-hai/ui/<name>` (no `components.json` setup or namespace needed) and they are copied into your project under `components/ui/<name>/`. There is no npm package — you own the code. Styles are intentionally empty; you fill them in with Tailwind classes.
+ui is an unstyled component registry built on [@base-ui/react](https://base-ui.com). It is a [shadcn GitHub registry](https://ui.shadcn.com/docs/registry/github): install components with `shadcn add ng-hai/ui/<name>` (no `components.json` setup or namespace needed) and they are copied into your project under `components/ui/<name>/`. There is no npm package — you own the code. Styles are intentionally empty; you fill them in with Tailwind classes from **your own theme** — ui does not require any token system.
+
+Two contracts meet only in `styles.ts` (and CSS via `[data-slot]` + Base UI state attributes like `data-open`, `data-disabled`, `data-highlighted`):
+
+- **Component contract** (registry-owned, stable): slot names, variant keys, `data-slot`, state attributes, the `styles` prop. It references no theme tokens.
+- **Theme** (yours): shadcn vars, your own `@theme`, Radix, anything. The registry's `theme` / `theme-generator` items are an optional Radix-style reference adapter — see [Radix adapter](#radix-adapter-optional).
 
 ## Component anatomy
 
@@ -69,7 +74,11 @@ import { Select } from "@/components/ui/select";
 
 ## How to style components
 
-### Fill in slot arrays
+### Step 1 — detect the project's existing tokens
+
+Before writing any class, find what the project already defines: `globals.css` / `@theme`, shadcn vars (`--primary`, `--border`, …), a Tailwind config, or `styles/ui-theme.css`. Fill slots with **those** tokens. Use the [Radix adapter](#radix-adapter-optional) only when it is already installed, or the project has no tokens and the user opts in. A class naming a token that does not exist compiles to nothing, silently — grep the theme for every token you use.
+
+### Step 2 — fill in slot arrays
 
 Open `styles.ts` and add Tailwind classes to the slot arrays. Each slot maps to a component part — `root` styles the `<Name>.Root`, `trigger` styles `<Name>.Trigger`, etc.
 
@@ -85,7 +94,35 @@ export const buttonStyles = tv({
 });
 ```
 
-**After (styled with variants):**
+**After, with shadcn tokens:**
+
+```ts
+import { tv } from "@/lib/tv-config";
+
+export const buttonStyles = tv({
+  slots: {
+    root: [
+      "inline-flex items-center justify-center gap-2 rounded-md font-medium",
+      "transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
+      "disabled:pointer-events-none disabled:opacity-50",
+    ],
+  },
+  variants: {
+    variant: {
+      solid: { root: "bg-primary text-primary-foreground hover:bg-primary/90" },
+      outline: { root: "border border-input hover:bg-accent" },
+      destructive: { root: "bg-destructive text-white hover:bg-destructive/90" },
+    },
+    size: {
+      sm: { root: "h-8 px-3 text-xs" },
+      md: { root: "h-10 px-4 text-sm" },
+    },
+  },
+  defaultVariants: { variant: "solid", size: "md" },
+});
+```
+
+**After, with the Radix adapter tokens:**
 
 ```ts
 import { tv } from "@/lib/tv-config";
@@ -118,8 +155,6 @@ export const buttonStyles = tv({
 });
 ```
 
-Focus rings use `outline-focus-8` — `--focus-8` follows the accent and is re-pointed by pool swap blocks, but deliberately **not** by the gray swap, so neutralized subtrees keep the brand focus ring (Radix Themes' exception).
-
 ### Add variants
 
 Add a `variants` block and `defaultVariants` to the `tv()` call. `createPropSplitter` in the root component discovers new variant keys at runtime — no changes to `.tsx` files needed. Variant props become available on the root component automatically. Use `VariantProps<typeof componentStyles>` from `@/lib/tv-config` to type variant props in root components:
@@ -130,7 +165,7 @@ Add a `variants` block and `defaultVariants` to the `tv()` call. `createPropSpli
 
 #### Combobox: `trigger` mode
 
-`Combobox.Trigger` plays two roles in Base UI: an **icon** button next to `Combobox.Input` (inside `Combobox.InputGroup`), or a select-like **field** wrapping `Combobox.Value` when the input lives in the popup. Both render the same `trigger` slot, so the registry ships a `trigger` root variant (`"icon"` default, `"field"`) with empty classes. Fill in each mode in `styles.ts` and pick it on the root:
+`Combobox.Trigger` plays two roles in Base UI: an **icon** button next to `Combobox.Input` (inside `Combobox.InputGroup`), or a select-like **field** wrapping `Combobox.Value` when the input lives in the popup. Both render the same `trigger` slot, so the registry ships a `trigger` root variant (`"icon"` default, `"field"`) with empty classes. Fill in each mode in `styles.ts` and pick it on the root (classes below are Radix adapter tokens — swap in your own):
 
 ```ts
 variants: {
@@ -150,6 +185,27 @@ variants: {
   <Combobox.Portal>…<Combobox.Input /> inside the popup…</Combobox.Portal>
 </Combobox.Root>
 ```
+
+### One-off overrides
+
+Use the `className` prop on any part. It merges with slot styles via `twMerge`:
+
+```tsx
+<Button.Root className="mt-4 w-full">Full width button</Button.Root>
+```
+
+### Preset injection
+
+Root components accept an optional `styles` prop to inject a pre-computed styles object, bypassing variant resolution:
+
+```tsx
+const precomputed = buttonStyles({ variant: "solid", size: "lg" });
+<Button.Root styles={precomputed}>Preset button</Button.Root>
+```
+
+## Radix adapter (optional)
+
+Everything in this section applies only when the Radix-style `theme` item is installed (`shadcn add ng-hai/ui/theme`). Components never depend on it; with any other token system, skip to [How to extend components](#how-to-extend-components).
 
 ### Design tokens — the Radix 12-step contract
 
@@ -180,6 +236,8 @@ muted:   "text-gray-11"
 
 The contract ships **neutral** (accent == a dark gray) via the `theme` preset (`shadcn add ng-hai/ui/theme`). To brand it, install `theme-generator`, drop your brand seeds into its `THEMES` config, and run it — it regenerates the whole contract (pinning step 9 of each scale to its seed) with a printed WCAG self-check. Keep the token *names* stable; only the values change.
 
+Focus rings use `outline-focus-8` — `--focus-8` follows the accent and is re-pointed by pool swap blocks, but deliberately **not** by the gray swap, so neutralized subtrees keep the brand focus ring (Radix Themes' exception).
+
 ### Multiple accents — `data-accent-color`
 
 Generated themes can carry an **accent pool**: the generator's `accents` map holds named scales (first key = the default `--accent-*`), each also emitted as `--<name>-*` tokens, `bg-<name>-9` utilities, and a `[data-accent-color="<name>"]` swap block. Setting that attribute on any element re-points every `accent-*` token (incl. `-contrast`) for its subtree — one slot fill in `accent-*` utilities yields every pool hue, no extra variants:
@@ -193,31 +251,14 @@ Semantic roles stay meaning, not identity: `semantics: { danger: "red", premium:
 
 ### Gray as accent (neutral buttons)
 
-**Buttons inherit the hue.** `Button.Root` pins no accent: inside a subtree that sets `data-accent-color` it takes that hue, like any other accent-built slot, so an action button inside a red alert reads red. Pass `data-accent-color="gray"` at the call site for a neutral button — the high-contrast neutral below — and a pool key to opt into the brand or any other hue.
+**Under the adapter, buttons inherit the hue.** `Button.Root` pins no accent: inside a subtree that sets `data-accent-color` it takes that hue, like any other accent-built slot, so an action button inside a red alert reads red. Pass `data-accent-color="gray"` at the call site for a neutral button — the high-contrast neutral below — and a pool key to opt into the brand or any other hue.
 
-`data-accent-color="gray"` is **always available** — `default.css` and every generated theme ship Radix Themes' gray remap (`accent-*` tokens → the theme's `gray-*` ramp; `"gray"` is reserved as a pool key). It neutralizes any accent-built slot per subtree or per element. Gray-9 solids are deliberately muted (below AA in light mode), so the swap block bakes in Radix's high-contrast treatment: `accent-9` → `gray-12`, `accent-10` → `--gray-12-hover`, `accent-contrast` → `gray-1` (alphas and all other steps stay 1:1). A solid built from `bg-accent-9 text-accent-contrast hover:bg-accent-10` therefore renders as a near-black (light) / near-white (dark) neutral at ~16:1 with no extra classes:
+`data-accent-color="gray"` is **always available** under the adapter — `default.css` and every generated theme ship Radix Themes' gray remap (`accent-*` tokens → the theme's `gray-*` ramp; `"gray"` is reserved as a pool key). It neutralizes any accent-built slot per subtree or per element. Gray-9 solids are deliberately muted (below AA in light mode), so the swap block bakes in Radix's high-contrast treatment: `accent-9` → `gray-12`, `accent-10` → `--gray-12-hover`, `accent-contrast` → `gray-1` (alphas and all other steps stay 1:1). A solid built from `bg-accent-9 text-accent-contrast hover:bg-accent-10` therefore renders as a near-black (light) / near-white (dark) neutral at ~16:1 with no extra classes:
 
 ```tsx
-<Button.Root variant="solid">Save</Button.Root>                            {/* gray by default: high-contrast neutral, 16:1 */}
+<Button.Root variant="solid" data-accent-color="gray">Save</Button.Root>  {/* high-contrast neutral, 16:1 */}
 <Button.Root variant="ghost">Cancel</Button.Root>                          {/* quiet gray chrome */}
 <Button.Root variant="solid" data-accent-color="jade">Upgrade</Button.Root> {/* opt into a pool hue — spend the brand sparingly */}
-```
-
-### One-off overrides
-
-Use the `className` prop on any part. It merges with slot styles via `twMerge`:
-
-```tsx
-<Button.Root className="mt-4 w-full">Full width button</Button.Root>
-```
-
-### Preset injection
-
-Root components accept an optional `styles` prop to inject a pre-computed styles object, bypassing variant resolution:
-
-```tsx
-const precomputed = buttonStyles({ variant: "solid", size: "lg" });
-<Button.Root styles={precomputed}>Preset button</Button.Root>
 ```
 
 ## How to extend components

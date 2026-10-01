@@ -14,7 +14,7 @@ This is a [GitHub registry](https://ui.shadcn.com/docs/registry/github): the `sh
 
 ## Presets and theme files
 
-Theme docs — how presets ship as `registry:file` items, the Radix 12-step token contract, and the `theme-generator` pipeline — live in `registry/theme/CLAUDE.md`, loaded automatically when working under `registry/theme/`.
+The theme is an **optional Radix-style reference adapter**, not part of the system: components reference no tokens and work with any theme (shadcn vars, a custom `@theme`, Radix). Theme docs — how presets ship as `registry:file` items, the Radix 12-step token contract, and the `theme-generator` pipeline — live in `registry/theme/CLAUDE.md`, loaded automatically when working under `registry/theme/`.
 
 ## Commands
 
@@ -57,6 +57,7 @@ Every component — including single-part ones like `button` and `input` — fol
 - **Every component goes through `createPropSplitter`.** Don't hand-pluck variant props — `variantKeys` comes from the TV config at runtime, so the splitter stays in sync when variants change.
 - **Every rendered primitive sets `data-slot="..."`** matching the component/part name (kebab-case). This is the consumer-visible styling hook.
 - **Multi-part components use `createStyleContext`, not prop drilling.** `checkbox-root.tsx` and `select-root.tsx` are the reference implementations; the root exports `useStyles` as `use<Name>Styles` for siblings.
+- **No theme tokens in component code.** No token utilities, CSS vars, or `data-accent-color` anywhere under `registry/ui/`, and no bare-class colors like `bg-primary` either. `registry/bare/token-free.test.ts` enforces only the Radix contract names (`accent-*`, `gray-*`, …) and `data-accent-color`; shadcn-style names are on you. Color defaults belong to the theme or the call site (e.g. `data-accent-color="gray"` on a neutral button), never to a component.
 - **Bare components must stay unstyled.** `styles.ts` slot arrays should be `[""]` or empty. Consumers fill them in after install.
 - **`styles` prop escape hatch.** Root accepts an optional `styles?: ReturnType<typeof componentStyles>` so consumers can inject a preset without recomputing variants — preserve this.
 - **No glyphs in component code.** Parts that take an icon (`Select.Icon`, `Dialog.Close`, `Checkbox.Indicator`) pass `children` straight through to the primitive and ship no default SVG, and `registry.json` declares no icon library. The icon set is the consumer's choice, so don't hardcode inline SVGs in `.tsx` files.
