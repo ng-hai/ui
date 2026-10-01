@@ -3,16 +3,27 @@
  * scales for the ui token contract. Installed via
  * `shadcn add ng-hai/ui/theme-generator`.
  *
- * Fill in YOUR themes in the THEMES array below (one entry per brand) — this is
- * your slot, like a component's empty `styles.ts`. Then run:
+ * Your themes live in a config file, not in this script — it is your slot, like
+ * a component's empty `styles.ts`. Run:
  *
- *   tsx scripts/gen-theme.ts        (or wire it as a package script)
+ *   tsx scripts/gen-theme.ts [config]     (config defaults to ./theme.config.ts)
  *
- * Per theme it emits (under ./themes by default — change OUT_DIR):
- *   themes/<name>/<name>.css         — full token contract (drop-in default.css)
- * plus one combined:
- *   themes/tenants.css               — [data-tenant]-scoped, render-blocking; pair
- *                                      with the `theme-brand` lib + neutral `theme`.
+ * With no config file it writes a starter `theme.config.ts` and exits non-zero;
+ * edit it (one `defineTheme` entry per brand) and run again:
+ *
+ *   import { defineConfig, defineTheme } from "./scripts/gen-theme";
+ *   export default defineConfig({
+ *     themes: [defineTheme({ name: "acme", accents: { blue: "#2563eb" } })],
+ *     // outDir: "src/styles/themes",  // default: src/styles/themes if ./src exists, else styles/themes
+ *     // tenants: true,                // also write tenants.css (see below)
+ *   });
+ *
+ * Per theme it emits <outDir>/<name>/<name>.css — the full token contract, a
+ * complete drop-in (no `theme` item needed): `@import "./themes/<name>/<name>.css"`
+ * from your CSS. Multi-tenant setups opt in with `tenants: true` for one more file:
+ *   <outDir>/tenants.css             — [data-tenant]-scoped, render-blocking; layers
+ *                                      over the neutral default.css, so also run
+ *                                      `shadcn add ng-hai/ui/theme ng-hai/ui/theme-brand`.
  *
  * ## The model: an accent pool + semantic roles
  *
@@ -104,18 +115,14 @@
 import Color from "colorjs.io";
 import * as RadixColors from "@radix-ui/colors";
 import { generateRadixColors } from "./generate-radix-colors";
-import { mkdirSync, writeFileSync } from "node:fs";
-import { resolve } from "node:path";
-import { fileURLToPath } from "node:url";
-
-// Where generated files are written, relative to where you run the script
-// (your project root). Change to taste, e.g. resolve(process.cwd(), "src/styles").
-const OUT_DIR = resolve(process.cwd(), "themes");
+import { existsSync, mkdirSync, writeFileSync } from "node:fs";
+import { relative, resolve } from "node:path";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
 type Seed = string | { light: string; dark: string };
 
 export type ThemeConfig = {
-  name: string; // → [data-tenant="<name>"] and themes/<name>/
+  name: string; // → [data-tenant="<name>"] and <outDir>/<name>/
   /** Pool of named identity scales. FIRST key = the default accent (--accent-*). */
   accents: Record<string, Seed>;
   /**
@@ -130,7 +137,7 @@ export type ThemeConfig = {
 };
 
 /**
- * Identity helper for THEMES entries: `semantics` aliases autocomplete from
+ * Identity helper for `themes` entries: `semantics` aliases autocomplete from
  * your `accents` keys (any other string is treated as a CSS color at runtime).
  */
 export function defineTheme<const A extends Record<string, Seed>>(config: {
@@ -143,28 +150,22 @@ export function defineTheme<const A extends Record<string, Seed>>(config: {
   return config;
 }
 
+export type Config = {
+  themes: ThemeConfig[];
+  /** Where files are written, relative to cwd. Default: `src/styles/themes` if ./src exists, else `styles/themes`. */
+  outDir?: string;
+  /** Also write tenants.css (multi-tenant setups; needs the neutral `theme` + `theme-brand` items). Default: false. */
+  tenants?: boolean;
+};
+
+/** Identity helper for the config file's default export. */
+export const defineConfig = (config: Config): Config => config;
+
 // Status roles the neutral default.css defines and registers utilities for.
 // The generator does NOT seed them by itself — semantics are opt-in — but
 // tenants.css layers over default.css, so its delta @theme inline must not
 // re-register these names.
 const CONTRACT_ROLES = ["danger", "warning", "success", "info"];
-
-// ──────────────────────────────────────────────────────────────────────────
-// YOUR THEMES — fill this in. One entry per brand.
-// ──────────────────────────────────────────────────────────────────────────
-const THEMES: ThemeConfig[] = [
-  defineTheme({
-    name: "example", // → [data-tenant="example"] and themes/example/
-    // First key = default accent. Add more entries for extra identity scales,
-    // each swappable per subtree via data-accent-color="<key>", e.g.:
-    //   accents: { blue: "#2563eb", jade: "#29a383", purple: { light: "#8e4ec6", dark: "#9a5cd0" } },
-    accents: { blue: "#2563eb" },
-    // Semantic roles are opt-in — omit `semantics` and none are generated.
-    // Alias a pool key (zero extra scales) or seed a private one; the Radix
-    // step-9 seeds make good starting points:
-    //   semantics: { info: "blue", danger: "#e5484d", warning: "#ffc53d", success: "#30a46c" },
-  }),
-];
 
 // ── names, roles, validation ─────────────────────────────────────────────────
 type Appearance = "light" | "dark";
@@ -602,7 +603,7 @@ export function renderTenantsCss(builtAll: BuiltTheme[]): string {
  *
  *   @import "tailwindcss";
  *   @import "./styles/ui-theme.css";    // neutral default (login / no tenant)
- *   @import "./styles/ui-tenants.css";  // this file
+ *   @import "./styles/themes/tenants.css";  // this file
  *
  * Three independent axes: brand ([data-tenant]) × mode (.dark) × accent
  * ([data-accent-color] — swap blocks are scoped per tenant to its own pool, so
@@ -642,27 +643,73 @@ function verify(mode: string, b: BuiltTheme, t: ModeTokens) {
 }
 
 // ── main ─────────────────────────────────────────────────────────────────────
-export function main(themes: ThemeConfig[] = THEMES) {
-  const builtAll: BuiltTheme[] = [];
-  for (const cfg of themes) {
-    const built = buildTheme(cfg);
-    const outDir = resolve(OUT_DIR, cfg.name);
-    mkdirSync(outDir, { recursive: true });
+const CONFIG_FILE = "theme.config.ts";
 
-    writeFileSync(resolve(outDir, `${cfg.name}.css`), renderCss(built));
+export const defaultOutDir = (cwd = process.cwd()) =>
+  resolve(cwd, existsSync(resolve(cwd, "src")) ? "src/styles/themes" : "styles/themes");
+
+export function main(config: Config, cwd = process.cwd()) {
+  const outDir = config.outDir ? resolve(cwd, config.outDir) : defaultOutDir(cwd);
+  const shown = (path: string) => relative(cwd, path);
+  const builtAll: BuiltTheme[] = [];
+  for (const cfg of config.themes) {
+    const built = buildTheme(cfg);
+    const themeDir = resolve(outDir, cfg.name);
+    mkdirSync(themeDir, { recursive: true });
+
+    const file = resolve(themeDir, `${cfg.name}.css`);
+    writeFileSync(file, renderCss(built));
 
     const roleSummary = [...built.aliases].map(([r, p]) => `${r}→${p}`).join(", ");
-    console.log(`\n✓ ${cfg.name}  →  themes/${cfg.name}/${cfg.name}.css  (accents: ${built.poolNames.join(", ")}; ${roleSummary})`);
+    console.log(`\n✓ ${cfg.name}  →  ${shown(file)}  (accents: ${built.poolNames.join(", ")}; ${roleSummary})`);
     verify("light", built, built.light);
     verify("dark", built, built.dark);
     builtAll.push(built);
   }
 
-  mkdirSync(OUT_DIR, { recursive: true });
-  writeFileSync(resolve(OUT_DIR, "tenants.css"), renderTenantsCss(builtAll));
-  console.log(`\n✓ tenants.css  →  themes/tenants.css  (${builtAll.length} tenants: ${builtAll.map((b) => b.cfg.name).join(", ")})`);
+  if (config.tenants) {
+    mkdirSync(outDir, { recursive: true });
+    const file = resolve(outDir, "tenants.css");
+    writeFileSync(file, renderTenantsCss(builtAll));
+    console.log(`\n✓ tenants.css  →  ${shown(file)}  (${builtAll.length} tenants: ${builtAll.map((b) => b.cfg.name).join(", ")})`);
+  }
+}
+
+const starterConfig = (importPath: string) => `import { defineConfig, defineTheme } from "${importPath}";
+
+export default defineConfig({
+  themes: [
+    defineTheme({
+      name: "example", // → <outDir>/example/example.css (and [data-tenant="example"] with tenants: true)
+      // First key = default accent. Add more entries for extra identity scales,
+      // each swappable per subtree via data-accent-color="<key>", e.g.:
+      //   accents: { blue: "#2563eb", jade: "#29a383", purple: { light: "#8e4ec6", dark: "#9a5cd0" } },
+      accents: { blue: "#2563eb" },
+      // Semantic roles are opt-in — omit \`semantics\` and none are generated.
+      // Alias a pool key (zero extra scales) or seed a private one; the Radix
+      // step-9 seeds make good starting points:
+      //   semantics: { info: "blue", danger: "#e5484d", warning: "#ffc53d", success: "#30a46c" },
+    }),
+  ],
+  // outDir: "src/styles/themes", // default: src/styles/themes if ./src exists, else styles/themes
+  // tenants: true, // also write tenants.css — needs \`shadcn add ng-hai/ui/theme ng-hai/ui/theme-brand\`
+});
+`;
+
+/** CLI: `gen-theme.ts [config]`. Returns the process exit code. */
+export async function runCli(args: string[], cwd = process.cwd()): Promise<number> {
+  const configPath = resolve(cwd, args[0] ?? `./${CONFIG_FILE}`);
+  if (!existsSync(configPath)) {
+    const self = relative(cwd, fileURLToPath(import.meta.url)).replace(/\.ts$/, "");
+    writeFileSync(configPath, starterConfig(self.startsWith(".") ? self : `./${self}`));
+    console.error(`No config found. Wrote a starter to ${relative(cwd, configPath)} — edit it, then run again:\n\n  tsx ${relative(cwd, fileURLToPath(import.meta.url))}${args[0] ? ` ${args[0]}` : ""}`);
+    return 1;
+  }
+  const mod = await import(pathToFileURL(configPath).href);
+  main(mod.default, cwd);
+  return 0;
 }
 
 // Run only when invoked directly (so the render helpers can be imported too).
 const invokedDirectly = process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url);
-if (invokedDirectly) main();
+if (invokedDirectly) void runCli(process.argv.slice(2)).then((code) => (process.exitCode = code));

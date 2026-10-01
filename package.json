@@ -6,7 +6,7 @@
   "scripts": {
     "registry:validate": "shadcn build --output node_modules/.cache/ui-registry",
     "registry:smoke": "./scripts/registry-smoke.sh",
-    "gen:theme": "tsx registry/theme/gen-theme.ts",
+    "gen:theme": "tsx registry/theme/gen-theme.ts registry/theme/theme.config.ts",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest"

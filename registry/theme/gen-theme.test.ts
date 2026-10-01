@@ -1,5 +1,16 @@
-import { describe, expect, it } from "vitest";
-import { buildTheme, defineTheme, renderCss, renderTenantsCss } from "./gen-theme";
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { join } from "node:path";
+import { afterEach, describe, expect, it, vi } from "vitest";
+import {
+  buildTheme,
+  defaultOutDir,
+  defineConfig,
+  defineTheme,
+  main,
+  renderCss,
+  renderTenantsCss,
+  runCli,
+} from "./gen-theme";
 
 // One multi-accent fixture reused across suites (buildTheme runs the color
 // engine ~2×(pool + seeded roles) times, so build once at module scope).
@@ -291,5 +302,80 @@ describe("renderTenantsCss", () => {
     expect(theme).not.toContain("--color-accent-9");
     expect(theme).not.toContain("--color-danger-9");
     expect(tenants).not.toContain("--radius-sm");
+  });
+});
+
+describe("config, output, and CLI", () => {
+  const dirs: string[] = [];
+  // Under the repo (not os.tmpdir) so vite can import the config file in the CLI test.
+  const cache = join(process.cwd(), "node_modules/.cache");
+  const project = (...subdirs: string[]) => {
+    mkdirSync(cache, { recursive: true });
+    const dir = mkdtempSync(join(cache, "gen-theme-"));
+    dirs.push(dir);
+    for (const d of subdirs) mkdirSync(join(dir, d));
+    return dir;
+  };
+  afterEach(() => {
+    vi.restoreAllMocks();
+    for (const d of dirs.splice(0)) rmSync(d, { recursive: true, force: true });
+  });
+  const quiet = () => {
+    vi.spyOn(console, "log").mockImplementation(() => {});
+    vi.spyOn(console, "error").mockImplementation(() => {});
+  };
+  const config = defineConfig({ themes: [defineTheme({ name: "t", accents: { blue: "#2563eb" } })] });
+
+  it("defaults outDir to src/styles/themes when ./src exists, else styles/themes", () => {
+    const withSrc = project("src");
+    const without = project();
+    expect(defaultOutDir(withSrc)).toBe(join(withSrc, "src/styles/themes"));
+    expect(defaultOutDir(without)).toBe(join(without, "styles/themes"));
+  });
+
+  it("writes the theme to the default outDir and skips tenants.css unless asked", () => {
+    quiet();
+    const cwd = project("src");
+    main(config, cwd);
+    expect(existsSync(join(cwd, "src/styles/themes/t/t.css"))).toBe(true);
+    expect(existsSync(join(cwd, "src/styles/themes/tenants.css"))).toBe(false);
+  });
+
+  it("writes tenants.css when tenants is true, into a custom outDir", () => {
+    quiet();
+    const cwd = project();
+    main({ ...config, tenants: true, outDir: "out" }, cwd);
+    expect(existsSync(join(cwd, "out/t/t.css"))).toBe(true);
+    expect(existsSync(join(cwd, "out/tenants.css"))).toBe(true);
+  });
+
+  it("prints the real output path", () => {
+    const log = vi.spyOn(console, "log").mockImplementation(() => {});
+    main(config, project("src"));
+    expect(log.mock.calls.flat().join("\n")).toContain("src/styles/themes/t/t.css");
+  });
+
+  it("writes a starter config, generates nothing, and exits non-zero when the config is missing", async () => {
+    quiet();
+    const cwd = project();
+    expect(await runCli([], cwd)).toBe(1);
+    const starter = readFileSync(join(cwd, "theme.config.ts"), "utf8");
+    expect(starter).toContain("defineConfig");
+    expect(starter).toContain('from "');
+    expect(existsSync(join(cwd, "styles"))).toBe(false);
+    expect(existsSync(join(cwd, "src"))).toBe(false);
+  });
+
+  it("loads the config file and generates from it", async () => {
+    quiet();
+    const cwd = project();
+    const file = join(cwd, "custom.config.ts");
+    writeFileSync(
+      file,
+      `export default { themes: [${JSON.stringify({ name: "c", accents: { jade: "#29a383" } })}], outDir: "gen" };`,
+    );
+    expect(await runCli(["custom.config.ts"], cwd)).toBe(0);
+    expect(existsSync(join(cwd, "gen/c/c.css"))).toBe(true);
+    expect(existsSync(join(cwd, "gen/tenants.css"))).toBe(false);
   });
 });

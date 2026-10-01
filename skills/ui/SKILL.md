@@ -234,7 +234,7 @@ card:    "bg-gray-2 text-gray-12 border border-gray-6"
 muted:   "text-gray-11"
 ```
 
-The contract ships **neutral** (accent == a dark gray) via the `theme` preset (`shadcn add ng-hai/ui/theme`). To brand it, install `theme-generator`, drop your brand seeds into its `THEMES` config, and run it — it regenerates the whole contract (pinning step 9 of each scale to its seed) with a printed WCAG self-check. Keep the token *names* stable; only the values change.
+The contract ships **neutral** (accent == a dark gray) via the `theme` preset (`shadcn add ng-hai/ui/theme`). To brand it, install `theme-generator` (lands in `scripts/` at the project root), run `tsx scripts/gen-theme.ts` once to get a starter `theme.config.ts`, put your brand seeds in it (`defineConfig({ themes: [defineTheme({...})] })`) and run it again — each theme becomes a complete drop-in CSS file (`src/styles/themes/<name>/<name>.css` when you have `src/`, else `styles/themes/`; `@import` it from your CSS) with the contract regenerated (pinning step 9 of each scale to its seed) and a printed WCAG self-check. Multi-tenant apps add `tenants: true` for a `[data-tenant]`-scoped `tenants.css` and also install `theme` + `theme-brand`. Keep the token *names* stable; only the values change.
 
 Focus rings use `outline-focus-8` — `--focus-8` follows the accent and is re-pointed by pool swap blocks, but deliberately **not** by the gray swap, so neutralized subtrees keep the brand focus ring (Radix Themes' exception).
 

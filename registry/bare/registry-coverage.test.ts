@@ -16,6 +16,7 @@ const UNSHIPPED = [
   /\.test\.(ts|tsx)$/,
   /(^|\/)CLAUDE\.md$/,
   /^registry\/lib\/testing-/,
+  /^registry\/theme\/theme\.config\.ts$/, // maintainer config for `pnpm gen:theme`
 ];
 
 describe("registry coverage", () => {
