@@ -75,11 +75,11 @@
       "categories": ["theme"],
       "files": [
         {
-          "path": "registry/lib/theme-mode.ts",
+          "path": "registry/theme/theme-mode.ts",
           "type": "registry:lib"
         },
         {
-          "path": "registry/lib/use-theme-mode.ts",
+          "path": "registry/theme/use-theme-mode.ts",
           "type": "registry:lib"
         }
       ]
@@ -92,11 +92,11 @@
       "categories": ["theme"],
       "files": [
         {
-          "path": "registry/lib/theme-brand.ts",
+          "path": "registry/theme/theme-brand.ts",
           "type": "registry:lib"
         },
         {
-          "path": "registry/lib/use-theme-brand.ts",
+          "path": "registry/theme/use-theme-brand.ts",
           "type": "registry:lib"
         }
       ]

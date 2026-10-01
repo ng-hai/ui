@@ -14,7 +14,7 @@ This is a [GitHub registry](https://ui.shadcn.com/docs/registry/github): the `sh
 
 ## Presets and theme files
 
-The theme is an **optional Radix-style reference adapter**, not part of the system: components reference no tokens and work with any theme (shadcn vars, a custom `@theme`, Radix). Theme docs — how presets ship as `registry:file` items, the Radix 12-step token contract, and the `theme-generator` pipeline — live in `registry/theme/CLAUDE.md`, loaded automatically when working under `registry/theme/`.
+The theme is an **optional Radix-style reference adapter**, not part of the system: components reference no tokens and work with any theme (shadcn vars, a custom `@theme`, Radix). Theme docs — how presets ship as `registry:file` items, the Radix 12-step token contract, and the `theme-generator` pipeline, plus the `theme-mode` / `theme-brand` controllers — live in `registry/theme/CLAUDE.md`, loaded automatically when working under `registry/theme/`.
 
 ## Commands
 
