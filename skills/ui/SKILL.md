@@ -157,11 +157,40 @@ export const buttonStyles = tv({
 
 ### Add variants
 
-Add a `variants` block and `defaultVariants` to the `tv()` call. `createPropSplitter` in the root component discovers new variant keys at runtime — no changes to `.tsx` files needed. Variant props become available on the root component automatically. Use `VariantProps<typeof componentStyles>` from `@/lib/tv-config` to type variant props in root components:
+Add a `variants` block and `defaultVariants` to the `tv()` call in the installed `styles.ts`. `createPropSplitter` in the root component discovers new variant keys at runtime — no changes to `.tsx` files needed. The roots already type their props with `VariantProps<typeof componentStyles>`, so the new keys show up as typed props on the root (and autocomplete) as soon as `styles.ts` changes:
+
+```ts
+variants: {
+  variant: {
+    solid: { root: "bg-accent-9 text-accent-contrast hover:bg-accent-10" },
+    soft: { root: "bg-accent-3 text-accent-11 hover:bg-accent-4" },
+    outline: { root: "border border-gray-7 text-gray-12 hover:bg-gray-3" },
+  },
+},
+defaultVariants: { variant: "solid" },
+```
 
 ```tsx
-<Button.Root variant="outline" size="lg">Click me</Button.Root>
+<Button.Root variant="soft">Click me</Button.Root>
 ```
+
+On multi-part components each variant value styles several slots at once — the variant is chosen once on the root and every part follows it through the style context:
+
+```ts
+// alert/styles.ts
+variants: {
+  tone: {
+    info: { root: "border-info-6 bg-info-3", title: "text-info-12", description: "text-info-11" },
+    danger: { root: "border-danger-6 bg-danger-3", title: "text-danger-12", description: "text-danger-11" },
+  },
+},
+```
+
+```tsx
+<Alert.Root tone="danger"><Alert.Title>…</Alert.Title></Alert.Root>
+```
+
+`Input.Group` is the root of its parts: put the variant on the group and its addons and input follow it (an `Input.Root` with its own variant props or `styles` still wins).
 
 #### Combobox: `trigger` mode
 
