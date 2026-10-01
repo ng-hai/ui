@@ -111,7 +111,10 @@ pnpm exec tailwindcss -i src/index.css -o out.css
 grep -Eq '\.bg-primary\s*\{' out.css || fail "compiled CSS has no .bg-primary rule"
 grep -A2 -E '\.bg-primary\s*\{' out.css | grep -q 'var(--primary)' || fail ".bg-primary does not resolve to var(--primary)"
 [ -z "$(find src -iname '*theme*')" ] || fail "theme files were installed: $(find src -iname '*theme*')"
-# Comments may mention tokens (token-free.test.ts allows it); only code is checked.
-tokens="$(grep -rEn 'accent-|gray-[0-9]|data-accent-color' src/components src/lib | grep -vE ':[0-9]+:\s*(//|/\*|\*)' || true)"
+# Same patterns as registry/bare/token-free.test.ts, so shadcn's own `accent` /
+# `accent-foreground` pass. Comments may mention tokens; only code is checked.
+scales='accent|gray|danger|warning|success|info|focus'
+token_re="\\b($scales)-a?[0-9]{1,2}\\b|--($scales)-|\\b($scales)-contrast\\b|data-accent-color"
+tokens="$(grep -rEn "$token_re" src/components src/lib | grep -vE ':[0-9]+:\s*(//|/\*|\*)' || true)"
 [ -z "$tokens" ] || fail "Radix token names in installed components:"$'\n'"$tokens"
 echo "ok: button works under a foreign theme, no Radix theme installed"
