@@ -96,7 +96,7 @@ export async function runCli(args: string[], cwd = process.cwd()): Promise<numbe
   const cssFiles = files.length ? files.map((f) => resolve(cwd, f)) : findCss(cwd);
   const found = cssFiles.map((file) => ({ file, names: findThemeNames(readFileSync(file, "utf8")) }));
   const missing = found.flatMap(({ file, names }) =>
-    missingNames(names, mod.twMergeTheme).map((f) => ({ ...f, file })),
+    missingNames(names, mod.twMergeTheme).map(({ scale, name, line }) => ({ scale, name, line, file })),
   );
   const total = found.reduce((n, f) => n + f.names.length, 0);
 
