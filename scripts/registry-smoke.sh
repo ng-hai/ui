@@ -118,3 +118,22 @@ token_re="\\b($scales)-a?[0-9]{1,2}\\b|--($scales)-|\\b($scales)-contrast\\b|dat
 tokens="$(grep -rEn "$token_re" src/components src/lib | grep -vE ':[0-9]+:\s*(//|/\*|\*)' || true)"
 [ -z "$tokens" ] || fail "Radix token names in installed components:"$'\n'"$tokens"
 echo "ok: button works under a foreign theme, no Radix theme installed"
+
+# 3. The tv-config check: a custom @theme size missing from twMergeTheme fails
+#    the check and names it; registering it passes.
+scaffold tv-check
+cat > src/index.css <<'CSS'
+@import "tailwindcss";
+@theme { --text-body-2: 1rem; --text-body-2--line-height: 1.5; }
+CSS
+install tv-config
+pnpm dlx shadcn@latest add "ng-hai/ui/tv-config-check$SUFFIX" --yes
+pnpm install --silent
+set +e
+out="$(pnpm exec tsx scripts/check-tv-config.ts 2>&1)"; code=$?
+set -e
+[ "$code" -eq 1 ] && grep -q 'body-2' <<<"$out" || fail "check should exit 1 naming body-2 (exit $code):"$'\n'"$out"
+sed -i.bak 's/text: \[\] as string\[\]/text: ["body-2"]/' src/lib/tv-config.ts && rm src/lib/tv-config.ts.bak
+grep -q '"body-2"' src/lib/tv-config.ts || fail "could not register body-2 in src/lib/tv-config.ts"
+pnpm exec tsx scripts/check-tv-config.ts || fail "check should pass once body-2 is registered"
+echo "ok: tv-config-check flags an unregistered @theme name and passes once registered"

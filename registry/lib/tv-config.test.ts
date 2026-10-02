@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { tv } from "./tv-config";
+import { tv, twMergeTheme } from "./tv-config";
 
 describe("tv config", () => {
   it("returns a function with variantKeys property", () => {
@@ -26,5 +26,11 @@ describe("tv config", () => {
     const result = s.root({ class: "p-4" });
     expect(result).toContain("p-4");
     expect(result).not.toContain("p-2");
+  });
+
+  it("exports twMergeTheme with the five scales tailwind-merge only knows t-shirt names for", () => {
+    expect(Object.keys(twMergeTheme).sort()).toEqual(
+      ["drop-shadow", "inset-shadow", "shadow", "text", "text-shadow"],
+    );
   });
 });

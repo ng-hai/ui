@@ -130,6 +130,27 @@ Every rendered element also emits a `data-slot="<name>"` attribute, so you can r
 }
 ```
 
+### Custom font sizes and shadows
+
+tailwind-merge only treats t-shirt names (`xs`…`xl`, `2xl`, …) as sizes for `text-*` and the shadow scales, so a custom `text-body-2` or `shadow-lv2` is read as a colour and silently dropped when a real colour class sits beside it. Register your `@theme` names in `twMergeTheme` in `lib/tv-config.ts`:
+
+```ts
+export const twMergeTheme = {
+  text: ["body-2", "h4"], // --text-body-2, --text-h4
+  shadow: ["lv1", "lv2"], // --shadow-lv1, --shadow-lv2
+  "inset-shadow": [],
+  "drop-shadow": [],
+  "text-shadow": [],
+};
+```
+
+To catch a name you forgot, install the check and run it (suggested: in CI) — it exits 1 and names every `@theme` size or shadow missing from the list:
+
+```bash
+pnpm dlx shadcn@latest add ng-hai/ui/tv-config-check
+pnpm exec tsx scripts/check-tv-config.ts
+```
+
 ## Per-instance style override
 
 Every root accepts an optional `styles` prop — a pre-computed TV result — that replaces the styles for a single instance. Every component also exports its `*Styles` object alongside the component, so you can compose from it.

@@ -78,6 +78,8 @@ import { Select } from "@/components/ui/select";
 
 Before writing any class, find what the project already defines: `globals.css` / `@theme`, shadcn vars (`--primary`, `--border`, …), a Tailwind config, or `styles/ui-theme.css`. Fill slots with **those** tokens. Use the [Radix adapter](#radix-adapter-optional) only when it is already installed, or the project has no tokens and the user opts in. A class naming a token that does not exist compiles to nothing, silently — grep the theme for every token you use.
 
+Register custom `--text-*`, `--shadow-*`, `--inset-shadow-*`, `--drop-shadow-*` and `--text-shadow-*` names (anything but t-shirt sizes) in `twMergeTheme` in `lib/tv-config.ts` (`--text-body-2` → `"body-2"`). Otherwise tailwind-merge reads `text-body-2` as a colour and silently drops it next to `text-fg`. Run `tsx scripts/check-tv-config.ts` when it is installed.
+
 ### Step 2 — fill in slot arrays
 
 Open `styles.ts` and add Tailwind classes to the slot arrays. Each slot maps to a component part — `root` styles the `<Name>.Root`, `trigger` styles `<Name>.Trigger`, etc.
@@ -375,7 +377,7 @@ These hold for every ui component. Registry re-adds, the preset-injection path a
 - Every rendered primitive sets `data-slot="<component>"` or `data-slot="<component>-<part>"`; consumers target these from CSS.
 - Root components keep their optional `styles` prop; it is the preset-injection path.
 - Adding or removing a part means updating `index.parts.ts`. `index.ts` re-exports it and rarely changes.
-- `lib/tv-config.ts`, `lib/create-style-context.ts` and `lib/split-variant-props.ts` are shared infrastructure; component work leaves them alone.
+- `lib/tv-config.ts`, `lib/create-style-context.ts` and `lib/split-variant-props.ts` are shared infrastructure; component work leaves them alone; registering names in `twMergeTheme` is the one edit consumers make to `lib/tv-config.ts`.
 - Behaviour and ARIA come from `@base-ui/react` primitives; the primitive API is at [base-ui.com](https://base-ui.com).
 
 ## Installing from the registry

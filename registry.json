@@ -8,7 +8,7 @@
       "name": "tv-config",
       "type": "registry:lib",
       "title": "TV Config",
-      "description": "Shared Tailwind Variants configuration with twMerge and extensible classGroups",
+      "description": "Shared Tailwind Variants configuration with twMerge, extensible classGroups, and a twMergeTheme list for custom text-size and shadow names",
       "dependencies": ["tailwind-variants@^3.3.0", "tailwind-merge@^3.0.0"],
       "files": [
         {
@@ -118,6 +118,21 @@
           "path": "registry/theme/gen-theme.ts",
           "type": "registry:file",
           "target": "~/scripts/gen-theme.ts"
+        }
+      ]
+    },
+    {
+      "name": "tv-config-check",
+      "type": "registry:file",
+      "title": "TV Config Check",
+      "description": "Build-time CLI script (lands in scripts/ at the project root) that checks twMergeTheme in tv-config against your @theme and fails when a custom text-size or shadow name is missing, so tailwind-merge can't silently drop it. Run `tsx scripts/check-tv-config.ts`.",
+      "registryDependencies": ["ng-hai/ui/tv-config"],
+      "devDependencies": ["tsx@^4.23.0"],
+      "files": [
+        {
+          "path": "registry/lib/check-tv-config.ts",
+          "type": "registry:file",
+          "target": "~/scripts/check-tv-config.ts"
         }
       ]
     },

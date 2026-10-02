@@ -20,3 +20,4 @@ accordion, alert, alert-dialog, autocomplete, avatar, button, checkbox, checkbox
 
 - theme (registry:file): optional Radix-style adapter — 12-step token contract + Tailwind `@theme` wiring, installed to `styles/ui-theme.css`
 - theme-generator (registry:file): adapter tooling — CLI that generates the token CSS for a custom brand palette from a `theme.config.ts`, installed to `scripts/` at the project root
+- tv-config-check (registry:file): CLI that checks `twMergeTheme` in `lib/tv-config.ts` against your `@theme`, so custom `--text-*` / `--shadow-*` names are not dropped by tailwind-merge; installed to `scripts/` at the project root
