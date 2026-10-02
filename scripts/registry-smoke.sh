@@ -38,9 +38,10 @@ scaffold() {
 }
 JSON
 
-  # pnpm 11 fails installs with unreviewed build scripts; the Tailwind CLI's
-  # file watcher is the only one here and the smoke test never watches.
-  printf "allowBuilds:\n  '@parcel/watcher': false\n" > pnpm-workspace.yaml
+  # pnpm 11 fails installs with unreviewed build scripts. The Tailwind CLI's
+  # file watcher never runs here; esbuild, behind the tsx that tv-config-check
+  # and theme-generator install, has to run its own.
+  printf "allowBuilds:\n  '@parcel/watcher': false\n  esbuild: true\n" > pnpm-workspace.yaml
 
   cat > tsconfig.json <<'JSON'
 {
