@@ -36,7 +36,15 @@ pnpm dlx shadcn@latest add \
   "ng-hai/ui/split-variant-props#<sha>"
 ```
 
+In a zsh script, pass the refs as an array, because zsh does not word-split an unquoted `$refs` string and the add fails with "item … was not found": `refs=(ng-hai/ui/button#<sha> ng-hai/ui/tv-config#<sha>)`, then `pnpm dlx shadcn@latest add "${refs[@]}"`.
+
 You can inspect exactly what a ref resolves to before installing with `pnpm dlx shadcn@latest view ng-hai/ui/button#<sha>`. In practice the strongest record is the one you already keep: the CLI copies the source into your repo — commit it, and that commit, not a version string, is what you installed.
+
+### After an add
+
+`shadcn add` installs each item's declared dependency range (e.g. `tailwind-merge@^3.0.0`), and pnpm writes a range even with `saveExact`, so an exact `3.7.0` becomes `^3.7.0`. If your project pins exact versions, check `git diff package.json` after the add and restore them.
+
+The copied files use this registry's formatting. Run your formatter over them after every add and re-add, or your format check fails, and expect re-adds to show formatting noise in the diff.
 
 ## Use it
 

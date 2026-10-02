@@ -234,6 +234,21 @@ const precomputed = buttonStyles({ variant: "solid", size: "lg" });
 <Button.Root styles={precomputed}>Preset button</Button.Root>
 ```
 
+## From Figma
+
+Figma components are grouped by look; ui parts are grouped by Base UI behavior. These rules translate between them.
+
+- **A Figma `state` property is never a variant.** Map each value to where the code already expresses it:
+  - interaction (`hover`, `focused`, `pressed`, `selected`, `checked`, `disabled`) → the part's Base UI state attribute where it has one (`data-highlighted`, `data-checked`, `data-pressed`, `data-disabled`), otherwise the CSS variant (`hover:`, `focus-visible:`, `active:`);
+  - `error` → `data-invalid`, set by passing `invalid` to `Field.Root`;
+  - `read-only` → the native `readOnly` prop, styled with `read-only:`;
+  - `placeholder` / `filled` → `placeholder:` styles on the input;
+  - workflow states (`uploading`, `reupload`, `update needed`, `locked`, …) → props of the app component, never of the primitive.
+- **Figma's error replaces the help text in one slot; Base UI has two parts.** Render `Field.Error` or `Field.Description`, not both, so the layout matches the frame.
+- **A searchable `select` is a Combobox.** A Figma select that contains a search field, checkbox options or removable chips is a Base UI Combobox (`multiple` when it has checkboxes or chips), not a Select.
+- **Figma strokes sit inside the frame; CSS borders add to the size.** When the height comes from padding, subtract the border width from the padding. A 46px input drawn as 12 + 22 + 12 with a 1px stroke needs `py-2.75`. With a fixed height, `border-box` already includes the border.
+- **`role="alert"` for an Alert that answers a submit.** `Alert.Root` defaults to `role="status"`, a polite announcement. A message the user must hear right after submitting gets `role="alert"`.
+
 ## Radix adapter (optional)
 
 Everything in this section applies only when the Radix-style `theme` item is installed (`shadcn add ng-hai/ui/theme`). Components never depend on it; with any other token system, skip to [How to extend components](#how-to-extend-components).
@@ -402,6 +417,13 @@ pnpm dlx shadcn@latest add ng-hai/ui/button#main      # explicit default branch
 ```
 
 There are no version tags; reproducibility comes from pinning a commit SHA (or just committing the installed source into your own repo).
+
+In a script, pass several pinned refs as an array (`refs=(ng-hai/ui/button#<sha> ng-hai/ui/tv-config#<sha>)`, then `pnpm dlx shadcn@latest add "${refs[@]}"`). zsh does not word-split an unquoted `$refs` string, so every ref arrives as one item and the add fails with "item … was not found".
+
+### After every add
+
+- **Exact pins:** `shadcn add` installs each item's declared range (e.g. `tailwind-merge@^3.0.0`), and pnpm writes a range even with `saveExact`. An exact `3.7.0` becomes `^3.7.0`. If the project pins exact versions, check `git diff package.json` after the add and restore them. (`--dry-run` previews an add without writing anything.)
+- **Formatting:** the copied files use this registry's formatting, so run the project's formatter over them after every add and re-add, or the format check fails. Expect re-adds to show formatting noise in the diff.
 
 ### Private forks
 
