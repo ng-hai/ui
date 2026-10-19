@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { Popover as PopoverPrimitive } from "@base-ui/react/popover";
 import { Popover } from "./index";
 import { describeSlots } from "@/registry/lib/testing-utils";
@@ -6,7 +7,8 @@ import { describeSlots } from "@/registry/lib/testing-utils";
 describe("Popover", () => {
   describeSlots(Popover, {
     Root: { slot: "popover", skipRender: true },
-    Trigger: { slot: "popover-trigger" },
+    // A detached Trigger renders outside Root, so the error comes from Base UI, not the style context.
+    Trigger: { slot: "popover-trigger", outsideError: "must be either used within" },
     Portal: { slot: "popover-portal" },
     Backdrop: { slot: "popover-backdrop" },
     Positioner: {
@@ -63,18 +65,49 @@ describe("Popover", () => {
       expect(Popover.createHandle() instanceof Popover.Handle).toBe(true);
     });
 
-    // Compile-time check: a typed handle flows into Root and a detached Trigger.
-    it("types the payload across Root and a detached Trigger", () => {
+    it("renders a detached Trigger outside Root", () => {
       const handle = Popover.createHandle<{ id: string }>();
-      const tree = (
+      render(
         <>
-          <Popover.Trigger handle={handle} payload={{ id: "a" }} />
-          {/* @ts-expect-error the payload must match the handle's type */}
-          <Popover.Trigger handle={handle} payload={{ id: 1 }} />
+          <Popover.Trigger handle={handle} payload={{ id: "a" }} className="__test-class__">
+            Open
+          </Popover.Trigger>
           <Popover.Root handle={handle}>{({ payload }) => <output>{payload?.id.toUpperCase()}</output>}</Popover.Root>
-        </>
+        </>,
       );
+      const trigger = document.querySelector('[data-slot="popover-trigger"]');
+      expect(trigger).toBeInTheDocument();
+      expect(trigger).toHaveClass("__test-class__");
+    });
+
+    it("rejects a payload that does not match the handle", () => {
+      const handle = Popover.createHandle<{ id: string }>();
+      // @ts-expect-error the payload must match the handle's type
+      const tree = <Popover.Trigger handle={handle} payload={{ id: 1 }} />;
       expect(tree).toBeDefined();
+    });
+
+    it("opens the Root from a detached Trigger and passes it the payload", () => {
+      const handle = Popover.createHandle<{ id: string }>();
+      render(
+        <>
+          <Popover.Trigger handle={handle} payload={{ id: "a" }}>
+            Open
+          </Popover.Trigger>
+          <Popover.Root handle={handle}>
+            {({ payload }) => (
+              <Popover.Portal>
+                <Popover.Positioner>
+                  <Popover.Popup>{payload?.id.toUpperCase()}</Popover.Popup>
+                </Popover.Positioner>
+              </Popover.Portal>
+            )}
+          </Popover.Root>
+        </>,
+      );
+      expect(document.querySelector('[data-slot="popover-popup"]')).not.toBeInTheDocument();
+      fireEvent.click(screen.getByText("Open"));
+      expect(document.querySelector('[data-slot="popover-popup"]')).toHaveTextContent("A");
     });
   });
 });

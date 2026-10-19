@@ -11,6 +11,7 @@ const { StyleContext, useStyles } = createStyleContext<PreviewCardStyles>("Previ
 const splitProps = createPropSplitter(previewCardStyles);
 
 export { useStyles as usePreviewCardStyles };
+export { StyleContext as PreviewCardStyleContext };
 
 interface PreviewCardRootProps<Payload = unknown> extends PreviewCardPrimitive.Root.Props<Payload>, PreviewCardVariantProps {
   styles?: PreviewCardStyles;

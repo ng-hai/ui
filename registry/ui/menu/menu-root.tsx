@@ -11,6 +11,7 @@ const { StyleContext, useStyles } = createStyleContext<MenuStyles>("Menu");
 const splitProps = createPropSplitter(menuStyles);
 
 export { useStyles as useMenuStyles };
+export { StyleContext as MenuStyleContext };
 
 interface MenuRootProps<Payload = unknown> extends MenuPrimitive.Root.Props<Payload>, MenuVariantProps {
   styles?: MenuStyles;

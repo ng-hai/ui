@@ -11,6 +11,7 @@ const { StyleContext, useStyles } = createStyleContext<DialogStyles>("Dialog");
 const splitProps = createPropSplitter(dialogStyles);
 
 export { useStyles as useDialogStyles };
+export { StyleContext as DialogStyleContext };
 
 interface DialogRootProps<Payload = unknown> extends DialogPrimitive.Root.Props<Payload>, DialogVariantProps {
   styles?: DialogStyles;

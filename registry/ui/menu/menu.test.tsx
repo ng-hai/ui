@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { render } from "@testing-library/react";
 import { Menu as MenuPrimitive } from "@base-ui/react/menu";
 import { Menu } from "./index";
 import { describeSlots } from "@/registry/lib/testing-utils";
@@ -7,7 +8,8 @@ describe("Menu", () => {
   describeSlots(Menu, {
     Root: { slot: "menu", skipRender: true },
     SubmenuRoot: { slot: "menu-submenu", skipRender: true },
-    Trigger: { slot: "menu-trigger" },
+    // A detached Trigger renders outside Root, so the error comes from Base UI, not the style context.
+    Trigger: { slot: "menu-trigger", outsideError: "must be either used within" },
     SubmenuTrigger: {
       slot: "menu-submenu-trigger",
       wrapper: (children) => (
@@ -115,17 +117,25 @@ describe("Menu", () => {
       expect(Menu.createHandle() instanceof Menu.Handle).toBe(true);
     });
 
-    // Compile-time check: a typed handle flows into Root and a detached Trigger.
-    it("types the payload across Root and a detached Trigger", () => {
+    it("renders a detached Trigger outside Root", () => {
       const handle = Menu.createHandle<{ id: string }>();
-      const tree = (
+      render(
         <>
-          <Menu.Trigger handle={handle} payload={{ id: "a" }} />
-          {/* @ts-expect-error the payload must match the handle's type */}
-          <Menu.Trigger handle={handle} payload={{ id: 1 }} />
+          <Menu.Trigger handle={handle} payload={{ id: "a" }} className="__test-class__">
+            Open
+          </Menu.Trigger>
           <Menu.Root handle={handle}>{({ payload }) => <output>{payload?.id.toUpperCase()}</output>}</Menu.Root>
-        </>
+        </>,
       );
+      const trigger = document.querySelector('[data-slot="menu-trigger"]');
+      expect(trigger).toBeInTheDocument();
+      expect(trigger).toHaveClass("__test-class__");
+    });
+
+    it("rejects a payload that does not match the handle", () => {
+      const handle = Menu.createHandle<{ id: string }>();
+      // @ts-expect-error the payload must match the handle's type
+      const tree = <Menu.Trigger handle={handle} payload={{ id: 1 }} />;
       expect(tree).toBeDefined();
     });
   });

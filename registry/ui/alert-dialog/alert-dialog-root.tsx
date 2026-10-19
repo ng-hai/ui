@@ -11,6 +11,7 @@ const { StyleContext, useStyles } = createStyleContext<AlertDialogStyles>("Alert
 const splitProps = createPropSplitter(alertDialogStyles);
 
 export { useStyles as useAlertDialogStyles };
+export { StyleContext as AlertDialogStyleContext };
 
 interface AlertDialogRootProps<Payload = unknown> extends AlertDialogPrimitive.Root.Props<Payload>, AlertDialogVariantProps {
   styles?: AlertDialogStyles;

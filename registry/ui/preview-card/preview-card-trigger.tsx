@@ -1,12 +1,14 @@
+import { use } from "react";
 import { PreviewCard as PreviewCardPrimitive } from "@base-ui/react/preview-card";
-import { usePreviewCardStyles } from "./preview-card-root";
+import { PreviewCardStyleContext } from "./preview-card-root";
+import { previewCardStyles } from "./styles";
 
 interface PreviewCardTriggerProps<Payload = unknown> extends PreviewCardPrimitive.Trigger.Props<Payload> {
   className?: string;
 }
 
 export function PreviewCardTrigger<Payload = unknown>({ className, ...props }: PreviewCardTriggerProps<Payload>) {
-  const styles = usePreviewCardStyles();
+  const styles = use(PreviewCardStyleContext) ?? previewCardStyles();
   return (
     <PreviewCardPrimitive.Trigger
       {...props}

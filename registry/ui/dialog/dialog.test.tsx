@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { render } from "@testing-library/react";
 import { Dialog as DialogPrimitive } from "@base-ui/react/dialog";
 import { Dialog } from "./index";
 import { describeSlots } from "@/registry/lib/testing-utils";
@@ -41,17 +42,25 @@ describe("Dialog", () => {
       expect(Dialog.createHandle() instanceof Dialog.Handle).toBe(true);
     });
 
-    // Compile-time check: a typed handle flows into Root and a detached Trigger.
-    it("types the payload across Root and a detached Trigger", () => {
+    it("renders a detached Trigger outside Root", () => {
       const handle = Dialog.createHandle<{ id: string }>();
-      const tree = (
+      render(
         <>
-          <Dialog.Trigger handle={handle} payload={{ id: "a" }} />
-          {/* @ts-expect-error the payload must match the handle's type */}
-          <Dialog.Trigger handle={handle} payload={{ id: 1 }} />
+          <Dialog.Trigger handle={handle} payload={{ id: "a" }} className="__test-class__">
+            Open
+          </Dialog.Trigger>
           <Dialog.Root handle={handle}>{({ payload }) => <output>{payload?.id.toUpperCase()}</output>}</Dialog.Root>
-        </>
+        </>,
       );
+      const trigger = document.querySelector('[data-slot="dialog-trigger"]');
+      expect(trigger).toBeInTheDocument();
+      expect(trigger).toHaveClass("__test-class__");
+    });
+
+    it("rejects a payload that does not match the handle", () => {
+      const handle = Dialog.createHandle<{ id: string }>();
+      // @ts-expect-error the payload must match the handle's type
+      const tree = <Dialog.Trigger handle={handle} payload={{ id: 1 }} />;
       expect(tree).toBeDefined();
     });
   });

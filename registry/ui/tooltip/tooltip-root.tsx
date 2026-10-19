@@ -11,6 +11,7 @@ const { StyleContext, useStyles } = createStyleContext<TooltipStyles>("Tooltip")
 const splitProps = createPropSplitter(tooltipStyles);
 
 export { useStyles as useTooltipStyles };
+export { StyleContext as TooltipStyleContext };
 
 interface TooltipRootProps<Payload = unknown> extends TooltipPrimitive.Root.Props<Payload>, TooltipVariantProps {
   styles?: TooltipStyles;

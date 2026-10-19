@@ -11,6 +11,7 @@ const { StyleContext, useStyles } = createStyleContext<PopoverStyles>("Popover")
 const splitProps = createPropSplitter(popoverStyles);
 
 export { useStyles as usePopoverStyles };
+export { StyleContext as PopoverStyleContext };
 
 interface PopoverRootProps<Payload = unknown> extends PopoverPrimitive.Root.Props<Payload>, PopoverVariantProps {
   styles?: PopoverStyles;
