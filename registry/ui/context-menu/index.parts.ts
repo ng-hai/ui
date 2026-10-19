@@ -11,6 +11,7 @@ export { ContextMenuItem as Item } from "./context-menu-item";
 export { ContextMenuLinkItem as LinkItem } from "./context-menu-link-item";
 export { ContextMenuGroup as Group } from "./context-menu-group";
 export { ContextMenuGroupLabel as GroupLabel } from "./context-menu-group-label";
+export { ContextMenuSeparator as Separator } from "./context-menu-separator";
 export { ContextMenuRadioGroup as RadioGroup } from "./context-menu-radio-group";
 export { ContextMenuRadioItem as RadioItem } from "./context-menu-radio-item";
 export { ContextMenuRadioItemIndicator as RadioItemIndicator } from "./context-menu-radio-item-indicator";

@@ -11,12 +11,13 @@ const { StyleContext, useStyles } = createStyleContext<PopoverStyles>("Popover")
 const splitProps = createPropSplitter(popoverStyles);
 
 export { useStyles as usePopoverStyles };
+export { StyleContext as PopoverStyleContext };
 
-interface PopoverRootProps extends PopoverPrimitive.Root.Props, PopoverVariantProps {
+interface PopoverRootProps<Payload = unknown> extends PopoverPrimitive.Root.Props<Payload>, PopoverVariantProps {
   styles?: PopoverStyles;
 }
 
-export function PopoverRoot(props: PopoverRootProps) {
+export function PopoverRoot<Payload = unknown>(props: PopoverRootProps<Payload>) {
   const [variantProps, { styles, ...htmlProps }] = splitProps(props);
   const s = styles ?? popoverStyles(variantProps);
   return (

@@ -1,5 +1,6 @@
-import { describe, it, expect } from "vitest";
+import { describe, expect, expectTypeOf, it } from "vitest";
 import { render } from "@testing-library/react";
+import type { Progress as ProgressPrimitive } from "@base-ui/react/progress";
 import { Progress } from "./index";
 import { describeSlots } from "@/registry/lib/testing-utils";
 
@@ -26,5 +27,11 @@ describe("Progress", () => {
     wrapper: (children) => (
       <Progress.Root value={50}>{children}</Progress.Root>
     ),
+  });
+
+  describe("types", () => {
+    it("re-exports the upstream Status type", () => {
+      expectTypeOf<Progress.Status>().toEqualTypeOf<ProgressPrimitive.Status>();
+    });
   });
 });

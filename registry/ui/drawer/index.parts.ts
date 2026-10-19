@@ -1,3 +1,5 @@
+import { Drawer as DrawerPrimitive } from "@base-ui/react/drawer";
+
 export { DrawerRoot as Root } from "./drawer-root";
 export { DrawerProvider as Provider } from "./drawer-provider";
 export { DrawerVirtualKeyboardProvider as VirtualKeyboardProvider } from "./drawer-virtual-keyboard-provider";
@@ -13,3 +15,7 @@ export { DrawerDescription as Description } from "./drawer-description";
 export { DrawerClose as Close } from "./drawer-close";
 export { DrawerIndent as Indent } from "./drawer-indent";
 export { DrawerIndentBackground as IndentBackground } from "./drawer-indent-background";
+
+export const createHandle = DrawerPrimitive.createHandle;
+export const Handle = DrawerPrimitive.Handle;
+export type Handle<Payload> = DrawerPrimitive.Handle<Payload>;

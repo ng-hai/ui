@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, expect, it } from "vitest";
 import { render, cleanup } from "@testing-library/react";
 import { Toast as ToastPrimitive } from "@base-ui/react/toast";
 import { useRef, type ReactNode } from "react";
@@ -12,7 +12,7 @@ import { describeSlots } from "@/registry/lib/testing-utils";
  * Content) can access the Toast.Root StyleContext.
  */
 function ToastHarness({ children }: { children: ReactNode }) {
-  const manager = ToastPrimitive.useToastManager();
+  const manager = Toast.useToastManager();
   const idRef = useRef<string | undefined>(undefined);
   if (!idRef.current) {
     idRef.current = manager.add({
@@ -70,7 +70,7 @@ describe("Toast", () => {
     it("merges className into slot", () => {
       cleanup();
       function RootWithClass() {
-        const manager = ToastPrimitive.useToastManager();
+        const manager = Toast.useToastManager();
         const idRef = useRef<string | undefined>(undefined);
         if (!idRef.current) idRef.current = manager.add({ title: "t" });
         const toast = manager.toasts.find((t) => t.id === idRef.current);
@@ -88,7 +88,7 @@ describe("Toast", () => {
 
   describe("Positioner", () => {
     function PositionerHarness({ className }: { className?: string }) {
-      const manager = ToastPrimitive.useToastManager();
+      const manager = Toast.useToastManager();
       const idRef = useRef<string | undefined>(undefined);
       if (!idRef.current) {
         idRef.current = manager.add({
@@ -128,7 +128,7 @@ describe("Toast", () => {
 
   describe("Arrow", () => {
     function ArrowHarness({ className }: { className?: string }) {
-      const manager = ToastPrimitive.useToastManager();
+      const manager = Toast.useToastManager();
       const idRef = useRef<string | undefined>(undefined);
       if (!idRef.current) {
         idRef.current = manager.add({
@@ -209,4 +209,11 @@ describe("Toast", () => {
       wrapper: (children) => <Toast.Provider>{children}</Toast.Provider>,
     },
   );
+
+  describe("utilities", () => {
+    it("re-exports the upstream manager API", () => {
+      expect(Toast.useToastManager).toBe(ToastPrimitive.useToastManager);
+      expect(Toast.createToastManager).toBe(ToastPrimitive.createToastManager);
+    });
+  });
 });

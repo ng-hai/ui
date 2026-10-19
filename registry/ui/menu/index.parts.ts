@@ -1,3 +1,5 @@
+import { Menu as MenuPrimitive } from "@base-ui/react/menu";
+
 export { MenuRoot as Root } from "./menu-root";
 export { MenuSubmenuRoot as SubmenuRoot } from "./menu-submenu-root";
 export { MenuTrigger as Trigger } from "./menu-trigger";
@@ -12,8 +14,13 @@ export { MenuItem as Item } from "./menu-item";
 export { MenuLinkItem as LinkItem } from "./menu-link-item";
 export { MenuGroup as Group } from "./menu-group";
 export { MenuGroupLabel as GroupLabel } from "./menu-group-label";
+export { MenuSeparator as Separator } from "./menu-separator";
 export { MenuRadioGroup as RadioGroup } from "./menu-radio-group";
 export { MenuRadioItem as RadioItem } from "./menu-radio-item";
 export { MenuRadioItemIndicator as RadioItemIndicator } from "./menu-radio-item-indicator";
 export { MenuCheckboxItem as CheckboxItem } from "./menu-checkbox-item";
 export { MenuCheckboxItemIndicator as CheckboxItemIndicator } from "./menu-checkbox-item-indicator";
+
+export const createHandle = MenuPrimitive.createHandle;
+export const Handle = MenuPrimitive.Handle;
+export type Handle<Payload> = MenuPrimitive.Handle<Payload>;

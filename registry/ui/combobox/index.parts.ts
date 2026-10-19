@@ -1,3 +1,5 @@
+import { Combobox as ComboboxPrimitive } from "@base-ui/react/combobox";
+
 export { ComboboxRoot as Root } from "./combobox-root";
 export { ComboboxValue as Value } from "./combobox-value";
 export { ComboboxCollection as Collection } from "./combobox-collection";
@@ -24,3 +26,7 @@ export { ComboboxGroupLabel as GroupLabel } from "./combobox-group-label";
 export { ComboboxSeparator as Separator } from "./combobox-separator";
 export { ComboboxEmpty as Empty } from "./combobox-empty";
 export { ComboboxStatus as Status } from "./combobox-status";
+
+export const useFilter = ComboboxPrimitive.useFilter;
+export const useFilteredItems = ComboboxPrimitive.useFilteredItems;
+export const createItems = ComboboxPrimitive.createItems;

@@ -1,5 +1,6 @@
-import { describe, it, expect } from "vitest";
+import { describe, expect, expectTypeOf, it } from "vitest";
 import { render, cleanup } from "@testing-library/react";
+import type { Field as FieldPrimitive } from "@base-ui/react/field";
 import { Field } from "./index";
 import { describeSlots } from "@/registry/lib/testing-utils";
 
@@ -57,5 +58,11 @@ describe("Field", () => {
     wrapper: (children) => (
       <Field.Root>{children}</Field.Root>
     ),
+  });
+
+  describe("types", () => {
+    it("re-exports the upstream ValidityData type", () => {
+      expectTypeOf<Field.ValidityData>().toEqualTypeOf<FieldPrimitive.ValidityData>();
+    });
   });
 });

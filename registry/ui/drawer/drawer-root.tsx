@@ -11,12 +11,13 @@ const { StyleContext, useStyles } = createStyleContext<DrawerStyles>("Drawer");
 const splitProps = createPropSplitter(drawerStyles);
 
 export { useStyles as useDrawerStyles };
+export { StyleContext as DrawerStyleContext };
 
-interface DrawerRootProps extends DrawerPrimitive.Root.Props, DrawerVariantProps {
+interface DrawerRootProps<Payload = unknown> extends DrawerPrimitive.Root.Props<Payload>, DrawerVariantProps {
   styles?: DrawerStyles;
 }
 
-export function DrawerRoot(props: DrawerRootProps) {
+export function DrawerRoot<Payload = unknown>(props: DrawerRootProps<Payload>) {
   const [variantProps, { styles, ...htmlProps }] = splitProps(props);
   const s = styles ?? drawerStyles(variantProps);
   return (

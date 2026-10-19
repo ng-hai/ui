@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { cleanup, render } from "@testing-library/react";
+import { Autocomplete as AutocompletePrimitive } from "@base-ui/react/autocomplete";
 import { Autocomplete } from "./index";
 import { describeSlots } from "@/registry/lib/testing-utils";
 
@@ -93,6 +94,13 @@ describe("Autocomplete", () => {
       const el = document.querySelector('[data-slot="autocomplete-empty"]');
       expect(el).toHaveClass("p-4");
       expect(el).toHaveTextContent("No results");
+    });
+  });
+
+  describe("utilities", () => {
+    it("re-exports the upstream filter hooks", () => {
+      expect(Autocomplete.useFilter).toBe(AutocompletePrimitive.useFilter);
+      expect(Autocomplete.useFilteredItems).toBe(AutocompletePrimitive.useFilteredItems);
     });
   });
 });

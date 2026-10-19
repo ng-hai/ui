@@ -9,6 +9,8 @@ interface SlotConfig {
   skipRender?: boolean;
   /** Per-slot wrapper override for parts needing deeper nesting (e.g. Arrow inside Positioner) */
   wrapper?: (children: ReactNode) => ReactNode;
+  /** Error expected outside the wrapper, when the part throws something other than the style context error */
+  outsideError?: string;
 }
 
 interface DescribeSlotsOptions {
@@ -62,7 +64,7 @@ export function describeSlots(
 
       if (globalWrapper) {
         it("throws when rendered outside Root", () => {
-          expect(() => render(<Part />)).toThrow("must be used within");
+          expect(() => render(<Part />)).toThrow(config.outsideError ?? "must be used within");
         });
       }
     });
