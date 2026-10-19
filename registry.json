@@ -258,6 +258,7 @@
         { "path": "registry/ui/popover/popover-backdrop.tsx", "type": "registry:ui" },
         { "path": "registry/ui/popover/popover-positioner.tsx", "type": "registry:ui" },
         { "path": "registry/ui/popover/popover-popup.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/popover/popover-viewport.tsx", "type": "registry:ui" },
         { "path": "registry/ui/popover/popover-arrow.tsx", "type": "registry:ui" },
         { "path": "registry/ui/popover/popover-title.tsx", "type": "registry:ui" },
         { "path": "registry/ui/popover/popover-description.tsx", "type": "registry:ui" },
