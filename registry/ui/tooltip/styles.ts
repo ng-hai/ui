@@ -7,6 +7,7 @@ export const tooltipStyles = tv({
     portal: [""],
     positioner: [""],
     popup: [""],
+    viewport: [""],
     arrow: [""],
   },
 });

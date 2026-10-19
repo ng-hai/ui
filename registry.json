@@ -316,10 +316,12 @@
       "dependencies": ["@base-ui/react@^1.9.0"],
       "files": [
         { "path": "registry/ui/tooltip/tooltip-root.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/tooltip/tooltip-provider.tsx", "type": "registry:ui" },
         { "path": "registry/ui/tooltip/tooltip-trigger.tsx", "type": "registry:ui" },
         { "path": "registry/ui/tooltip/tooltip-portal.tsx", "type": "registry:ui" },
         { "path": "registry/ui/tooltip/tooltip-positioner.tsx", "type": "registry:ui" },
         { "path": "registry/ui/tooltip/tooltip-popup.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/tooltip/tooltip-viewport.tsx", "type": "registry:ui" },
         { "path": "registry/ui/tooltip/tooltip-arrow.tsx", "type": "registry:ui" },
         { "path": "registry/ui/tooltip/styles.ts", "type": "registry:ui" },
         { "path": "registry/ui/tooltip/index.parts.ts", "type": "registry:ui" },
