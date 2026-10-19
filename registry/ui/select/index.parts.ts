@@ -1,11 +1,15 @@
 export { SelectRoot as Root } from "./select-root";
 export { SelectTrigger as Trigger } from "./select-trigger";
+export { SelectLabel as Label } from "./select-label";
 export { SelectValue as Value } from "./select-value";
 export { SelectIcon as Icon } from "./select-icon";
 export { SelectPortal as Portal } from "./select-portal";
 export { SelectBackdrop as Backdrop } from "./select-backdrop";
 export { SelectPositioner as Positioner } from "./select-positioner";
 export { SelectPopup as Popup } from "./select-popup";
+export { SelectList as List } from "./select-list";
+export { SelectScrollUpArrow as ScrollUpArrow } from "./select-scroll-up-arrow";
+export { SelectScrollDownArrow as ScrollDownArrow } from "./select-scroll-down-arrow";
 export { SelectItem as Item } from "./select-item";
 export { SelectItemText as ItemText } from "./select-item-text";
 export { SelectItemIndicator as ItemIndicator } from "./select-item-indicator";

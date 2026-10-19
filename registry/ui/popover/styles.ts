@@ -8,6 +8,7 @@ export const popoverStyles = tv({
     backdrop: [""],
     positioner: [""],
     popup: [""],
+    viewport: [""],
     arrow: [""],
     title: [""],
     description: [""],

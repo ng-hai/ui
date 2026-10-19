@@ -17,6 +17,7 @@ export const autocompleteStyles = tv({
     item: [""],
     group: [""],
     groupLabel: [""],
+    separator: [""],
     empty: [""],
     status: [""],
   },

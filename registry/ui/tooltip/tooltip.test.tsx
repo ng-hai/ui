@@ -5,6 +5,7 @@ import { describeSlots } from "@/registry/lib/testing-utils";
 describe("Tooltip", () => {
   describeSlots(Tooltip, {
     Root: { slot: "tooltip", skipRender: true },
+    Provider: { slot: "tooltip-provider", skipRender: true },
     Trigger: { slot: "tooltip-trigger" },
     Portal: { slot: "tooltip-portal" },
     Positioner: {
@@ -17,6 +18,16 @@ describe("Tooltip", () => {
     },
     Popup: {
       slot: "tooltip-popup",
+      wrapper: (children) => (
+        <Tooltip.Root open>
+          <Tooltip.Portal>
+            <Tooltip.Positioner>{children}</Tooltip.Positioner>
+          </Tooltip.Portal>
+        </Tooltip.Root>
+      ),
+    },
+    Viewport: {
+      slot: "tooltip-viewport",
       wrapper: (children) => (
         <Tooltip.Root open>
           <Tooltip.Portal>

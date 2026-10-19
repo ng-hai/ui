@@ -60,6 +60,7 @@ describe("Autocomplete", () => {
         </Autocomplete.Root>
       ),
     },
+    Separator: { slot: "autocomplete-separator" },
     Empty: { slot: "autocomplete-empty" },
     Status: { slot: "autocomplete-status" },
   }, {

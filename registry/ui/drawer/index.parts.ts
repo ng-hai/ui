@@ -1,5 +1,6 @@
 export { DrawerRoot as Root } from "./drawer-root";
 export { DrawerProvider as Provider } from "./drawer-provider";
+export { DrawerVirtualKeyboardProvider as VirtualKeyboardProvider } from "./drawer-virtual-keyboard-provider";
 export { DrawerTrigger as Trigger } from "./drawer-trigger";
 export { DrawerPortal as Portal } from "./drawer-portal";
 export { DrawerBackdrop as Backdrop } from "./drawer-backdrop";

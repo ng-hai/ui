@@ -26,6 +26,16 @@ describe("Popover", () => {
         </Popover.Root>
       ),
     },
+    Viewport: {
+      slot: "popover-viewport",
+      wrapper: (children) => (
+        <Popover.Root open>
+          <Popover.Portal>
+            <Popover.Positioner>{children}</Popover.Positioner>
+          </Popover.Portal>
+        </Popover.Root>
+      ),
+    },
     Arrow: {
       slot: "popover-arrow",
       wrapper: (children) => (

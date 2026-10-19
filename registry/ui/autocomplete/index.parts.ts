@@ -16,5 +16,6 @@ export { AutocompleteRow as Row } from "./autocomplete-row";
 export { AutocompleteItem as Item } from "./autocomplete-item";
 export { AutocompleteGroup as Group } from "./autocomplete-group";
 export { AutocompleteGroupLabel as GroupLabel } from "./autocomplete-group-label";
+export { AutocompleteSeparator as Separator } from "./autocomplete-separator";
 export { AutocompleteEmpty as Empty } from "./autocomplete-empty";
 export { AutocompleteStatus as Status } from "./autocomplete-status";
