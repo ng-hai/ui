@@ -62,6 +62,7 @@ describe("ContextMenu", () => {
         </ContextMenu.Root>
       ),
     },
+    Separator: { slot: "context-menu-separator" },
     RadioGroup: { slot: "context-menu-radio-group" },
     RadioItem: {
       slot: "context-menu-radio-item",

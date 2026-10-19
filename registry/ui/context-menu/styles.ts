@@ -13,6 +13,7 @@ export const contextMenuStyles = tv({
     linkItem: [""],
     group: [""],
     groupLabel: [""],
+    separator: [""],
     radioGroup: [""],
     radioItem: [""],
     radioItemIndicator: [""],

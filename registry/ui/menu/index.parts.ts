@@ -12,6 +12,7 @@ export { MenuItem as Item } from "./menu-item";
 export { MenuLinkItem as LinkItem } from "./menu-link-item";
 export { MenuGroup as Group } from "./menu-group";
 export { MenuGroupLabel as GroupLabel } from "./menu-group-label";
+export { MenuSeparator as Separator } from "./menu-separator";
 export { MenuRadioGroup as RadioGroup } from "./menu-radio-group";
 export { MenuRadioItem as RadioItem } from "./menu-radio-item";
 export { MenuRadioItemIndicator as RadioItemIndicator } from "./menu-radio-item-indicator";

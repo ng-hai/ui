@@ -72,6 +72,7 @@ describe("Menu", () => {
         </Menu.Root>
       ),
     },
+    Separator: { slot: "menu-separator" },
     RadioGroup: { slot: "menu-radio-group" },
     RadioItem: {
       slot: "menu-radio-item",

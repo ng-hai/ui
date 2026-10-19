@@ -14,6 +14,7 @@ export const menuStyles = tv({
     linkItem: [""],
     group: [""],
     groupLabel: [""],
+    separator: [""],
     radioGroup: [""],
     radioItem: [""],
     radioItemIndicator: [""],
