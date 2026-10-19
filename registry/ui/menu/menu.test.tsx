@@ -1,4 +1,5 @@
-import { describe } from "vitest";
+import { describe, expect, it } from "vitest";
+import { Menu as MenuPrimitive } from "@base-ui/react/menu";
 import { Menu } from "./index";
 import { describeSlots } from "@/registry/lib/testing-utils";
 
@@ -105,5 +106,27 @@ describe("Menu", () => {
     wrapper: (children) => (
       <Menu.Root open>{children}</Menu.Root>
     ),
+  });
+
+  describe("handle", () => {
+    it("re-exports the upstream handle API", () => {
+      expect(Menu.createHandle).toBe(MenuPrimitive.createHandle);
+      expect(Menu.Handle).toBe(MenuPrimitive.Handle);
+      expect(Menu.createHandle() instanceof Menu.Handle).toBe(true);
+    });
+
+    // Compile-time check: a typed handle flows into Root and a detached Trigger.
+    it("types the payload across Root and a detached Trigger", () => {
+      const handle = Menu.createHandle<{ id: string }>();
+      const tree = (
+        <>
+          <Menu.Trigger handle={handle} payload={{ id: "a" }} />
+          {/* @ts-expect-error the payload must match the handle's type */}
+          <Menu.Trigger handle={handle} payload={{ id: 1 }} />
+          <Menu.Root handle={handle}>{({ payload }) => <output>{payload?.id.toUpperCase()}</output>}</Menu.Root>
+        </>
+      );
+      expect(tree).toBeDefined();
+    });
   });
 });

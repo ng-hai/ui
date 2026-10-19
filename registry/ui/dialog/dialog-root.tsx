@@ -12,11 +12,11 @@ const splitProps = createPropSplitter(dialogStyles);
 
 export { useStyles as useDialogStyles };
 
-interface DialogRootProps extends DialogPrimitive.Root.Props, DialogVariantProps {
+interface DialogRootProps<Payload = unknown> extends DialogPrimitive.Root.Props<Payload>, DialogVariantProps {
   styles?: DialogStyles;
 }
 
-export function DialogRoot(props: DialogRootProps) {
+export function DialogRoot<Payload = unknown>(props: DialogRootProps<Payload>) {
   const [variantProps, { styles, ...htmlProps }] = splitProps(props);
   const s = styles ?? dialogStyles(variantProps);
   return (

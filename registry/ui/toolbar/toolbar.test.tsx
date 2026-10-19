@@ -1,5 +1,6 @@
-import { describe, it, expect } from "vitest";
+import { describe, expect, expectTypeOf, it } from "vitest";
 import { render } from "@testing-library/react";
+import type { Toolbar as ToolbarPrimitive } from "@base-ui/react/toolbar";
 import { Toolbar } from "./index";
 import { describeSlots } from "@/registry/lib/testing-utils";
 
@@ -27,5 +28,11 @@ describe("Toolbar", () => {
     wrapper: (children) => (
       <Toolbar.Root>{children}</Toolbar.Root>
     ),
+  });
+
+  describe("types", () => {
+    it("re-exports the upstream Orientation type", () => {
+      expectTypeOf<Toolbar.Orientation>().toEqualTypeOf<ToolbarPrimitive.Orientation>();
+    });
   });
 });

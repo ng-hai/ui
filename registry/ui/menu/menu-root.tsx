@@ -12,11 +12,11 @@ const splitProps = createPropSplitter(menuStyles);
 
 export { useStyles as useMenuStyles };
 
-interface MenuRootProps extends MenuPrimitive.Root.Props, MenuVariantProps {
+interface MenuRootProps<Payload = unknown> extends MenuPrimitive.Root.Props<Payload>, MenuVariantProps {
   styles?: MenuStyles;
 }
 
-export function MenuRoot(props: MenuRootProps) {
+export function MenuRoot<Payload = unknown>(props: MenuRootProps<Payload>) {
   const [variantProps, { styles, ...htmlProps }] = splitProps(props);
   const s = styles ?? menuStyles(variantProps);
   return (

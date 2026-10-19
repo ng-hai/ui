@@ -12,11 +12,11 @@ const splitProps = createPropSplitter(tooltipStyles);
 
 export { useStyles as useTooltipStyles };
 
-interface TooltipRootProps extends TooltipPrimitive.Root.Props, TooltipVariantProps {
+interface TooltipRootProps<Payload = unknown> extends TooltipPrimitive.Root.Props<Payload>, TooltipVariantProps {
   styles?: TooltipStyles;
 }
 
-export function TooltipRoot(props: TooltipRootProps) {
+export function TooltipRoot<Payload = unknown>(props: TooltipRootProps<Payload>) {
   const [variantProps, { styles, ...htmlProps }] = splitProps(props);
   const s = styles ?? tooltipStyles(variantProps);
   return (

@@ -1,3 +1,5 @@
+import { Autocomplete as AutocompletePrimitive } from "@base-ui/react/autocomplete";
+
 export { AutocompleteRoot as Root } from "./autocomplete-root";
 export { AutocompleteValue as Value } from "./autocomplete-value";
 export { AutocompleteCollection as Collection } from "./autocomplete-collection";
@@ -19,3 +21,6 @@ export { AutocompleteGroupLabel as GroupLabel } from "./autocomplete-group-label
 export { AutocompleteSeparator as Separator } from "./autocomplete-separator";
 export { AutocompleteEmpty as Empty } from "./autocomplete-empty";
 export { AutocompleteStatus as Status } from "./autocomplete-status";
+
+export const useFilter = AutocompletePrimitive.useFilter;
+export const useFilteredItems = AutocompletePrimitive.useFilteredItems;

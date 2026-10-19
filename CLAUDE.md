@@ -50,6 +50,8 @@ Every component follows the same layering, and Claude should preserve it when ad
    - `index.parts.ts` — re-exports each part under its short name (`Root`, `Trigger`, `Popup`, etc.), aliased from the full component export (`SelectTrigger as Trigger`). This is the namespaced surface.
    - `index.ts` — the public export consumed by shadcn. Does `export * as <Name> from "./index.parts"` plus `export { <name>Styles } from "./styles"`. Consumers use it as `<Select.Root>`, `<Select.Trigger>`, etc.
 
+`index.parts.ts` also re-exports Base UI's non-part exports (handles, hooks, factories, types) straight from the primitive: `export const createHandle = PopoverPrimitive.createHandle`, plus `export const Handle` and `export type Handle<Payload>` for a class that is both a value and a type. These need no wrapper file, slot, or `data-slot`. APIs Base UI marks as preview are not wrapped or re-exported until they are stable.
+
 Every component — including single-part ones like `button` and `input` — follows this barrel pattern so the public API is uniform (`<Button.Root>`, `<Input.Root>`). Single-part components still skip the style-context; their `index.parts.ts` just exports `Root`.
 
 ### Invariants to keep

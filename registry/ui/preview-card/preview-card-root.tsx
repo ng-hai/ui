@@ -12,11 +12,11 @@ const splitProps = createPropSplitter(previewCardStyles);
 
 export { useStyles as usePreviewCardStyles };
 
-interface PreviewCardRootProps extends PreviewCardPrimitive.Root.Props, PreviewCardVariantProps {
+interface PreviewCardRootProps<Payload = unknown> extends PreviewCardPrimitive.Root.Props<Payload>, PreviewCardVariantProps {
   styles?: PreviewCardStyles;
 }
 
-export function PreviewCardRoot(props: PreviewCardRootProps) {
+export function PreviewCardRoot<Payload = unknown>(props: PreviewCardRootProps<Payload>) {
   const [variantProps, { styles, ...htmlProps }] = splitProps(props);
   const s = styles ?? previewCardStyles(variantProps);
   return (

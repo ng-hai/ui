@@ -1,3 +1,5 @@
+import { Toast as ToastPrimitive } from "@base-ui/react/toast";
+
 export { ToastProvider as Provider } from "./toast-provider";
 export { ToastPortal as Portal } from "./toast-portal";
 export { ToastViewport as Viewport } from "./toast-viewport";
@@ -9,3 +11,6 @@ export { ToastDescription as Description } from "./toast-description";
 export { ToastAction as Action } from "./toast-action";
 export { ToastClose as Close } from "./toast-close";
 export { ToastArrow as Arrow } from "./toast-arrow";
+
+export const useToastManager = ToastPrimitive.useToastManager;
+export const createToastManager = ToastPrimitive.createToastManager;

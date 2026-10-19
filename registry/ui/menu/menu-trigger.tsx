@@ -1,11 +1,11 @@
 import { Menu as MenuPrimitive } from "@base-ui/react/menu";
 import { useMenuStyles } from "./menu-root";
 
-interface MenuTriggerProps extends MenuPrimitive.Trigger.Props {
+interface MenuTriggerProps<Payload = unknown> extends MenuPrimitive.Trigger.Props<Payload> {
   className?: string;
 }
 
-export function MenuTrigger({ className, ...props }: MenuTriggerProps) {
+export function MenuTrigger<Payload = unknown>({ className, ...props }: MenuTriggerProps<Payload>) {
   const styles = useMenuStyles();
   return <MenuPrimitive.Trigger {...props} className={styles.trigger({ class: className })} data-slot="menu-trigger" />;
 }

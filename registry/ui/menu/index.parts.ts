@@ -1,3 +1,5 @@
+import { Menu as MenuPrimitive } from "@base-ui/react/menu";
+
 export { MenuRoot as Root } from "./menu-root";
 export { MenuSubmenuRoot as SubmenuRoot } from "./menu-submenu-root";
 export { MenuTrigger as Trigger } from "./menu-trigger";
@@ -18,3 +20,7 @@ export { MenuRadioItem as RadioItem } from "./menu-radio-item";
 export { MenuRadioItemIndicator as RadioItemIndicator } from "./menu-radio-item-indicator";
 export { MenuCheckboxItem as CheckboxItem } from "./menu-checkbox-item";
 export { MenuCheckboxItemIndicator as CheckboxItemIndicator } from "./menu-checkbox-item-indicator";
+
+export const createHandle = MenuPrimitive.createHandle;
+export const Handle = MenuPrimitive.Handle;
+export type Handle<Payload> = MenuPrimitive.Handle<Payload>;

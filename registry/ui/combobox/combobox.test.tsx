@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { cleanup, render } from "@testing-library/react";
+import { Combobox as ComboboxPrimitive } from "@base-ui/react/combobox";
 import { Combobox, comboboxStyles } from "./index";
 import { describeSlots } from "@/registry/lib/testing-utils";
 
@@ -138,6 +139,14 @@ describe("Combobox", () => {
       const el = document.querySelector('[data-slot="combobox-empty"]');
       expect(el).toHaveClass("p-4");
       expect(el).toHaveTextContent("No results");
+    });
+  });
+
+  describe("utilities", () => {
+    it("re-exports the upstream filter and item helpers", () => {
+      expect(Combobox.useFilter).toBe(ComboboxPrimitive.useFilter);
+      expect(Combobox.useFilteredItems).toBe(ComboboxPrimitive.useFilteredItems);
+      expect(Combobox.createItems).toBe(ComboboxPrimitive.createItems);
     });
   });
 });

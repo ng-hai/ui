@@ -1,4 +1,5 @@
-import { describe } from "vitest";
+import { describe, expect, it } from "vitest";
+import { Drawer as DrawerPrimitive } from "@base-ui/react/drawer";
 import { Drawer } from "./index";
 import { describeSlots } from "@/registry/lib/testing-utils";
 
@@ -37,5 +38,27 @@ describe("Drawer", () => {
     wrapper: (children) => (
       <Drawer.Root open>{children}</Drawer.Root>
     ),
+  });
+
+  describe("handle", () => {
+    it("re-exports the upstream handle API", () => {
+      expect(Drawer.createHandle).toBe(DrawerPrimitive.createHandle);
+      expect(Drawer.Handle).toBe(DrawerPrimitive.Handle);
+      expect(Drawer.createHandle() instanceof Drawer.Handle).toBe(true);
+    });
+
+    // Compile-time check: a typed handle flows into Root and a detached Trigger.
+    it("types the payload across Root and a detached Trigger", () => {
+      const handle = Drawer.createHandle<{ id: string }>();
+      const tree = (
+        <>
+          <Drawer.Trigger handle={handle} payload={{ id: "a" }} />
+          {/* @ts-expect-error the payload must match the handle's type */}
+          <Drawer.Trigger handle={handle} payload={{ id: 1 }} />
+          <Drawer.Root handle={handle}>{({ payload }) => <output>{payload?.id.toUpperCase()}</output>}</Drawer.Root>
+        </>
+      );
+      expect(tree).toBeDefined();
+    });
   });
 });

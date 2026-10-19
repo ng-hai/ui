@@ -1,4 +1,5 @@
-import { describe } from "vitest";
+import { describe, expect, it } from "vitest";
+import { Tooltip as TooltipPrimitive } from "@base-ui/react/tooltip";
 import { Tooltip } from "./index";
 import { describeSlots } from "@/registry/lib/testing-utils";
 
@@ -50,5 +51,27 @@ describe("Tooltip", () => {
     wrapper: (children) => (
       <Tooltip.Root open>{children}</Tooltip.Root>
     ),
+  });
+
+  describe("handle", () => {
+    it("re-exports the upstream handle API", () => {
+      expect(Tooltip.createHandle).toBe(TooltipPrimitive.createHandle);
+      expect(Tooltip.Handle).toBe(TooltipPrimitive.Handle);
+      expect(Tooltip.createHandle() instanceof Tooltip.Handle).toBe(true);
+    });
+
+    // Compile-time check: a typed handle flows into Root and a detached Trigger.
+    it("types the payload across Root and a detached Trigger", () => {
+      const handle = Tooltip.createHandle<{ id: string }>();
+      const tree = (
+        <>
+          <Tooltip.Trigger handle={handle} payload={{ id: "a" }} />
+          {/* @ts-expect-error the payload must match the handle's type */}
+          <Tooltip.Trigger handle={handle} payload={{ id: 1 }} />
+          <Tooltip.Root handle={handle}>{({ payload }) => <output>{payload?.id.toUpperCase()}</output>}</Tooltip.Root>
+        </>
+      );
+      expect(tree).toBeDefined();
+    });
   });
 });

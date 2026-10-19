@@ -1,11 +1,11 @@
 import { AlertDialog as AlertDialogPrimitive } from "@base-ui/react/alert-dialog";
 import { useAlertDialogStyles } from "./alert-dialog-root";
 
-interface AlertDialogTriggerProps extends AlertDialogPrimitive.Trigger.Props {
+interface AlertDialogTriggerProps<Payload = unknown> extends AlertDialogPrimitive.Trigger.Props<Payload> {
   className?: string;
 }
 
-export function AlertDialogTrigger({ className, ...props }: AlertDialogTriggerProps) {
+export function AlertDialogTrigger<Payload = unknown>({ className, ...props }: AlertDialogTriggerProps<Payload>) {
   const styles = useAlertDialogStyles();
   return (
     <AlertDialogPrimitive.Trigger
