@@ -1,4 +1,5 @@
-import { describe } from "vitest";
+import { describe, expect, it } from "vitest";
+import { render } from "@testing-library/react";
 import { Select } from "./index";
 import { describeSlots } from "@/registry/lib/testing-utils";
 
@@ -6,6 +7,7 @@ describe("Select", () => {
   describeSlots(Select, {
     Root: { slot: "select", skipRender: true },
     Trigger: { slot: "select-trigger" },
+    Label: { slot: "select-label" },
     Value: { slot: "select-value" },
     Icon: { slot: "select-icon" },
     Portal: { slot: "select-portal" },
@@ -13,6 +15,14 @@ describe("Select", () => {
     Positioner: { slot: "select-positioner" },
     Popup: {
       slot: "select-popup",
+      wrapper: (children) => (
+        <Select.Root open>
+          <Select.Positioner>{children}</Select.Positioner>
+        </Select.Root>
+      ),
+    },
+    List: {
+      slot: "select-list",
       wrapper: (children) => (
         <Select.Root open>
           <Select.Positioner>{children}</Select.Positioner>
@@ -60,5 +70,31 @@ describe("Select", () => {
     wrapper: (children) => (
       <Select.Root open>{children}</Select.Root>
     ),
+  });
+
+  // The arrows render only while the popup can scroll, and describeSlots can't pass props, so keep them mounted.
+  describe.each([
+    ["ScrollUpArrow", "select-scroll-up-arrow"],
+    ["ScrollDownArrow", "select-scroll-down-arrow"],
+  ] as const)("%s", (part, slot) => {
+    const Part = Select[part];
+    const renderPart = (className?: string) =>
+      render(
+        <Select.Root open>
+          <Select.Positioner>
+            <Part keepMounted className={className} />
+          </Select.Positioner>
+        </Select.Root>,
+      );
+
+    it(`renders with data-slot="${slot}"`, () => {
+      renderPart();
+      expect(document.querySelector(`[data-slot="${slot}"]`)).toBeInTheDocument();
+    });
+
+    it("merges className into slot", () => {
+      renderPart("__test-class__");
+      expect(document.querySelector(`[data-slot="${slot}"]`)).toHaveClass("__test-class__");
+    });
   });
 });
