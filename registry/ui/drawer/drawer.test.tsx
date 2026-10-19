@@ -6,6 +6,7 @@ describe("Drawer", () => {
   describeSlots(Drawer, {
     Root: { slot: "drawer", skipRender: true },
     Provider: { slot: "drawer-provider", skipRender: true },
+    VirtualKeyboardProvider: { slot: "drawer-virtual-keyboard-provider", skipRender: true },
     Trigger: { slot: "drawer-trigger" },
     Portal: { slot: "drawer-portal" },
     Backdrop: { slot: "drawer-backdrop" },

@@ -655,6 +655,7 @@
       "files": [
         { "path": "registry/ui/drawer/drawer-root.tsx", "type": "registry:ui" },
         { "path": "registry/ui/drawer/drawer-provider.tsx", "type": "registry:ui" },
+        { "path": "registry/ui/drawer/drawer-virtual-keyboard-provider.tsx", "type": "registry:ui" },
         { "path": "registry/ui/drawer/drawer-trigger.tsx", "type": "registry:ui" },
         { "path": "registry/ui/drawer/drawer-portal.tsx", "type": "registry:ui" },
         { "path": "registry/ui/drawer/drawer-backdrop.tsx", "type": "registry:ui" },
