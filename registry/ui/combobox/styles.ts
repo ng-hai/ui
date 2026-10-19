@@ -22,6 +22,7 @@ export const comboboxStyles = tv({
     itemIndicator: [""],
     group: [""],
     groupLabel: [""],
+    separator: [""],
     empty: [""],
     status: [""],
   },

@@ -88,6 +88,7 @@ describe("Combobox", () => {
         </Combobox.Root>
       ),
     },
+    Separator: { slot: "combobox-separator" },
     Empty: { slot: "combobox-empty" },
     Status: { slot: "combobox-status" },
   }, {

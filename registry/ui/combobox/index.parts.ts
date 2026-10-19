@@ -21,5 +21,6 @@ export { ComboboxItem as Item } from "./combobox-item";
 export { ComboboxItemIndicator as ItemIndicator } from "./combobox-item-indicator";
 export { ComboboxGroup as Group } from "./combobox-group";
 export { ComboboxGroupLabel as GroupLabel } from "./combobox-group-label";
+export { ComboboxSeparator as Separator } from "./combobox-separator";
 export { ComboboxEmpty as Empty } from "./combobox-empty";
 export { ComboboxStatus as Status } from "./combobox-status";
